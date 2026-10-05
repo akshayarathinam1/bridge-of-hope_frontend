@@ -9,27 +9,27 @@ const actions = [
     title: "Become a Volunteer",
     description:
       "Alone I can do little. Together, we can do anything. Join our growing family of change-makers.",
-    color: "bg-blue-50",
-    iconColor: "text-blue-600",
-    border: "border-blue-100",
+    color: "bg-brand-navy/10",
+    iconColor: "text-brand-navy",
+    border: "border-brand-navy/20",
   },
   {
     icon: FiTrendingUp,
     title: "Quick Fundraising",
     description:
       "Start a fundraiser for a cause you care about. Every rupee raised brings us closer to our goal.",
-    color: "bg-amber-50",
-    iconColor: "text-amber-600",
-    border: "border-amber-100",
+    color: "bg-orange-50",
+    iconColor: "text-brand-orange",
+    border: "border-orange-100",
   },
   {
     icon: FiGift,
     title: "Start Donating",
     description:
       "Your donation, however small, changes a life. Donate once or set up a monthly giving plan.",
-    color: "bg-green-50",
-    iconColor: "text-green-600",
-    border: "border-green-100",
+    color: "bg-red-50",
+    iconColor: "text-brand-red",
+    border: "border-red-100",
   },
 ];
 

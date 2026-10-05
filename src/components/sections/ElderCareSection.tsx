@@ -54,7 +54,7 @@ export default function ElderCareSection() {
 
             <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-8">
               No senior citizen should ever feel abandoned or forgotten. Our
-              HopeBridge Care homes provide medical treatment, comfortable beds,
+              Bridge of Hope Care homes provide medical treatment, comfortable beds,
               daily recreation, and a true family environment for homeless and
               destitute elders.
             </p>

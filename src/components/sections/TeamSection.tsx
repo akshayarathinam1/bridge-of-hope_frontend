@@ -10,7 +10,7 @@ const teamMembers = [
     name: "Dr. Andrew Smith",
     role: "Founder & Managing Trustee",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80",
-    bio: "Passionate about grassroots equity, Dr. Smith leads HopeBridge with over 15 years of social service leadership.",
+    bio: "Passionate about grassroots equity, Dr. Smith leads Bridge of Hope with over 15 years of social service leadership.",
   },
   {
     name: "Ethan Matthew",
@@ -28,8 +28,13 @@ const teamMembers = [
 
 export default function TeamSection() {
   return (
-    <section className="bg-brand-black text-white pt-20 pb-28 md:pt-24 md:pb-32 rounded-t-[40px] md:rounded-t-[60px] relative overflow-hidden">
-      {/* Decorative subtle polygon/geometric overlay in top-right matching reference */}
+    <section className="relative bg-[#032a6a] text-white pt-20 pb-28 md:pt-24 md:pb-32 rounded-t-[40px] md:rounded-t-[60px] overflow-hidden">
+      {/* Blue mixed with white gradient overlays identical to hero */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#032a6a]/75 via-[#0e3b82]/50 to-white/20 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#032a6a]/60 via-transparent to-white/25 pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.25)_0%,_transparent_65%)] pointer-events-none" />
+
+      {/* Decorative subtle polygon/geometric overlay in top-right */}
       <div className="absolute top-0 right-0 w-80 h-80 opacity-10 pointer-events-none">
         <svg viewBox="0 0 200 200" className="w-full h-full fill-white">
           <polygon points="0,0 200,0 200,200" />

@@ -30,7 +30,9 @@ interface ProgramInfo {
   slugs: string[];
   tag: string;
   title: string;
+  titleHighlight: string;
   headline: string;
+  headlineHighlight: string;
   subtitle: string;
   heroImage: string;
   secondaryImage: string;
@@ -57,7 +59,9 @@ const programsDatabase: Record<string, ProgramInfo> = {
     slugs: ["education"],
     tag: "Education & Literacy",
     title: "Education For Every Child",
+    titleHighlight: "Child",
     headline: "Unlocking Potential Through Knowledge, Tools & Mentorship",
+    headlineHighlight: "Mentorship",
     subtitle:
       "Empowering underprivileged children across communities with school supplies, remedial study centers, digital literacy labs, and merit scholarships.",
     heroImage:
@@ -66,8 +70,8 @@ const programsDatabase: Record<string, ProgramInfo> = {
       "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=800&q=80",
     heroImageAlt: "School children learning and raising hands in classroom",
     icon: FiBookOpen,
-    iconColor: "text-amber-600",
-    iconBg: "bg-amber-500/10",
+    iconColor: "text-brand-orange",
+    iconBg: "bg-orange-50",
     donateCause: "education",
     stats: [
       { label: "Students Supported", value: "4,800+" },
@@ -78,7 +82,7 @@ const programsDatabase: Record<string, ProgramInfo> = {
     challenge:
       "In low-income neighborhoods and rural villages, children face severe economic obstacles that threaten their education. Families often struggle to afford basic textbooks, notebooks, school bags, and uniform fees. Without academic support at home or access to modern digital tools, many promising students fall behind and are forced to leave school early to support their households.",
     solution:
-      "HopeBridge's Education Program intervenes at every stage of a child's academic journey. We establish community after-school study centers staffed by qualified tutors, sponsor full school kits every academic year, install computer labs, and award secondary scholarships to ensure that financial hardship never ends a child's education.",
+      "Bridge of Hope's Education Program intervenes at every stage of a child's academic journey. We establish community after-school study centers staffed by qualified tutors, sponsor full school kits every academic year, install computer labs, and award secondary scholarships to ensure that financial hardship never ends a child's education.",
     pillars: [
       {
         title: "Annual School Kit Sponsorship",
@@ -110,7 +114,7 @@ const programsDatabase: Record<string, ProgramInfo> = {
     ],
     story: {
       quote:
-        "When my father passed away, my family could not afford my books or school fees. HopeBridge gave me my school kit and welcomed me to the evening study center. With the tutors' guidance, I scored 91% in my 10th grade exams. Today I am studying science and dreaming of becoming a doctor.",
+        "When my father passed away, my family could not afford my books or school fees. Bridge of Hope gave me my school kit and welcomed me to the evening study center. With the tutors' guidance, I scored 91% in my 10th grade exams. Today I am studying science and dreaming of becoming a doctor.",
       person: "Ananya R.",
       role: "Student, Class 11 Beneficiary",
     },
@@ -120,8 +124,10 @@ const programsDatabase: Record<string, ProgramInfo> = {
     id: "old-age",
     slugs: ["old-age", "senior-care"],
     tag: "Elder Care & Dignity",
-    title: "Senior Citizen Care & Dignity",
+    title: "Elderly Care & Dignity",
+    titleHighlight: "Dignity",
     headline: "Restoring Comfort, Medical Care & Companionship to Our Elders",
+    headlineHighlight: "Our Elders",
     subtitle:
       "Ensuring vulnerable, abandoned, and low-income senior citizens live their twilight years surrounded by medical care, nourishment, and dignity.",
     heroImage:
@@ -142,7 +148,7 @@ const programsDatabase: Record<string, ProgramInfo> = {
     challenge:
       "Countless senior citizens in our society spend their advanced years battling chronic untreated illnesses, severe isolation, and poverty. Many have no pensions, living relatives, or financial security, leaving them unable to afford vital medicines for conditions like diabetes, hypertension, and arthritis.",
     solution:
-      "Our Senior Citizen Care initiative delivers regular, dignified assistance directly to elders living alone and in partner care homes. We provide free monthly chronic illness medication, mobility equipment like wheelchairs and walking canes, nutritional ration supplies, and regular companion visits.",
+      "Our Elderly Care initiative delivers regular, dignified assistance directly to elders living alone and in partner care homes. We provide free monthly chronic illness medication, mobility equipment like wheelchairs and walking canes, nutritional ration supplies, and regular companion visits.",
     pillars: [
       {
         title: "Chronic Medicine Sponsorship",
@@ -174,9 +180,9 @@ const programsDatabase: Record<string, ProgramInfo> = {
     ],
     story: {
       quote:
-        "After my wife passed away and my joints deteriorated, I could not walk or afford my diabetes medicines. HopeBridge volunteers brought me a walker and deliver my medicines every single month without fail. They make me feel like I have family again.",
+        "After my wife passed away and my joints deteriorated, I could not walk or afford my diabetes medicines. Bridge of Hope volunteers brought me a walker and deliver my medicines every single month without fail. They make me feel like I have family again.",
       person: "Murugan S., 74",
-      role: "Senior Citizen Program Beneficiary",
+      role: "Elderly Program Beneficiary",
     },
   },
 
@@ -185,7 +191,9 @@ const programsDatabase: Record<string, ProgramInfo> = {
     slugs: ["orphanage", "child-care"],
     tag: "Child Welfare & Protection",
     title: "Child & Orphan Protection",
+    titleHighlight: "Protection",
     headline: "Safe Shelters, Nutritious Meals & Loving Environments",
+    headlineHighlight: "Loving Environments",
     subtitle:
       "Providing orphaned, abandoned, and vulnerable children with secure living conditions, pediatric healthcare, nutritious food, and holistic care.",
     heroImage:
@@ -194,8 +202,8 @@ const programsDatabase: Record<string, ProgramInfo> = {
       "https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=800&q=80",
     heroImageAlt: "Children smiling joyfully together in a community shelter",
     icon: FiHome,
-    iconColor: "text-teal-600",
-    iconBg: "bg-teal-500/10",
+    iconColor: "text-brand-navy",
+    iconBg: "bg-brand-navy/10",
     donateCause: "child-care",
     stats: [
       { label: "Children Sheltered", value: "1,200+" },
@@ -206,7 +214,7 @@ const programsDatabase: Record<string, ProgramInfo> = {
     challenge:
       "Children who lose parental care or are abandoned due to extreme poverty face severe emotional vulnerability, malnutrition, and developmental hurdles. Without stable shelter, wholesome food, and psychological support, their fundamental childhood rights are compromised.",
     solution:
-      "HopeBridge collaborates with verified children's homes and community daycares to ensure every child has a secure bed, a nutritious pediatric diet, comprehensive medical oversight, and trauma counseling. We believe every child deserves to feel safe, loved, and encouraged to reach their full potential.",
+      "Bridge of Hope collaborates with verified children's homes and community daycares to ensure every child has a secure bed, a nutritious pediatric diet, comprehensive medical oversight, and trauma counseling. We believe every child deserves to feel safe, loved, and encouraged to reach their full potential.",
     pillars: [
       {
         title: "Complete Pediatric Nutrition",
@@ -249,7 +257,9 @@ const programsDatabase: Record<string, ProgramInfo> = {
     slugs: ["medical", "medical-support"],
     tag: "Healthcare & Emergency Aid",
     title: "Medical & Healthcare Support",
+    titleHighlight: "Support",
     headline: "Extending Lifesaving Healthcare to Underserved Communities",
+    headlineHighlight: "Underserved Communities",
     subtitle:
       "Organizing mobile health camps, subsidizing chronic treatments, and sponsoring urgent surgeries for low-income families.",
     heroImage:
@@ -258,8 +268,8 @@ const programsDatabase: Record<string, ProgramInfo> = {
       "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=800&q=80",
     heroImageAlt: "Doctor performing medical examination at a rural health camp",
     icon: FiActivity,
-    iconColor: "text-blue-600",
-    iconBg: "bg-blue-500/10",
+    iconColor: "text-brand-navy",
+    iconBg: "bg-brand-navy/10",
     donateCause: "medical-support",
     stats: [
       { label: "Families Assisted", value: "3,200+" },
@@ -302,7 +312,7 @@ const programsDatabase: Record<string, ProgramInfo> = {
     ],
     story: {
       quote:
-        "When my two-year-old daughter was diagnosed with a congenital heart defect, private hospitals quoted ₹2.5 lakhs—more than five years of my income. HopeBridge stepped in immediately and covered the entire surgical cost. Today my daughter runs and laughs like any other healthy child.",
+        "When my two-year-old daughter was diagnosed with a congenital heart defect, private hospitals quoted ₹2.5 lakhs—more than five years of my income. Bridge of Hope stepped in immediately and covered the entire surgical cost. Today my daughter runs and laughs like any other healthy child.",
       person: "Venkatesh K.",
       role: "Father of Priya (Surgery Beneficiary)",
     },
@@ -313,7 +323,9 @@ const programsDatabase: Record<string, ProgramInfo> = {
     slugs: ["social-service", "social-services"],
     tag: "Community Welfare & Relief",
     title: "Community Social Service & Relief",
+    titleHighlight: "Relief",
     headline: "Rapid Relief, Disaster Aid & Sustainable Grassroots Development",
+    headlineHighlight: "Grassroots Development",
     subtitle:
       "Delivering immediate disaster response, winter warmth drives, clean drinking water installations, and women's self-reliance training.",
     heroImage:
@@ -322,8 +334,8 @@ const programsDatabase: Record<string, ProgramInfo> = {
       "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&q=80",
     heroImageAlt: "Volunteers distributing food relief packages to community members",
     icon: FiUsers,
-    iconColor: "text-emerald-600",
-    iconBg: "bg-emerald-500/10",
+    iconColor: "text-brand-orange",
+    iconBg: "bg-orange-50",
     donateCause: "social-service",
     stats: [
       { label: "Community Members", value: "12,500+" },
@@ -334,7 +346,7 @@ const programsDatabase: Record<string, ProgramInfo> = {
     challenge:
       "Extreme weather shocks, regional floods, harsh winter cold, and systemic marginalization leave vulnerable communities in acute distress. In times of localized disasters, families lose their homes, dry food reserves, and clean water sources within hours.",
     solution:
-      "HopeBridge's Social Service brigades operate on the frontlines of humanitarian need. We mobilize rapid disaster aid with food and potable water, run annual winter warmth campaigns, install community water filters, and conduct vocational training so women can earn sustainable livelihoods.",
+      "Bridge of Hope's Social Service brigades operate on the frontlines of humanitarian need. We mobilize rapid disaster aid with food and potable water, run annual winter warmth campaigns, install community water filters, and conduct vocational training so women can earn sustainable livelihoods.",
     pillars: [
       {
         title: "Disaster Emergency Response",
@@ -366,7 +378,7 @@ const programsDatabase: Record<string, ProgramInfo> = {
     ],
     story: {
       quote:
-        "After our small roadside shop was destroyed during the monsoon floods, we had no savings. HopeBridge provided our family with dry rations and enrolled me in their free tailoring program. Today, I sew school uniforms and earn enough to educate my two children with dignity.",
+        "After our small roadside shop was destroyed during the monsoon floods, we had no savings. Bridge of Hope provided our family with dry rations and enrolled me in their free tailoring program. Today, I sew school uniforms and earn enough to educate my two children with dignity.",
       person: "Lakshmi M.",
       role: "Vocational Program Graduate & Tailor",
     },
@@ -393,7 +405,7 @@ function resolveProgram(slug: string): ProgramInfo {
 
 const otherProgramsList = [
   { slug: "education", title: "Education For Every Child", tag: "Education & Literacy", icon: FiBookOpen },
-  { slug: "old-age", title: "Senior Citizen Care", tag: "Elder Care & Dignity", icon: FiHeart },
+  { slug: "old-age", title: "Elderly Care", tag: "Elder Care & Dignity", icon: FiHeart },
   { slug: "orphanage", title: "Child & Orphan Protection", tag: "Child Welfare", icon: FiHome },
   { slug: "medical", title: "Medical & Healthcare Support", tag: "Healthcare Aid", icon: FiActivity },
   { slug: "social-service", title: "Community Social Service", tag: "Community Relief", icon: FiUsers },
@@ -415,6 +427,7 @@ export default function ProgramDetailPage({
       ───────────────────────────────────────────────────────────── */}
       <PageHeader
         title={prog.title}
+        titleHighlight={prog.titleHighlight}
         subtitle={prog.subtitle}
         breadcrumb={prog.tag}
       />
@@ -445,7 +458,15 @@ export default function ProgramDetailPage({
             >
               <SectionLabel>{prog.tag}</SectionLabel>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-brand-black tracking-tight leading-tight mt-1 mb-4">
-                {prog.headline}
+                {prog.headlineHighlight && prog.headline.includes(prog.headlineHighlight) ? (
+                  <>
+                    {prog.headline.split(prog.headlineHighlight)[0]}
+                    <span className="text-brand-orange">{prog.headlineHighlight}</span>
+                    {prog.headline.split(prog.headlineHighlight).slice(1).join(prog.headlineHighlight)}
+                  </>
+                ) : (
+                  prog.headline
+                )}
               </h1>
               <p className="text-gray-700 text-base sm:text-lg leading-relaxed mb-6 font-medium">
                 {prog.subtitle}
@@ -532,7 +553,8 @@ export default function ProgramDetailPage({
             <div className="lg:col-span-6 space-y-6">
               <SectionLabel>The Reality On The Ground</SectionLabel>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-black tracking-tight leading-tight">
-                Understanding The Challenge
+                Understanding The{" "}
+                <span className="text-brand-orange">Challenge</span>
               </h2>
               <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
                 {prog.challenge}
@@ -571,7 +593,8 @@ export default function ProgramDetailPage({
           <div className="max-w-3xl mx-auto text-center mb-16">
             <SectionLabel>How We Operate</SectionLabel>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-black tracking-tight mt-1 mb-3">
-              Four Core Pillars of the Program
+              Four Core Pillars of the{" "}
+              <span className="text-brand-orange">Program</span>
             </h2>
             <p className="text-gray-600 text-sm sm:text-base">
               Each pillar ensures our work is structured, measurable, and impactful over the long term.
@@ -611,7 +634,8 @@ export default function ProgramDetailPage({
             <div className="lg:col-span-6 bg-white p-8 sm:p-10 rounded-3xl border border-gray-200/90 shadow-sm">
               <SectionLabel>Tangible Aid</SectionLabel>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-brand-black tracking-tight mt-1 mb-6">
-                What We Provide Directly
+                What We Provide{" "}
+                <span className="text-brand-orange">Directly</span>
               </h2>
               <ul className="space-y-4">
                 {prog.deliverables.map((item, dIdx) => (
@@ -623,22 +647,37 @@ export default function ProgramDetailPage({
               </ul>
             </div>
 
-            {/* Impact Spotlight / Story */}
-            <div className="lg:col-span-6 bg-brand-black text-white p-8 sm:p-10 rounded-3xl relative overflow-hidden shadow-xl">
+            {/* Impact Spotlight / Story (Real Lives Changed) */}
+            <div className="lg:col-span-6 bg-[#032a6a] text-white p-8 sm:p-10 rounded-3xl relative overflow-hidden shadow-2xl border border-white/15 group" suppressHydrationWarning>
+              {/* Background Image & Hero-matched overlays */}
+              <div className="absolute inset-0 z-0 pointer-events-none" suppressHydrationWarning>
+                <Image
+                  src={prog.heroImage}
+                  alt={`${prog.title} - Real Lives Changed`}
+                  fill
+                  className="object-cover object-center opacity-35 group-hover:scale-105 transition-transform duration-700"
+                />
+                <div suppressHydrationWarning className="absolute inset-0 bg-gradient-to-r from-[#032a6a]/85 via-[#0e3b82]/65 to-[#032a6a]/80" />
+                <div suppressHydrationWarning className="absolute inset-0 bg-gradient-to-t from-[#032a6a]/70 via-transparent to-white/15" />
+                <div suppressHydrationWarning className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.25)_0%,_transparent_65%)]" />
+              </div>
+
+              {/* Ambient flare */}
               <div className="absolute -right-12 -bottom-12 w-48 h-48 bg-brand-red/20 rounded-full blur-3xl pointer-events-none" />
+
               <div className="relative z-10">
-                <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-red-light mb-4">
-                  <FiAward className="w-4 h-4" />
-                  Real Lives Changed
+                <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-xs font-bold uppercase tracking-wider text-white mb-4">
+                  <FiAward className="w-4 h-4 text-brand-red" />
+                  <span>Real Lives Changed</span>
                 </span>
-                <blockquote className="text-base sm:text-lg italic text-gray-200 leading-relaxed mb-6">
+                <blockquote className="text-base sm:text-lg italic text-gray-100 leading-relaxed mb-6 font-medium">
                   &ldquo;{prog.story.quote}&rdquo;
                 </blockquote>
-                <div className="pt-4 border-t border-white/10">
+                <div className="pt-4 border-t border-white/15">
                   <p className="font-extrabold text-white text-base">
                     {prog.story.person}
                   </p>
-                  <p className="text-xs text-gray-400">
+                  <p className="text-xs text-gray-300">
                     {prog.story.role}
                   </p>
                 </div>
@@ -657,7 +696,8 @@ export default function ProgramDetailPage({
             <div>
               <SectionLabel>Discover More</SectionLabel>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-brand-black tracking-tight">
-                Explore Other Initiatives
+                Explore Other{" "}
+                <span className="text-brand-orange">Initiatives</span>
               </h2>
             </div>
             <Button href="/programs" variant="outline" size="sm">

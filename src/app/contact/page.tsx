@@ -75,7 +75,8 @@ export default function ContactPage() {
               <div>
                 <SectionLabel>Get In Touch</SectionLabel>
                 <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-black tracking-tight mt-1 mb-4">
-                  We&apos;d Love to Hear From You
+                  We&apos;d Love to{" "}
+                  <span className="text-brand-orange">Hear From You</span>
                 </h2>
                 <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
                   Whether you have questions about our initiatives, want to support our programs, or need assistance, our team is always here to help.
@@ -194,20 +195,20 @@ export default function ContactPage() {
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="p-8 rounded-2xl bg-emerald-50 border border-emerald-200 text-center"
+                  className="p-8 rounded-2xl bg-green-50 border border-green-200 text-center"
                 >
-                  <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-4">
+                  <div className="w-14 h-14 rounded-full bg-brand-navy/10 text-brand-navy flex items-center justify-center mx-auto mb-4">
                     <FiCheckCircle className="w-8 h-8" />
                   </div>
-                  <h4 className="text-xl font-extrabold text-emerald-900 mb-2">
+                  <h4 className="text-xl font-extrabold text-brand-navy mb-2">
                     Message Sent Successfully!
                   </h4>
-                  <p className="text-sm text-emerald-800 max-w-md mx-auto mb-6 leading-relaxed">
+                  <p className="text-sm text-brand-navy/80 max-w-md mx-auto mb-6 leading-relaxed">
                     Thank you for reaching out. Our team has received your message and will get back to you within 24 hours.
                   </p>
                   <button
                     onClick={handleReset}
-                    className="px-6 py-2.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-colors shadow-sm cursor-pointer"
+                    className="px-6 py-2.5 rounded-full bg-brand-navy hover:bg-brand-navy/90 text-white text-xs font-bold transition-colors shadow-sm cursor-pointer"
                   >
                     Send Another Message
                   </button>
@@ -286,14 +287,14 @@ export default function ContactPage() {
                   </div>
 
                   <div className="flex items-center gap-2.5 text-xs text-gray-500 pt-1">
-                    <FiShield className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                    <FiShield className="w-4 h-4 text-brand-navy flex-shrink-0" />
                     <span>Your information is protected and will never be shared.</span>
                   </div>
 
                   <button
                     type="submit"
                     disabled={loading}
-                    className="relative overflow-hidden group inline-flex items-center justify-center gap-2 w-full py-3.5 px-6 rounded-full bg-brand-red hover:bg-brand-red-dark text-white font-bold text-sm shadow-[0_4px_18px_rgba(211,47,47,0.35)] hover:shadow-[0_8px_25px_rgba(211,47,47,0.5)] transition-all duration-300 disabled:opacity-70 cursor-pointer"
+                    className="relative overflow-hidden group inline-flex items-center justify-center gap-2 w-full py-3.5 px-6 rounded-full bg-brand-red hover:bg-brand-red-dark text-white font-bold text-sm shadow-[0_4px_18px_rgba(255,113,0,0.35)] hover:shadow-[0_8px_25px_rgba(255,113,0,0.5)] transition-all duration-300 disabled:opacity-70 cursor-pointer"
                   >
                     {loading ? (
                       <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />

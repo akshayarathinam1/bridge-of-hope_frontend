@@ -9,7 +9,7 @@ import { FaQuoteLeft } from "react-icons/fa";
 const testimonials = [
   {
     quote:
-      "HopeBridge is the most transparent and dedicated foundation I have partnered with. Seeing the smiles on the elderly mothers who received health care restored my faith in humanity.",
+      "Bridge of Hope is the most transparent and dedicated foundation I have partnered with. Seeing the smiles on the elderly mothers who received health care restored my faith in humanity.",
     name: "Dr. Elizabeth Joe",
     role: "Medical Volunteer & Donor",
     avatar:
@@ -17,7 +17,7 @@ const testimonials = [
   },
   {
     quote:
-      "When our rural school lacked basic desks and computer sets, HopeBridge stepped in within weeks. Today, 140 girls in our village are learning coding and English.",
+      "When our rural school lacked basic desks and computer sets, Bridge of Hope stepped in within weeks. Today, 140 girls in our village are learning coding and English.",
     name: "Esther Howard",
     role: "Headmistress, Govt School",
     avatar:

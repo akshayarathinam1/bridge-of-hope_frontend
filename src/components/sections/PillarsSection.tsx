@@ -11,24 +11,24 @@ const pillars = [
     title: "Kids Education",
     description:
       "Empowering young minds with scholarships, modern school supplies, and computer literacy.",
-    borderColor: "hover:border-blue-300",
-    iconBg: "bg-blue-50 text-blue-600",
+    borderColor: "hover:border-brand-navy/30",
+    iconBg: "bg-brand-navy/10 text-brand-navy",
   },
   {
     icon: FiDroplet,
     title: "Pure Water",
     description:
       "Installing borewells, purification filters, and clean water stations in water-scarce villages.",
-    borderColor: "hover:border-teal-300",
-    iconBg: "bg-teal-50 text-teal-600",
+    borderColor: "hover:border-brand-orange/30",
+    iconBg: "bg-orange-50 text-brand-orange",
   },
   {
     icon: FiHeart,
     title: "Healthy Food",
     description:
       "Providing daily hot meals, rations, and dietary supplements to children and seniors.",
-    borderColor: "hover:border-amber-300",
-    iconBg: "bg-amber-50 text-amber-600",
+    borderColor: "hover:border-brand-orange/30",
+    iconBg: "bg-orange-50 text-brand-orange",
   },
   {
     icon: FiActivity,

@@ -8,7 +8,7 @@ import { FiTarget, FiEye, FiPhone, FiArrowUpRight } from "react-icons/fi";
 
 export default function AboutSection() {
   return (
-    <section id="about" className="py-20 bg-white overflow-hidden">
+    <section id="about" className="py-16 sm:py-20 bg-white overflow-hidden">
       <div className="container-site">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
@@ -76,7 +76,7 @@ export default function AboutSection() {
               <svg width="100" height="30" viewBox="0 0 100 30" fill="none">
                 <path
                   d="M2 15 C14 4 24 26 36 15 C48 4 58 26 70 15 C82 4 92 26 98 15"
-                  stroke="#D32F2F"
+                  stroke="#ff7100"
                   strokeWidth="2.8"
                   strokeLinecap="round"
                   fill="none"
@@ -91,6 +91,32 @@ export default function AboutSection() {
             </div>
           </motion.div>
 
+          {/* Mobile-only image strip with Impact Badge */}
+          <div className="lg:hidden w-full mb-8">
+            <div className="grid grid-cols-2 gap-3 relative">
+              <div className="relative h-44 rounded-2xl overflow-hidden shadow-lg border-2 border-white">
+                <Image
+                  src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=500&q=80"
+                  alt="Children learning"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="relative h-44 rounded-2xl overflow-hidden shadow-lg border-2 border-white">
+                <Image
+                  src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=600&q=80"
+                  alt="Volunteers helping"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute bottom-2.5 right-2.5 bg-white/95 backdrop-blur-md rounded-xl px-2.5 py-1.5 shadow-md border border-gray-100">
+                  <p className="text-xs font-black text-brand-black leading-none">8+ Years</p>
+                  <p className="text-[9px] text-gray-500 font-medium mt-0.5">Of Impact</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* ── RIGHT: Text content with user requested About Us copy ── */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
@@ -99,30 +125,30 @@ export default function AboutSection() {
             transition={{ duration: 0.7, delay: 0.15 }}
             className="flex flex-col"
           >
-            <SectionLabel>About HopeBridge Foundation</SectionLabel>
+            <SectionLabel>About Bridge of Hope</SectionLabel>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1] tracking-tight text-brand-black mt-2 mb-5">
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.15] sm:leading-[1.1] tracking-tight text-brand-black mt-2 mb-4 sm:mb-5">
               We Believe Every Life{" "}
-              <span className="text-brand-red">Deserves Hope</span>
+              <span className="text-brand-orange">Deserves Hope</span>
             </h2>
 
-            <p className="text-gray-600 text-sm sm:text-base leading-relaxed mb-4">
-              Our mission is to create meaningful change by supporting people and communities in need. Through education, healthcare, care for children and senior citizens, and social welfare initiatives, we strive to make a lasting difference.
+            <p className="text-gray-600 text-xs sm:text-base leading-relaxed mb-4">
+              Our mission is to create meaningful change by supporting people and communities in need. Through education, healthcare, care for children and elderly, and social welfare initiatives, we strive to make a lasting difference.
             </p>
 
             {/* Pull Quote Highlight */}
-            <div className="p-4 rounded-xl bg-brand-red-light/60 border-l-4 border-brand-red mb-5">
+            <div className="p-3.5 sm:p-4 rounded-xl bg-brand-red-light/60 border-l-4 border-brand-red mb-4 sm:mb-5">
               <p className="text-xs sm:text-sm font-semibold text-brand-black italic">
                 &ldquo;We believe that real change begins with compassion—and grows when people come together.&rdquo;
               </p>
             </div>
 
-            <p className="text-gray-500 text-xs sm:text-sm leading-relaxed mb-8">
+            <p className="text-gray-500 text-xs sm:text-sm leading-relaxed mb-6 sm:mb-8">
               From helping a child access education to supporting an elderly person with essential care, every initiative is driven by one simple purpose: to give people the support, dignity, and opportunities they deserve.
             </p>
 
             {/* Two feature cards: Our Mission & Our Vision */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-9">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 mb-7 sm:mb-9">
               {/* Mission */}
               <div className="p-4 rounded-2xl bg-white border-2 border-gray-100 hover:border-brand-red/40 shadow-sm hover:shadow-md transition-all duration-300 group">
                 <div className="flex items-center gap-2.5 mb-2">
@@ -155,17 +181,17 @@ export default function AboutSection() {
             </div>
 
             {/* CTA row */}
-            <div className="flex flex-wrap items-center gap-6">
-              <Button href="/donate" size="lg">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6">
+              <Button href="/donate" size="lg" className="w-full sm:w-auto">
                 <span>Donate Now</span>
                 <FiArrowUpRight className="w-5 h-5" />
               </Button>
 
               <a
                 href="tel:+911234567890"
-                className="inline-flex items-center gap-3 group"
+                className="inline-flex items-center justify-center sm:justify-start gap-3 group p-2.5 sm:p-0 rounded-2xl sm:rounded-none bg-gray-50 sm:bg-transparent"
               >
-                <span className="w-11 h-11 rounded-full border-2 border-brand-red/30 group-hover:border-brand-red flex items-center justify-center transition-colors duration-200">
+                <span className="w-10 h-10 sm:w-11 sm:h-11 rounded-full border-2 border-brand-red/30 group-hover:border-brand-red flex items-center justify-center transition-colors duration-200 bg-white">
                   <FiPhone className="w-4 h-4 text-brand-red" />
                 </span>
                 <div>

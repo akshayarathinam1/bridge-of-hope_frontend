@@ -21,7 +21,7 @@ import {
 const CAUSES = [
   { id: "child-education", label: "Child Education" },
   { id: "child-care", label: "Child Care" },
-  { id: "senior-care", label: "Senior Citizen Care" },
+  { id: "senior-care", label: "Elderly Care" },
   { id: "medical-support", label: "Medical Support" },
   { id: "where-needed", label: "Where Most Needed" },
 ];
@@ -89,25 +89,28 @@ export default function DonationImpactCard() {
 
   return (
     <section id="donate-section" className="relative pt-14 pb-24 bg-white overflow-visible">
-      {/* ── Absolute dark background — covers top ~45% ── */}
-      <div className="absolute inset-x-0 top-0 h-[45%] min-h-[260px] bg-brand-black z-0 overflow-hidden">
+      {/* ── Absolute Hero-matched blue + white background — covers top ~45% ── */}
+      <div className="absolute inset-x-0 top-0 h-[45%] min-h-[260px] bg-[#032a6a] z-0 overflow-hidden">
         <Image
-          src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1600&q=75"
+          src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1600&q=85"
           alt="Community background"
           fill
-          className="object-cover opacity-15"
+          className="object-cover object-center opacity-85"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/90 to-brand-black/70" />
+        {/* Blue mixed with white gradient overlays identical to hero */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#032a6a]/75 via-[#0e3b82]/50 to-white/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#032a6a]/60 via-transparent to-white/25" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.25)_0%,_transparent_65%)]" />
       </div>
 
       {/* ── Content layer ── */}
       <div className="relative z-10 container-site flex flex-col items-center">
         {/* Section Heading */}
-        <div className="w-full max-w-4xl mb-8">
+        <div className="w-full max-w-4xl mb-6 sm:mb-8 text-center sm:text-left">
           <SectionLabel light>Start Donating to Poor People</SectionLabel>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-[1.1] tracking-tight mt-2">
-            Join The <span className="text-brand-red">Community</span> To Give
-            <br />
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-[1.18] sm:leading-[1.1] tracking-tight mt-2">
+            Join The <span className="text-brand-red">Community</span> To Give{" "}
+            <br className="hidden sm:inline" />
             Education &amp; Care For People In Need
           </h2>
         </div>
@@ -118,10 +121,10 @@ export default function DonationImpactCard() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6 }}
-          className="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-12 rounded-3xl overflow-hidden shadow-2xl bg-white border border-gray-100 min-h-[580px]"
+          className="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-12 rounded-3xl overflow-hidden shadow-2xl bg-white border border-gray-100 min-h-0 sm:min-h-[580px]"
         >
           {/* ── Left Column: Multi-Step Interactive Donation Card (col-span-7) ── */}
-          <div className="lg:col-span-7 p-6 sm:p-9 flex flex-col justify-between bg-white">
+          <div className="lg:col-span-7 p-4 sm:p-8 md:p-9 flex flex-col justify-between bg-white">
             <AnimatePresence mode="wait">
               {/* ─────────────────────────────────────────────────────────────
                   STEP 1 — START YOUR DONATION
@@ -180,7 +183,7 @@ export default function DonationImpactCard() {
                       <label className="block text-xs font-bold text-brand-black uppercase tracking-wider mb-2">
                         Donation Amount
                       </label>
-                      <div className="grid grid-cols-5 gap-1.5 sm:gap-2 mb-2">
+                      <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 mb-2">
                         {QUICK_AMOUNTS.map((amt) => (
                           <button
                             key={amt}
@@ -189,7 +192,7 @@ export default function DonationImpactCard() {
                               setSelectedAmount(amt);
                               setIsCustom(false);
                             }}
-                            className={`py-2 rounded-full text-xs font-bold border-2 transition-all duration-200 ${
+                            className={`py-2 px-1 rounded-full text-xs font-bold border-2 transition-all duration-200 text-center ${
                               !isCustom && selectedAmount === amt
                                 ? "bg-brand-red text-white border-brand-red shadow-sm"
                                 : "bg-white text-brand-black border-gray-200 hover:border-brand-black"
@@ -201,7 +204,7 @@ export default function DonationImpactCard() {
                         <button
                           type="button"
                           onClick={() => setIsCustom(true)}
-                          className={`py-2 rounded-full text-xs font-bold border-2 transition-all duration-200 ${
+                          className={`py-2 px-1 rounded-full text-xs font-bold border-2 transition-all duration-200 text-center ${
                             isCustom
                               ? "bg-brand-black text-white border-brand-black shadow-sm"
                               : "bg-white text-brand-black border-gray-200 hover:border-brand-black"
@@ -264,7 +267,7 @@ export default function DonationImpactCard() {
                       if (amount >= 100) setStep("step2");
                     }}
                     disabled={amount < 100}
-                    className="group relative overflow-hidden w-full inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-brand-red hover:bg-brand-red-dark disabled:bg-gray-300 text-white text-sm font-bold shadow-[0_4px_18px_rgba(211,47,47,0.4)] hover:shadow-[0_8px_25px_rgba(211,47,47,0.5)] transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/35 before:to-transparent before:-translate-x-full hover:before:translate-x-full before:transition-transform before:duration-700 before:ease-in-out before:pointer-events-none cursor-pointer"
+                    className="group relative overflow-hidden w-full inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-brand-red hover:bg-brand-red-dark disabled:bg-gray-300 text-white text-sm font-bold shadow-[0_4px_18px_rgba(255,113,0,0.4)] hover:shadow-[0_8px_25px_rgba(255,113,0,0.5)] transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/35 before:to-transparent before:-translate-x-full hover:before:translate-x-full before:transition-transform before:duration-700 before:ease-in-out before:pointer-events-none cursor-pointer"
                   >
                     <span>Continue with {formattedAmount} →</span>
                   </button>
@@ -508,7 +511,7 @@ export default function DonationImpactCard() {
                     <button
                       type="button"
                       onClick={() => setStep("gateway")}
-                      className="group relative overflow-hidden w-full inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-brand-red hover:bg-brand-red-dark text-white text-sm font-bold shadow-[0_4px_18px_rgba(211,47,47,0.4)] hover:shadow-[0_8px_25px_rgba(211,47,47,0.5)] transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/35 before:to-transparent before:-translate-x-full hover:before:translate-x-full before:transition-transform before:duration-700 before:ease-in-out before:pointer-events-none cursor-pointer"
+                      className="group relative overflow-hidden w-full inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-brand-red hover:bg-brand-red-dark text-white text-sm font-bold shadow-[0_4px_18px_rgba(255,113,0,0.4)] hover:shadow-[0_8px_25px_rgba(255,113,0,0.5)] transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/35 before:to-transparent before:-translate-x-full hover:before:translate-x-full before:transition-transform before:duration-700 before:ease-in-out before:pointer-events-none cursor-pointer"
                     >
                       <span>Proceed to Secure Payment →</span>
                     </button>
@@ -730,7 +733,7 @@ export default function DonationImpactCard() {
           <div className="lg:col-span-5 relative min-h-[340px] lg:min-h-0 overflow-hidden bg-gray-100 hidden sm:block">
             <Image
               src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=900&q=85"
-              alt="Smiling child receiving support — HopeBridge Foundation"
+              alt="Smiling child receiving support — Bridge of Hope"
               fill
               className="object-cover object-center"
             />
@@ -791,7 +794,7 @@ export default function DonationImpactCard() {
                   DIGITAL DONATION RECEIPT
                 </p>
                 <h3 className="text-lg font-black text-brand-black">
-                  HOPEBRIDGE FOUNDATION
+                  BRIDGE OF HOPE
                 </h3>
                 <p className="text-xs text-gray-500">Donation Receipt</p>
               </div>

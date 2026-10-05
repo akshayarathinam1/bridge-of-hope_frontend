@@ -6,23 +6,25 @@ import { motion } from "framer-motion";
 
 interface PageHeaderProps {
   title: string;
+  titleHighlight?: string;
   subtitle?: string;
   breadcrumb: string;
 }
 
-export default function PageHeader({ title, subtitle, breadcrumb }: PageHeaderProps) {
+export default function PageHeader({ title, titleHighlight, subtitle, breadcrumb }: PageHeaderProps) {
   return (
-    <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 bg-brand-black text-white overflow-hidden">
-      {/* Background Image with Dark Contrast Overlay */}
+    <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 bg-[#032a6a] text-white overflow-hidden">
+      {/* Background Image with softer contrast overlay */}
       <div className="absolute inset-0 z-0">
         <Image
           src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1400&q=80"
-          alt="HopeBridge Foundation Community"
+          alt="Bridge of Hope Community"
           fill
           priority
-          className="object-cover opacity-25 grayscale brightness-75"
+          className="object-cover opacity-50"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/90 to-brand-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#032a6a]/75 via-[#0e3b82]/55 to-white/20" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.2)_0%,_transparent_65%)]" />
       </div>
 
       {/* Decorative Bottom Curved Mask matching reference */}
@@ -36,7 +38,10 @@ export default function PageHeader({ title, subtitle, breadcrumb }: PageHeaderPr
           transition={{ duration: 0.5 }}
         >
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-            {title}
+            {titleHighlight
+              ? <>{title.replace(titleHighlight, "").trim()}{" "}<span className="text-brand-orange">{titleHighlight}</span></>
+              : title
+            }
           </h1>
           {subtitle && (
             <p className="mt-3 text-base sm:text-lg text-gray-300 max-w-xl">

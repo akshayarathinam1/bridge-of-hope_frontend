@@ -10,11 +10,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "HopeBridge Foundation | Building Hope • Changing Lives",
+  title: "Bridge of Hope | Building Hope • Changing Lives",
   description:
-    "HopeBridge Foundation empowers vulnerable communities through education, old age care, orphanage support, medical assistance, and social service.",
+    "Bridge of Hope empowers vulnerable communities through education, old age care, orphanage support, medical assistance, and social service.",
   icons: {
-    icon: "/assets/hopebridge_logo.jpeg",
+    icon: "/assets/bridgeofhope_logo.png",
   },
 };
 
@@ -24,10 +24,44 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} min-h-screen flex flex-col bg-white text-brand-black antialiased selection:bg-brand-red selection:text-white`}>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Strip external browser extension attributes (e.g. rtrvr-ls) before React hydration to prevent mismatches */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                function cleanExtensionAttrs() {
+                  var els = document.querySelectorAll('[rtrvr-ls]');
+                  for (var i = 0; i < els.length; i++) {
+                    els[i].removeAttribute('rtrvr-ls');
+                  }
+                }
+                cleanExtensionAttrs();
+                var observer = new MutationObserver(function(mutations) {
+                  for (var i = 0; i < mutations.length; i++) {
+                    var m = mutations[i];
+                    if (m.type === 'attributes' && m.attributeName && m.attributeName.indexOf('rtrvr') === 0) {
+                      m.target.removeAttribute(m.attributeName);
+                    }
+                  }
+                });
+                observer.observe(document.documentElement, { attributes: true, subtree: true });
+                window.addEventListener('DOMContentLoaded', cleanExtensionAttrs);
+                window.addEventListener('load', function() {
+                  setTimeout(function() { observer.disconnect(); }, 1500);
+                }, { once: true });
+              } catch (e) {}
+            `,
+          }}
+        />
+      </head>
+      <body
+        suppressHydrationWarning
+        className={`${inter.className} min-h-screen flex flex-col bg-white text-brand-black antialiased selection:bg-brand-red selection:text-white`}
+      >
         <Navbar />
-        <div className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col" suppressHydrationWarning>
           {children}
         </div>
         <Footer />

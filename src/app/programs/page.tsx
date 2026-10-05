@@ -22,6 +22,7 @@ interface ProgramDetail {
   id: string;
   category: string;
   title: string;
+  titleHighlight: string;
   headline: string;
   description1: string;
   description2: string;
@@ -40,6 +41,7 @@ const programsData: ProgramDetail[] = [
     id: "education",
     category: "Education & Literacy",
     title: "Education For Every Child",
+    titleHighlight: "Child",
     headline: "Unlocking Potential Through Knowledge, Tools & Mentorship",
     description1:
       "Education is the single most powerful tool to break generational cycles of poverty. Unfortunately, thousands of children from low-income families in our communities face severe hurdles—from lacking basic school kits and uniform funds to leaving school early due to economic hardship.",
@@ -49,8 +51,8 @@ const programsData: ProgramDetail[] = [
       "https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=900&q=85",
     imageAlt: "Children actively learning and raising hands in classroom",
     icon: FiBookOpen,
-    iconBg: "bg-amber-500/10",
-    iconColor: "text-amber-600",
+    iconBg: "bg-orange-50",
+    iconColor: "text-brand-orange",
     stats: [
       { label: "Students Supported", value: "4,800+" },
       { label: "Learning Kits Delivered", value: "6,500+" },
@@ -69,17 +71,18 @@ const programsData: ProgramDetail[] = [
     id: "child-care",
     category: "Child & Orphan Welfare",
     title: "Child & Orphan Protection",
+    titleHighlight: "Protection",
     headline: "Safe Havens, Nutritious Meals & Loving Care for Vulnerable Children",
     description1:
       "Every child deserves a secure childhood free from neglect, hunger, and instability. Abandoned, orphaned, or displaced children often lack access to balanced nutrition, emotional well-being, and safe residential environments necessary for healthy development.",
     description2:
-      "Through our Child & Orphan Care Program, HopeBridge supports trusted children's shelters, foster care networks, and community daycare facilities. We guarantee full daily nutrition, medical checkups, emotional counseling, and recreational development so that every child grows up feeling cherished and protected.",
+      "Through our Child & Orphan Care Program, Bridge of Hope supports trusted children's shelters, foster care networks, and community daycare facilities. We guarantee full daily nutrition, medical checkups, emotional counseling, and recreational development so that every child grows up feeling cherished and protected.",
     image:
       "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=900&q=85",
     imageAlt: "Happy children smiling together at a community shelter",
     icon: FiHome,
-    iconBg: "bg-teal-500/10",
-    iconColor: "text-teal-600",
+    iconBg: "bg-brand-navy/10",
+    iconColor: "text-brand-navy",
     stats: [
       { label: "Children Sheltered & Cared", value: "1,200+" },
       { label: "Care Centers Supported", value: "14" },
@@ -97,12 +100,13 @@ const programsData: ProgramDetail[] = [
   {
     id: "senior-care",
     category: "Elder Care & Dignity",
-    title: "Senior Citizen Care",
+    title: "Elderly Care",
+    titleHighlight: "Care",
     headline: "Restoring Dignity, Medical Support & Companionship to Our Elders",
     description1:
       "Our seniors dedicated their lives to building families and communities, yet many now spend their golden years in isolation, battling chronic illnesses and facing financial distress without family support or pensions.",
     description2:
-      "HopeBridge's Senior Citizen Care initiative provides steady relief through subsidized geriatric medicine, monthly ration supplies, mobile healthcare visits, and companion care. We also assist old age homes with infrastructure upgrades, mobility aids, and organized social gatherings to prevent loneliness.",
+      "Bridge of Hope's Elderly Care initiative provides steady relief through subsidized geriatric medicine, monthly ration supplies, mobile healthcare visits, and companion care. We also assist old age homes with infrastructure upgrades, mobility aids, and organized social gatherings to prevent loneliness.",
     image:
       "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=900&q=85",
     imageAlt: "Caregiver gently holding the hand of an elderly woman",
@@ -127,6 +131,7 @@ const programsData: ProgramDetail[] = [
     id: "medical-support",
     category: "Healthcare & Emergency Aid",
     title: "Medical & Healthcare Support",
+    titleHighlight: "Support",
     headline: "Extending Lifesaving Healthcare to Underserved Communities",
     description1:
       "A sudden illness or medical emergency should never push a family into extreme poverty. Yet for thousands of daily-wage earners and rural households, out-of-pocket healthcare costs represent an insurmountable barrier to lifesaving treatment.",
@@ -136,8 +141,8 @@ const programsData: ProgramDetail[] = [
       "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=900&q=85",
     imageAlt: "Doctor examining a patient at a community medical health drive",
     icon: FiActivity,
-    iconBg: "bg-blue-500/10",
-    iconColor: "text-blue-600",
+    iconBg: "bg-brand-navy/10",
+    iconColor: "text-brand-navy",
     stats: [
       { label: "Families Assisted", value: "3,200+" },
       { label: "Free Health Camps Held", value: "150+" },
@@ -156,17 +161,18 @@ const programsData: ProgramDetail[] = [
     id: "social-service",
     category: "Community Welfare & Relief",
     title: "Community Social Service",
+    titleHighlight: "Service",
     headline: "Rapid Relief, Disaster Aid & Sustainable Grassroots Development",
     description1:
       "When unexpected hardships strike—whether climate disasters, extreme winters, or severe economic disruptions—vulnerable families bear the brunt. Rapid, organized community intervention is essential to stabilize affected households.",
     description2:
-      "HopeBridge's Social Service teams work actively on the frontlines: organizing blanket drives during harsh winters, dry ration kits during localized crises, clean drinking water installations, and skill workshops for women seeking financial independence. We empower neighborhoods from within.",
+      "Bridge of Hope's Social Service teams work actively on the frontlines: organizing blanket drives during harsh winters, dry ration kits during localized crises, clean drinking water installations, and skill workshops for women seeking financial independence. We empower neighborhoods from within.",
     image:
       "https://images.unsplash.com/photo-1541544741938-0af808871cc0?w=900&q=85",
     imageAlt: "Volunteers distributing food and relief packages to community members",
     icon: FiUsers,
-    iconBg: "bg-emerald-500/10",
-    iconColor: "text-emerald-600",
+    iconBg: "bg-orange-50",
+    iconColor: "text-brand-orange",
     stats: [
       { label: "Community Members Reached", value: "12,500+" },
       { label: "Relief Drives Conducted", value: "75+" },
@@ -230,7 +236,8 @@ export default function ProgramsPage() {
           <div className="max-w-3xl mx-auto text-center mb-10">
             <SectionLabel>Our Strategic Approach</SectionLabel>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-black tracking-tight mt-2 mb-4">
-              Direct, Measurable &amp; Sustainable Impact
+              Direct, Measurable &amp;{" "}
+              <span className="text-brand-orange">Sustainable Impact</span>
             </h2>
             <p className="text-gray-600 text-base sm:text-lg leading-relaxed">
               We design our programs to deliver both immediate crisis relief and sustainable long-term pathways out of poverty. Explore each program below to discover how our community-driven interventions make a difference.
@@ -306,14 +313,14 @@ export default function ProgramsPage() {
                           <span
                             className={`w-2.5 h-2.5 rounded-full ${
                               prog.id === "education"
-                                ? "bg-amber-500"
+                                ? "bg-brand-orange"
                                 : prog.id === "child-care"
-                                ? "bg-teal-500"
+                                ? "bg-brand-navy"
                                 : prog.id === "senior-care"
                                 ? "bg-brand-red"
                                 : prog.id === "medical-support"
-                                ? "bg-blue-500"
-                                : "bg-emerald-500"
+                                ? "bg-brand-navy"
+                                : "bg-brand-orange"
                             }`}
                           />
                           <span>{prog.category}</span>
@@ -353,7 +360,8 @@ export default function ProgramsPage() {
 
                     {/* Program Title */}
                     <h2 className="text-3xl sm:text-4xl lg:text-4.5xl font-black text-brand-black tracking-tight leading-tight mt-1 mb-3">
-                      {prog.title}
+                      {prog.title.replace(prog.titleHighlight, "").trim()}{" "}
+                      <span className="text-brand-orange">{prog.titleHighlight}</span>
                     </h2>
 
                     {/* Subheadline */}
@@ -422,19 +430,31 @@ export default function ProgramsPage() {
       </div>
 
       {/* ─────────────────────────────────────────────────────────────
-          8. IMPACT NUMBERS STRIP
+          8. IMPACT NUMBERS STRIP (Consolidated Footprint)
       ───────────────────────────────────────────────────────────── */}
-      <section className="py-20 sm:py-24 bg-brand-black text-white relative overflow-hidden">
-        {/* Subtle Background Pattern */}
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
+      <section className="py-20 sm:py-24 bg-[#032a6a] text-white relative overflow-hidden" suppressHydrationWarning>
+        {/* Background Image & Hero-matched overlays */}
+        <div className="absolute inset-0 z-0 pointer-events-none" suppressHydrationWarning>
+          <Image
+            src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1920&q=85"
+            alt="Bridge of Hope Consolidated Community Footprint"
+            fill
+            className="object-cover object-center opacity-35"
+          />
+          {/* Blue mixed with white gradient overlays identical to hero */}
+          <div suppressHydrationWarning className="absolute inset-0 bg-gradient-to-r from-[#032a6a]/85 via-[#0e3b82]/60 to-white/20" />
+          <div suppressHydrationWarning className="absolute inset-0 bg-gradient-to-t from-[#032a6a]/75 via-transparent to-white/20" />
+          <div suppressHydrationWarning className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.25)_0%,_transparent_65%)]" />
+        </div>
 
         <div className="container-site relative z-10">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <SectionLabel light>Consolidated Footprint</SectionLabel>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight mt-2 mb-4">
-              Our Collective Reach &amp; Impact
+              Our Collective Reach &amp;{" "}
+              <span className="text-brand-orange">Impact</span>
             </h2>
-            <p className="text-gray-400 text-sm sm:text-base leading-relaxed">
+            <p className="text-gray-200 text-sm sm:text-base leading-relaxed">
               Every initiative connects directly with real lives, real families, and real futures. Here is what we have accomplished together.
             </p>
           </div>
@@ -449,9 +469,9 @@ export default function ProgramsPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  className="relative p-7 sm:p-8 rounded-3xl bg-white/[0.04] border border-white/10 hover:border-brand-red/50 hover:bg-white/[0.07] transition-all duration-300 group"
+                  className="relative p-7 sm:p-8 rounded-3xl bg-white/10 border border-white/15 backdrop-blur-md hover:border-brand-red/60 hover:bg-white/15 transition-all duration-300 group shadow-xl"
                 >
-                  <div className="w-12 h-12 rounded-2xl bg-brand-red/10 border border-brand-red/20 flex items-center justify-center text-brand-red mb-5 group-hover:scale-110 group-hover:bg-brand-red group-hover:text-white transition-all duration-300">
+                  <div className="w-12 h-12 rounded-2xl bg-white/15 border border-white/20 flex items-center justify-center text-brand-red mb-5 group-hover:scale-110 group-hover:bg-brand-red group-hover:text-white transition-all duration-300 shadow-inner">
                     <Icon className="w-6 h-6" />
                   </div>
 
@@ -463,7 +483,7 @@ export default function ProgramsPage() {
                     {stat.label}
                   </h3>
 
-                  <p className="text-xs sm:text-sm text-gray-400 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-gray-200 leading-relaxed">
                     {stat.description}
                   </p>
                 </motion.div>

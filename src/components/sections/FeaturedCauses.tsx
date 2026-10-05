@@ -22,7 +22,7 @@ const causes = [
   },
   {
     id: "elder-care",
-    title: "Care for Senior Citizens",
+    title: "Care for Elderly",
     description:
       "Help provide essential care, comfort, and support to elderly people who may be living without adequate assistance.",
     category: "Elder Care",
@@ -73,7 +73,7 @@ export default function FeaturedCauses() {
   ].slice(0, visible);
 
   return (
-    <section id="causes" className="py-24 bg-white">
+    <section id="causes" className="py-16 sm:py-20 md:py-24 bg-white">
       <div className="container-site">
         {/* Header row */}
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">
@@ -81,7 +81,7 @@ export default function FeaturedCauses() {
             <SectionLabel>Featured Causes</SectionLabel>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1] tracking-tight text-brand-black mt-1 mb-3">
               Where Your Support{" "}
-              <span className="text-brand-red">Makes a Difference</span>
+              <span className="text-brand-orange">Makes a Difference</span>
             </h2>
             <p className="text-sm sm:text-base text-gray-500 leading-relaxed">
               Your generosity helps us support initiatives that address some of the most important needs in our communities.
@@ -179,7 +179,7 @@ export default function FeaturedCauses() {
                   {/* Card CTA button matching user request */}
                   <Link
                     href={`/donate?cause=${cause.id}`}
-                    className="group/btn relative overflow-hidden w-full inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full border-2 border-brand-black text-brand-black text-xs sm:text-sm font-bold hover:bg-brand-red hover:text-white hover:border-brand-red transition-all duration-300 shadow-sm hover:shadow-[0_6px_20px_rgba(211,47,47,0.35)] hover:-translate-y-0.5 active:translate-y-0 before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/35 before:to-transparent before:-translate-x-full hover:before:translate-x-full before:transition-transform before:duration-700 before:ease-in-out before:pointer-events-none"
+                    className="group/btn relative overflow-hidden w-full inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full border-2 border-brand-black text-brand-black text-xs sm:text-sm font-bold hover:bg-brand-red hover:text-white hover:border-brand-red transition-all duration-300 shadow-sm hover:shadow-[0_6px_20px_rgba(255,113,0,0.35)] hover:-translate-y-0.5 active:translate-y-0 before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/35 before:to-transparent before:-translate-x-full hover:before:translate-x-full before:transition-transform before:duration-700 before:ease-in-out before:pointer-events-none"
                   >
                     <span>{cause.ctaText}</span>
                     <FiArrowUpRight className="w-4 h-4 transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />

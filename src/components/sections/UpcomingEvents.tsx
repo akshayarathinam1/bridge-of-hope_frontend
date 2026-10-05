@@ -12,7 +12,7 @@ const events = [
     id: "school-drive",
     title: "School Kit & Uniform Distribution Drive",
     date: { day: "15", month: "OCT" },
-    badgeColor: "bg-amber-500",
+    badgeColor: "bg-brand-orange",
     time: "9:00 AM - 2:00 PM",
     location: "Govt School, Tambaram, Chennai",
     image:
@@ -22,7 +22,7 @@ const events = [
     id: "medical-camp",
     title: "Free Rural Health & Vision Screening Camp",
     date: { day: "22", month: "NOV" },
-    badgeColor: "bg-teal-500",
+    badgeColor: "bg-brand-navy",
     time: "8:30 AM - 4:00 PM",
     location: "Community Center, Kanchipuram",
     image:
@@ -42,9 +42,9 @@ const events = [
 
 export default function UpcomingEvents() {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-14 sm:py-20 md:py-24 bg-white">
       <div className="container-site">
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
           <SectionLabel className="justify-center">Join Hands Together</SectionLabel>
           <SectionHeading
             title="Join Our Upcoming Events"
@@ -53,7 +53,7 @@ export default function UpcomingEvents() {
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {events.map((evt, i) => (
             <motion.div
               key={evt.id}
@@ -61,7 +61,7 @@ export default function UpcomingEvents() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: i * 0.15 }}
-              className="relative rounded-2xl overflow-hidden shadow-md group h-[380px] flex flex-col justify-end p-6 border border-gray-100"
+              className="relative rounded-2xl overflow-hidden shadow-md group h-[290px] sm:h-[380px] flex flex-col justify-end p-4 sm:p-6 border border-gray-100"
             >
               {/* Background Image */}
               <Image

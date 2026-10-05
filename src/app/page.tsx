@@ -11,7 +11,7 @@ import CtaBanner from "@/components/sections/CtaBanner";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white overflow-x-hidden w-full max-w-full" suppressHydrationWarning>
       {/* 1. Hero Section: Display typography, CTA buttons, avatar stack */}
       <Hero />
 

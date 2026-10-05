@@ -6,9 +6,9 @@ import FaqSection from "@/components/sections/FaqSection";
 import CtaBanner from "@/components/sections/CtaBanner";
 
 export const metadata: Metadata = {
-  title: "Donate Now | HopeBridge Foundation",
+  title: "Donate Now | Bridge of Hope",
   description:
-    "Make a direct, 100% tax-deductible donation to HopeBridge Foundation. Support child education, elder care, medical support, and community welfare.",
+    "Make a direct, 100% tax-deductible donation to Bridge of Hope. Support child education, elder care, medical support, and community welfare.",
 };
 
 export default function DonatePage() {

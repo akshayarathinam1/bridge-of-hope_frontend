@@ -66,11 +66,12 @@ export default function MissionJourneySection() {
             <SectionLabel>Our Foundation Mission</SectionLabel>
 
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-black tracking-tight mt-2 mb-6 leading-tight">
-              Make Every Stage In The Journey Meaningful
+              Make Every Stage In The Journey{" "}
+              <span className="text-brand-orange">Meaningful</span>
             </h2>
 
             <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-8">
-              At HopeBridge Foundation, we believe sustainable social change begins by addressing the full human lifecycle—protecting vulnerable childhoods, providing opportunities for youth, and ensuring serene dignity for our elderly.
+              At Bridge of Hope, we believe sustainable social change begins by addressing the full human lifecycle—protecting vulnerable childhoods, providing opportunities for youth, and ensuring serene dignity for our elderly.
             </p>
 
             {/* Checklist */}
@@ -90,7 +91,7 @@ export default function MissionJourneySection() {
             {/* CTA Button with curved pill shape and hover shine */}
             <Link
               href="/get-involved"
-              className="group relative overflow-hidden inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-brand-red hover:bg-brand-red-dark text-white text-sm font-bold shadow-[0_4px_18px_rgba(211,47,47,0.35)] hover:shadow-[0_8px_26px_rgba(211,47,47,0.5)] transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/35 before:to-transparent before:-translate-x-full hover:before:translate-x-full before:transition-transform before:duration-700 before:ease-in-out before:pointer-events-none"
+              className="group relative overflow-hidden inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-brand-red hover:bg-brand-red-dark text-white text-sm font-bold shadow-[0_4px_18px_rgba(255,113,0,0.35)] hover:shadow-[0_8px_26px_rgba(255,113,0,0.5)] transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/35 before:to-transparent before:-translate-x-full hover:before:translate-x-full before:transition-transform before:duration-700 before:ease-in-out before:pointer-events-none"
             >
               <span>Join Our Mission</span>
               <FiArrowUpRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

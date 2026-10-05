@@ -32,7 +32,7 @@ const articles = [
     slug: "orphan-dreams",
     title: "Help make their dreams and career aspirations come true.",
     excerpt:
-      "Meet Priya and Rahul, two orphanage residents who cleared state engineering entrance tests through HopeBridge mentoring.",
+      "Meet Priya and Rahul, two orphanage residents who cleared state engineering entrance tests through Bridge of Hope mentoring.",
     date: "Jul 10, 2026",
     category: "Stories of Hope",
     image:
