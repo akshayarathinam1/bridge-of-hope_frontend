@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Link from "next/link";
 import Image from "next/image";
@@ -13,7 +13,7 @@ interface PageHeaderProps {
 
 export default function PageHeader({ title, titleHighlight, subtitle, breadcrumb }: PageHeaderProps) {
   return (
-    <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 bg-[#032a6a] text-white overflow-hidden">
+    <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 bg-[#222A59] text-white overflow-hidden">
       {/* Background Image with softer contrast overlay */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -23,7 +23,7 @@ export default function PageHeader({ title, titleHighlight, subtitle, breadcrumb
           priority
           className="object-cover opacity-50"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#032a6a]/75 via-[#0e3b82]/55 to-white/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#222A59]/75 via-[#2e3870]/55 to-white/20" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.2)_0%,_transparent_65%)]" />
       </div>
 

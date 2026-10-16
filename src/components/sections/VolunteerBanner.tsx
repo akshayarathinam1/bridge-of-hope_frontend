@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -34,7 +34,7 @@ const stats = [
 
 export default function VolunteerBanner() {
   return (
-    <section className="relative py-24 md:py-32 bg-[#032a6a] overflow-hidden">
+    <section className="relative py-24 md:py-32 bg-[#222A59] overflow-hidden">
       {/* Background Image with Hero-matched blue + white gradients */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -44,8 +44,8 @@ export default function VolunteerBanner() {
           className="object-cover object-center opacity-85"
         />
         {/* Blue mixed with white gradient overlays identical to hero */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#032a6a]/75 via-[#0e3b82]/50 to-white/20" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#032a6a]/60 via-transparent to-white/25" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#222A59]/75 via-[#2e3870]/50 to-white/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#222A59]/60 via-transparent to-white/25" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.25)_0%,_transparent_65%)]" />
       </div>
 

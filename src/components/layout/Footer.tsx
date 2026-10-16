@@ -9,6 +9,7 @@ import {
   FiPhone,
   FiMapPin,
 } from "react-icons/fi";
+import { FaWhatsapp } from "react-icons/fa6";
 
 const quickLinks = [
   { label: "About Us", href: "/about" },
@@ -26,6 +27,7 @@ const programs = [
 ];
 
 const socials = [
+  { icon: FaWhatsapp, href: "https://wa.me/919876543210?text=Hello%20Bridge%20of%20Hope", label: "WhatsApp" },
   { icon: FiFacebook, href: "#", label: "Facebook" },
   { icon: FiTwitter, href: "#", label: "Twitter" },
   { icon: FiInstagram, href: "#", label: "Instagram" },
@@ -34,7 +36,7 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#032a6a] text-white overflow-hidden">
+    <footer className="relative bg-[#222A59] text-white overflow-hidden">
       {/* Background Image and Hero-matched white + blue overlays */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -44,8 +46,8 @@ export default function Footer() {
           className="object-cover object-center opacity-40 mix-blend-luminosity"
         />
         {/* Blue mixed with white gradient overlays identical to hero */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#032a6a]/85 via-[#0e3b82]/65 to-white/20" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#032a6a]/75 via-[#032a6a]/40 to-white/25" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#222A59]/85 via-[#2e3870]/65 to-white/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#222A59]/75 via-[#222A59]/40 to-white/25" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.25)_0%,_transparent_65%)]" />
       </div>
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent z-10" />
@@ -58,11 +60,11 @@ export default function Footer() {
             <Link href="/" className="inline-block mb-5" aria-label="Bridge of Hope home">
               <div className="bg-white rounded-2xl p-3 inline-flex items-center justify-center shadow-lg border border-white">
                 <Image
-                  src="/assets/bridgeofhope_logo.png"
+                  src="/assets/bh-logo.png"
                   alt="Bridge of Hope"
                   width={260}
                   height={260}
-                  className="h-18 md:h-20 w-auto object-contain"
+                  className="h-32 md:h-36 w-auto object-contain"
                   unoptimized
                 />
               </div>
@@ -137,13 +139,29 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <a
-                  href="mailto:info@hopebridgefoundation.org"
+                  href="mailto:info@bhfoundations.com"
                   className="flex items-center gap-3 text-sm text-white/85 hover:text-white transition-colors group p-2.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 shadow-sm"
                 >
                   <span className="w-7 h-7 rounded-lg bg-white text-brand-black flex items-center justify-center flex-shrink-0 shadow-sm">
                     <FiMail className="w-3.5 h-3.5 text-brand-red" aria-hidden="true" />
                   </span>
-                  <span className="truncate">info@hopebridgefoundation.org</span>
+                  <span className="truncate">info@bhfoundations.com</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://wa.me/919876543210?text=Hello%20Bridge%20of%20Hope"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 text-sm text-white/90 hover:text-white transition-colors group p-2.5 rounded-xl bg-[#25D366]/20 hover:bg-[#25D366]/30 border border-[#25D366]/40 shadow-sm"
+                >
+                  <span className="w-7 h-7 rounded-lg bg-[#25D366] text-white flex items-center justify-center flex-shrink-0 shadow-sm">
+                    <FaWhatsapp className="w-4 h-4" aria-hidden="true" />
+                  </span>
+                  <div className="flex flex-col">
+                    <span className="text-[10px] text-emerald-300 font-bold uppercase tracking-wider">Chat on WhatsApp</span>
+                    <span className="font-semibold text-white">+91 98765 43210</span>
+                  </div>
                 </a>
               </li>
               <li>

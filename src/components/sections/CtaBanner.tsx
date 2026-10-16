@@ -21,7 +21,7 @@ function HandsHeartIcon({ className = "w-14 h-14" }: { className?: string }) {
       {/* Heartbeat pulse inside heart */}
       <path
         d="M22 28.5H26.5L29 22.5L34 33L36.5 28.5H42"
-        stroke="#032a6a"
+        stroke="#222A59"
         strokeWidth="2.4"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -57,10 +57,10 @@ function HandsHeartIcon({ className = "w-14 h-14" }: { className?: string }) {
 
 export default function CtaBanner() {
   return (
-    <section className="relative w-full overflow-hidden bg-[#032a6a]">
+    <section className="relative w-full overflow-hidden bg-[#222A59]">
       <div className="grid grid-cols-1 lg:grid-cols-3 min-h-0">
         {/* ── 1. LEFT PANEL: Become A Volunteer ── */}
-        <div className="relative flex flex-col items-center justify-center text-center p-6 sm:p-12 lg:p-14 overflow-hidden bg-[#032a6a] group/left min-h-[290px] sm:min-h-[380px] lg:min-h-0">
+        <div className="relative flex flex-col items-center justify-center text-center p-6 sm:p-12 lg:p-14 overflow-hidden bg-[#222A59] group/left min-h-[290px] sm:min-h-[380px] lg:min-h-0">
           {/* Background Image with clear exposure */}
           <div className="absolute inset-0 z-0">
             <Image
@@ -70,8 +70,8 @@ export default function CtaBanner() {
               className="object-cover object-center opacity-85 group-hover/left:scale-105 transition-transform duration-700 ease-out"
             />
             {/* Blue mixed with white gradient overlays identical to hero */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#032a6a]/75 via-[#0e3b82]/50 to-white/20" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#032a6a]/60 via-transparent to-white/25" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#222A59]/75 via-[#2e3870]/50 to-white/20" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#222A59]/60 via-transparent to-white/25" />
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.25)_0%,_transparent_65%)]" />
           </div>
 
@@ -84,7 +84,7 @@ export default function CtaBanner() {
             >
               <path
                 d="M0,0 L18,0 C28,45 12,90 22,135 C32,180 15,225 28,270 C40,315 18,360 25,405 C32,450 14,495 24,540 C30,570 18,600 18,600 L0,600 Z"
-                fill="#0e3b82"
+                fill="#2e3870"
               />
               <path
                 d="M18,0 C28,45 12,90 22,135 C32,180 15,225 28,270 C40,315 18,360 25,405 C32,450 14,495 24,540 C30,570 18,600 18,600"
@@ -155,7 +155,7 @@ export default function CtaBanner() {
             >
               <path
                 d="M50,0 L32,0 C22,45 38,90 28,135 C18,180 35,225 22,270 C10,315 32,360 25,405 C18,450 36,495 26,540 C20,570 32,600 32,600 L50,600 Z"
-                fill="#ff7100"
+                fill="#FF6100"
               />
               <path
                 d="M32,0 C22,45 38,90 28,135 C18,180 35,225 22,270 C10,315 32,360 25,405 C18,450 36,495 26,540 C20,570 32,600 32,600"
@@ -195,3 +195,4 @@ export default function CtaBanner() {
     </section>
   );
 }
+

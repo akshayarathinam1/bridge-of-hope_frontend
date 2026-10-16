@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -28,10 +28,10 @@ const teamMembers = [
 
 export default function TeamSection() {
   return (
-    <section className="relative bg-[#032a6a] text-white pt-20 pb-28 md:pt-24 md:pb-32 rounded-t-[40px] md:rounded-t-[60px] overflow-hidden">
+    <section className="relative bg-[#222A59] text-white pt-20 pb-28 md:pt-24 md:pb-32 rounded-t-[40px] md:rounded-t-[60px] overflow-hidden">
       {/* Blue mixed with white gradient overlays identical to hero */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#032a6a]/75 via-[#0e3b82]/50 to-white/20 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#032a6a]/60 via-transparent to-white/25 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#222A59]/75 via-[#2e3870]/50 to-white/20 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#222A59]/60 via-transparent to-white/25 pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.25)_0%,_transparent_65%)] pointer-events-none" />
 
       {/* Decorative subtle polygon/geometric overlay in top-right */}

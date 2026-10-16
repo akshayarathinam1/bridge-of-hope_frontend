@@ -16,7 +16,10 @@ import {
   FiSmartphone,
   FiCreditCard,
   FiFileText,
+  FiPhone,
+  FiCheckCircle,
 } from "react-icons/fi";
+import { FaWhatsapp } from "react-icons/fa6";
 
 const CAUSES = [
   { id: "child-education", label: "Child Education" },
@@ -30,7 +33,11 @@ const QUICK_AMOUNTS = [500, 1000, 2500, 5000];
 
 type Step = "step1" | "step2" | "step3" | "gateway" | "success" | "failed";
 
-export default function DonationImpactCard() {
+interface DonationImpactCardProps {
+  embedded?: boolean;
+}
+
+export default function DonationImpactCard({ embedded = false }: DonationImpactCardProps) {
   // Step 1 State
   const [step, setStep] = useState<Step>("step1");
   const [frequency, setFrequency] = useState<"once" | "monthly">("monthly");

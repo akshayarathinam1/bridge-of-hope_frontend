@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -432,7 +432,7 @@ export default function ProgramsPage() {
       {/* ─────────────────────────────────────────────────────────────
           8. IMPACT NUMBERS STRIP (Consolidated Footprint)
       ───────────────────────────────────────────────────────────── */}
-      <section className="py-20 sm:py-24 bg-[#032a6a] text-white relative overflow-hidden" suppressHydrationWarning>
+      <section className="py-20 sm:py-24 bg-[#222A59] text-white relative overflow-hidden" suppressHydrationWarning>
         {/* Background Image & Hero-matched overlays */}
         <div className="absolute inset-0 z-0 pointer-events-none" suppressHydrationWarning>
           <Image
@@ -442,8 +442,8 @@ export default function ProgramsPage() {
             className="object-cover object-center opacity-35"
           />
           {/* Blue mixed with white gradient overlays identical to hero */}
-          <div suppressHydrationWarning className="absolute inset-0 bg-gradient-to-r from-[#032a6a]/85 via-[#0e3b82]/60 to-white/20" />
-          <div suppressHydrationWarning className="absolute inset-0 bg-gradient-to-t from-[#032a6a]/75 via-transparent to-white/20" />
+          <div suppressHydrationWarning className="absolute inset-0 bg-gradient-to-r from-[#222A59]/85 via-[#2e3870]/60 to-white/20" />
+          <div suppressHydrationWarning className="absolute inset-0 bg-gradient-to-t from-[#222A59]/75 via-transparent to-white/20" />
           <div suppressHydrationWarning className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.25)_0%,_transparent_65%)]" />
         </div>
 

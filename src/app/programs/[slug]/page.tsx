@@ -648,7 +648,7 @@ export default function ProgramDetailPage({
             </div>
 
             {/* Impact Spotlight / Story (Real Lives Changed) */}
-            <div className="lg:col-span-6 bg-[#032a6a] text-white p-8 sm:p-10 rounded-3xl relative overflow-hidden shadow-2xl border border-white/15 group" suppressHydrationWarning>
+            <div className="lg:col-span-6 bg-[#222A59] text-white p-8 sm:p-10 rounded-3xl relative overflow-hidden shadow-2xl border border-white/15 group" suppressHydrationWarning>
               {/* Background Image & Hero-matched overlays */}
               <div className="absolute inset-0 z-0 pointer-events-none" suppressHydrationWarning>
                 <Image
@@ -657,8 +657,8 @@ export default function ProgramDetailPage({
                   fill
                   className="object-cover object-center opacity-35 group-hover:scale-105 transition-transform duration-700"
                 />
-                <div suppressHydrationWarning className="absolute inset-0 bg-gradient-to-r from-[#032a6a]/85 via-[#0e3b82]/65 to-[#032a6a]/80" />
-                <div suppressHydrationWarning className="absolute inset-0 bg-gradient-to-t from-[#032a6a]/70 via-transparent to-white/15" />
+                <div suppressHydrationWarning className="absolute inset-0 bg-gradient-to-r from-[#222A59]/85 via-[#2e3870]/65 to-[#222A59]/80" />
+                <div suppressHydrationWarning className="absolute inset-0 bg-gradient-to-t from-[#222A59]/70 via-transparent to-white/15" />
                 <div suppressHydrationWarning className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.25)_0%,_transparent_65%)]" />
               </div>
 

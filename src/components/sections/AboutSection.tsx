@@ -5,8 +5,10 @@ import Image from "next/image";
 import Button from "@/components/ui/Button";
 import SectionLabel from "@/components/ui/SectionLabel";
 import { FiTarget, FiEye, FiPhone, FiArrowUpRight } from "react-icons/fi";
+import { useDonateModal } from "@/context/DonateModalContext";
 
 export default function AboutSection() {
+  const { openDonateModal } = useDonateModal();
   return (
     <section id="about" className="py-16 sm:py-20 bg-white overflow-hidden">
       <div className="container-site">
@@ -76,7 +78,7 @@ export default function AboutSection() {
               <svg width="100" height="30" viewBox="0 0 100 30" fill="none">
                 <path
                   d="M2 15 C14 4 24 26 36 15 C48 4 58 26 70 15 C82 4 92 26 98 15"
-                  stroke="#ff7100"
+                  stroke="#FF6100"
                   strokeWidth="2.8"
                   strokeLinecap="round"
                   fill="none"
@@ -182,7 +184,7 @@ export default function AboutSection() {
 
             {/* CTA row */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6">
-              <Button href="/donate" size="lg" className="w-full sm:w-auto">
+              <Button onClick={openDonateModal} size="lg" className="w-full sm:w-auto">
                 <span>Donate Now</span>
                 <FiArrowUpRight className="w-5 h-5" />
               </Button>

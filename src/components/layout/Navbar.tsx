@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { clsx } from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
 import { HiOutlineMenuAlt3, HiOutlineX } from "react-icons/hi";
+import { useDonateModal } from "@/context/DonateModalContext";
 import {
   FiArrowUpRight,
   FiChevronDown,
@@ -74,6 +75,7 @@ export default function Navbar() {
   const [mobileProgramsOpen, setMobileProgramsOpen] = useState(false);
   const dropdownRef = useRef<HTMLLIElement>(null);
   const pathname = usePathname();
+  const { openDonateModal } = useDonateModal();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 25);
@@ -100,215 +102,190 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Floating Capsule Header Wrapper */}
-      <header className="fixed top-2.5 sm:top-4 md:top-5 inset-x-0 z-50 px-3 sm:px-6 lg:px-8 pointer-events-none transition-all duration-300">
+      {/* Modern Floating Navbar */}
+      <header className="fixed top-0 inset-x-0 z-50 px-3 sm:px-5 pt-3 sm:pt-4 pointer-events-none">
         <div className="max-w-7xl mx-auto">
           <nav
             aria-label="Main Navigation"
             className={clsx(
-              "pointer-events-auto transition-all duration-300 ease-out",
-              "rounded-full px-4 sm:px-6 md:px-7 py-2",
-              "flex items-center justify-between gap-3 sm:gap-6",
+              "pointer-events-auto flex items-center justify-between px-4 sm:px-5 transition-all duration-500 rounded-2xl overflow-visible",
               "border",
               scrolled
-                ? "bg-white/98 backdrop-blur-xl border-gray-200/90 shadow-[0_16px_45px_-8px_rgba(0,0,0,0.15),0_2px_8px_rgba(0,0,0,0.05)]"
-                : "bg-white/96 backdrop-blur-xl border-white/90 shadow-[0_12px_40px_-6px_rgba(0,0,0,0.12),0_2px_6px_rgba(0,0,0,0.04)]"
+                ? "bg-white/90 backdrop-blur-2xl border-gray-200/70 shadow-[0_8px_32px_-4px_rgba(0,0,0,0.12),0_2px_8px_-2px_rgba(0,0,0,0.06)]"
+                : "bg-white/75 backdrop-blur-xl border-white/60 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.08),0_1px_4px_-1px_rgba(0,0,0,0.04)]"
             )}
+            style={{ height: "88px" }}
           >
             {/* Logo */}
             <Link
               href="/"
-              className="flex items-center gap-2 flex-shrink-0 group py-0.5"
+              className="flex items-center flex-shrink-0 group"
               aria-label="Bridge of Hope Home"
             >
               <Image
-                src="/assets/bridgeofhope_logo.png"
+                src="/assets/bh-logo.png"
                 alt="Bridge of Hope"
                 width={400}
                 height={400}
-                className="h-16 sm:h-20 md:h-[84px] lg:h-[96px] w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02] drop-shadow-xs"
+                className="h-[100px] sm:h-[112px] md:h-[128px] w-auto object-contain transition-transform duration-300 group-hover:scale-[1.04] drop-shadow-sm"
                 priority
                 unoptimized
               />
             </Link>
 
-            {/* Desktop Center Navigation Island */}
-            <div className="hidden lg:flex items-center">
-              <ul className="flex items-center gap-1 bg-gray-100/80 p-1.5 rounded-full border border-gray-200/60 backdrop-blur-xs">
-                {navLinks.map((link) => {
-                  const isActive = pathname === link.href;
-                  return (
-                    <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        className={clsx(
-                          "px-5 py-2 text-sm xl:text-base font-extrabold rounded-full transition-all duration-200 block tracking-wide",
-                          isActive
-                            ? "bg-white text-brand-black shadow-xs"
-                            : "text-gray-700 hover:text-brand-black hover:bg-white/60"
-                        )}
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  );
-                })}
+            {/* Desktop Nav — center */}
+            <div className="hidden lg:flex items-center gap-0.5 h-full">
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={clsx(
+                      "relative px-4 h-full flex items-center text-[13.5px] font-semibold tracking-wide transition-colors duration-200 group",
+                      isActive ? "text-brand-orange" : "text-gray-500 hover:text-gray-900"
+                    )}
+                  >
+                    {link.label}
+                    <span className={clsx(
+                      "absolute bottom-0 inset-x-4 h-[2px] rounded-full bg-brand-orange transition-all duration-300 origin-center",
+                      isActive ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100"
+                    )} />
+                  </Link>
+                );
+              })}
 
-                {/* Programs Link & Dropdown */}
-                <li
-                  ref={dropdownRef}
-                  className="relative"
-                  onMouseEnter={() => setProgramsOpen(true)}
-                  onMouseLeave={() => setProgramsOpen(false)}
+              {/* Programs Dropdown */}
+              <li
+                ref={dropdownRef}
+                className="relative list-none h-full flex items-center"
+                onMouseEnter={() => setProgramsOpen(true)}
+                onMouseLeave={() => setProgramsOpen(false)}
+              >
+                <Link
+                  id="programs-dropdown-trigger"
+                  href="/programs"
+                  onClick={() => setProgramsOpen(false)}
+                  className={clsx(
+                    "relative flex items-center gap-1 px-4 h-full text-[13.5px] font-semibold tracking-wide transition-colors duration-200 group",
+                    pathname.startsWith("/programs") || programsOpen
+                      ? "text-brand-orange"
+                      : "text-gray-500 hover:text-gray-900"
+                  )}
                 >
-                  <Link
-                    id="programs-dropdown-trigger"
-                    href="/programs"
-                    onClick={() => setProgramsOpen(false)}
-                    className={clsx(
-                      "flex items-center gap-2 px-5 py-2 text-sm xl:text-base font-extrabold rounded-full transition-all duration-200 tracking-wide",
-                      pathname === "/programs" || pathname.startsWith("/programs") || programsOpen
-                        ? "bg-white text-brand-black shadow-xs"
-                        : "text-gray-700 hover:text-brand-black hover:bg-white/60"
-                    )}
-                  >
-                    <span>Programs</span>
-                    <FiChevronDown
-                      className={clsx(
-                        "w-4 h-4 transition-transform duration-200 stroke-[2.5]",
-                        programsOpen && "rotate-180 text-brand-orange"
-                      )}
-                    />
-                  </Link>
+                  Programs
+                  <FiChevronDown className={clsx("w-3.5 h-3.5 transition-transform duration-250 mt-px flex-shrink-0", programsOpen && "rotate-180")} />
+                  <span className={clsx(
+                    "absolute bottom-0 inset-x-4 h-[2px] rounded-full bg-brand-orange transition-all duration-300 origin-center",
+                    pathname.startsWith("/programs") || programsOpen ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100"
+                  )} />
+                </Link>
 
-                  {/* Desktop Programs Popover */}
-                  <AnimatePresence>
-                    {programsOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10, scale: 0.96 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 8, scale: 0.96 }}
-                        transition={{ duration: 0.18, ease: "easeOut" }}
-                        className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[360px] sm:w-[400px] rounded-3xl bg-white/98 backdrop-blur-2xl shadow-[0_25px_60px_-12px_rgba(0,0,0,0.2),0_0_0_1px_rgba(0,0,0,0.06)] border border-white/80 p-3 z-50 overflow-hidden"
-                      >
-                        {/* Popover Header */}
-                        <div className="flex items-center justify-between px-3 py-2 border-b border-gray-100 mb-2">
-                          <span className="text-[11px] font-black uppercase tracking-wider text-gray-400">
-                            Our Initiatives
-                          </span>
-                          <Link
-                            href="/programs"
-                            onClick={() => setProgramsOpen(false)}
-                            className="text-[11px] font-bold text-brand-orange hover:text-brand-orange-dark flex items-center gap-1 transition-colors"
-                          >
-                            <span>Explore All 5</span>
-                            <FiArrowRight className="w-3 h-3" />
-                          </Link>
-                        </div>
+                <AnimatePresence>
+                  {programsOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 6, scale: 0.98 }}
+                      transition={{ duration: 0.15, ease: [0.16, 1, 0.3, 1] }}
+                      className="absolute top-[calc(100%+10px)] left-0 w-[370px] bg-white/95 backdrop-blur-xl border border-gray-100/80 shadow-[0_24px_60px_-12px_rgba(0,0,0,0.18)] rounded-2xl p-4 z-50"
+                    >
+                      <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-gray-100">
+                        <p className="text-[10px] font-black uppercase tracking-[0.14em] text-gray-400">Our Programs</p>
+                        <Link href="/programs" onClick={() => setProgramsOpen(false)} className="flex items-center gap-1 text-[11px] font-semibold text-brand-orange hover:underline underline-offset-2">
+                          View all <FiArrowRight className="w-3 h-3" />
+                        </Link>
+                      </div>
 
-                        {/* Program List */}
-                        <div className="space-y-1">
-                          {programs.map((prog) => {
-                            const Icon = prog.icon;
-                            const isCurrent = pathname === prog.href;
-                            return (
-                              <Link
-                                key={prog.href}
-                                href={prog.href}
-                                onClick={() => setProgramsOpen(false)}
-                                className={clsx(
-                                  "flex items-center gap-3 p-2.5 rounded-2xl group transition-all duration-150",
-                                  isCurrent ? "bg-orange-50/50" : "hover:bg-gray-50/90"
-                                )}
-                              >
-                                <div
-                                  className={clsx(
-                                    "w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-200 group-hover:scale-105 shadow-xs",
-                                    prog.accent
-                                  )}
-                                >
-                                  <Icon className="w-5 h-5" />
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                  <div className="flex items-center justify-between">
-                                    <p className="text-xs font-bold text-brand-black group-hover:text-brand-orange transition-colors">
-                                      {prog.label}
-                                    </p>
-                                    <FiArrowUpRight className="w-3.5 h-3.5 text-gray-300 group-hover:text-brand-orange group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all opacity-0 group-hover:opacity-100" />
-                                  </div>
-                                  <p className="text-[11px] text-gray-500 line-clamp-1 mt-0.5 font-normal">
-                                    {prog.desc}
-                                  </p>
-                                </div>
-                              </Link>
-                            );
-                          })}
-                        </div>
+                      <div className="space-y-px">
+                        {programs.map((prog) => {
+                          const Icon = prog.icon;
+                          const isCurrent = pathname === prog.href;
+                          return (
+                            <Link
+                              key={prog.href}
+                              href={prog.href}
+                              onClick={() => setProgramsOpen(false)}
+                              className={clsx(
+                                "flex items-center gap-3 px-3 py-2.5 rounded-xl group/item transition-colors duration-150",
+                                isCurrent ? "bg-orange-50" : "hover:bg-gray-50/80"
+                              )}
+                            >
+                              <div className={clsx("w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-transform duration-150 group-hover/item:scale-110", prog.accent)}>
+                                <Icon className="w-3.5 h-3.5" />
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <p className="text-[13px] font-semibold text-gray-800 group-hover/item:text-brand-orange transition-colors">{prog.label}</p>
+                                <p className="text-[11px] text-gray-400 truncate mt-px">{prog.desc}</p>
+                              </div>
+                              <FiArrowUpRight className="w-3.5 h-3.5 text-gray-300 group-hover/item:text-brand-orange flex-shrink-0 transition-colors" />
+                            </Link>
+                          );
+                        })}
+                      </div>
 
-                        {/* Popover Footer Banner */}
-                        <div className="mt-2.5 pt-2.5 border-t border-gray-100/90 bg-gray-50/70 -mx-3 -mb-3 p-3 flex items-center justify-between">
-                          <span className="text-[11px] text-gray-500 font-semibold">
-                            100% Tax Deductible
-                          </span>
-                          <Link
-                            href="/donate"
-                            onClick={() => setProgramsOpen(false)}
-                            className="text-[11px] font-extrabold text-brand-orange hover:text-brand-orange-dark hover:underline flex items-center gap-1"
-                          >
-                            <span>Donate Directly</span>
-                            <span>&rarr;</span>
-                          </Link>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </li>
+                      <div className="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between">
+                        <span className="text-[11px] text-gray-400">80G Tax Deductible · Est. 2016</span>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setProgramsOpen(false);
+                            openDonateModal();
+                          }}
+                          className="text-[11px] font-semibold text-brand-orange hover:underline underline-offset-2"
+                        >
+                          Donate →
+                        </button>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </li>
 
-                {/* Contact Link */}
-                <li>
-                  <Link
-                    href="/contact"
-                    className={clsx(
-                      "px-5 py-2 text-sm xl:text-base font-extrabold rounded-full transition-all duration-200 block tracking-wide",
-                      pathname === "/contact"
-                        ? "bg-white text-brand-black shadow-xs"
-                        : "text-gray-700 hover:text-brand-black hover:bg-white/60"
-                    )}
-                  >
-                    Contact
-                  </Link>
-                </li>
-              </ul>
+              <Link
+                href="/contact"
+                className={clsx(
+                  "relative px-4 h-full flex items-center text-[13.5px] font-semibold tracking-wide transition-colors duration-200 group",
+                  pathname === "/contact" ? "text-brand-orange" : "text-gray-500 hover:text-gray-900"
+                )}
+              >
+                Contact
+                <span className={clsx(
+                  "absolute bottom-0 inset-x-4 h-[2px] rounded-full bg-brand-orange transition-all duration-300 origin-center",
+                  pathname === "/contact" ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100"
+                )} />
+              </Link>
             </div>
 
-            {/* Right Actions */}
-            <div className="flex items-center gap-2 sm:gap-2.5">
-
-              {/* Modern Floating CTA Button */}
-              <Link
-                href="/donate"
-                className="group relative inline-flex items-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3 rounded-full text-sm font-extrabold text-white overflow-hidden shadow-[0_4px_16px_rgba(217,38,38,0.28)] hover:shadow-[0_6px_22px_rgba(217,38,38,0.38)] transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] flex-shrink-0"
+            {/* Right — CTA + Hamburger */}
+            <div className="flex items-center gap-2.5">
+              <button
+                onClick={openDonateModal}
+                className="hidden sm:flex items-center gap-1.5 px-4 py-2 rounded-lg bg-brand-orange text-white text-[13px] font-bold tracking-wide hover:bg-brand-orange-dark active:scale-[0.97] transition-all duration-200 shadow-[0_2px_10px_rgba(255,97,0,0.28)]"
               >
-                <span className="absolute inset-0 bg-gradient-to-r from-brand-red via-brand-red to-brand-orange group-hover:from-brand-red-hover group-hover:to-brand-orange transition-all duration-300" />
-                <span className="relative z-10 flex items-center gap-1.5 whitespace-nowrap">
-                  <FiHeart className="w-4 h-4 fill-white/20 text-white group-hover:scale-110 transition-transform duration-200" />
-                  <span>Donate Now</span>
-                </span>
-              </Link>
+                <FiHeart className="w-3.5 h-3.5" />
+                Donate Now
+              </button>
 
-              {/* Mobile Hamburger Toggle Button */}
+              {/* Mobile Hamburger */}
               <button
                 id="mobile-menu-toggle"
                 onClick={() => setOpen(!open)}
                 aria-expanded={open}
                 aria-label="Toggle navigation menu"
-                className="lg:hidden w-9 h-9 rounded-full bg-gray-100/90 hover:bg-gray-200/90 flex items-center justify-center text-brand-black transition-colors"
+                className="lg:hidden w-9 h-9 rounded-xl border border-gray-200/80 bg-white/80 flex items-center justify-center text-gray-600 hover:text-gray-900 hover:border-gray-300 transition-all duration-200"
               >
-                {open ? (
-                  <HiOutlineX className="w-5 h-5" aria-hidden="true" />
-                ) : (
-                  <HiOutlineMenuAlt3 className="w-5 h-5" aria-hidden="true" />
-                )}
+                <AnimatePresence mode="wait" initial={false}>
+                  {open ? (
+                    <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.12 }}>
+                      <HiOutlineX className="w-5 h-5" />
+                    </motion.span>
+                  ) : (
+                    <motion.span key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.12 }}>
+                      <HiOutlineMenuAlt3 className="w-5 h-5" />
+                    </motion.span>
+                  )}
+                </AnimatePresence>
               </button>
             </div>
           </nav>
@@ -335,7 +312,7 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.97 }}
               transition={{ duration: 0.22, ease: "easeOut" }}
-              className="fixed inset-x-3 sm:inset-x-6 top-24 sm:top-28 z-50 rounded-3xl bg-white/98 backdrop-blur-2xl border border-white/90 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.25)] p-5 lg:hidden max-h-[85vh] overflow-y-auto"
+              className="fixed inset-x-3 sm:inset-x-5 top-[84px] sm:top-[88px] z-50 rounded-2xl bg-white/95 backdrop-blur-2xl border border-gray-100/80 shadow-[0_20px_60px_-12px_rgba(0,0,0,0.18)] p-5 lg:hidden max-h-[85vh] overflow-y-auto"
             >
               {/* Primary Navigation Links */}
               <div className="flex flex-col gap-1 pb-4 border-b border-gray-100">
@@ -455,14 +432,13 @@ export default function Navbar() {
 
               {/* Mobile Sheet Actions & Quick Support */}
               <div className="pt-4 space-y-3">
-                <Link
-                  href="/donate"
-                  onClick={() => setOpen(false)}
+                <button
+                  onClick={() => { setOpen(false); openDonateModal(); }}
                   className="w-full flex items-center justify-center gap-2 py-3 rounded-2xl bg-gradient-to-r from-brand-red to-brand-orange text-white font-bold text-sm shadow-[0_4px_16px_rgba(217,38,38,0.28)] hover:shadow-lg transition-all"
                 >
                   <FiHeart className="w-4 h-4 fill-white/20" />
                   <span>Donate & Support A Life</span>
-                </Link>
+                </button>
 
                 <div className="flex items-center justify-between px-2 pt-1 text-[11px] text-gray-500 font-medium">
                   <span className="flex items-center gap-1.5">

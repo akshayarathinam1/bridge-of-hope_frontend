@@ -3,6 +3,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { DonateModalProvider } from "@/context/DonateModalContext";
+import DonateModal from "@/components/ui/DonateModal";
+import WhatsAppButton from "@/components/ui/WhatsAppButton";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -13,9 +16,6 @@ export const metadata: Metadata = {
   title: "Bridge of Hope | Building Hope • Changing Lives",
   description:
     "Bridge of Hope empowers vulnerable communities through education, old age care, orphanage support, medical assistance, and social service.",
-  icons: {
-    icon: "/assets/bridgeofhope_logo.png",
-  },
 };
 
 export default function RootLayout({
@@ -60,11 +60,15 @@ export default function RootLayout({
         suppressHydrationWarning
         className={`${inter.className} min-h-screen flex flex-col bg-white text-brand-black antialiased selection:bg-brand-red selection:text-white`}
       >
-        <Navbar />
-        <div className="flex-1 flex flex-col" suppressHydrationWarning>
-          {children}
-        </div>
-        <Footer />
+        <DonateModalProvider>
+          <Navbar />
+          <div className="flex-1 flex flex-col" suppressHydrationWarning>
+            {children}
+          </div>
+          <Footer />
+          <DonateModal />
+          <WhatsAppButton />
+        </DonateModalProvider>
       </body>
     </html>
   );

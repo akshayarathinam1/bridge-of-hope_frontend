@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Image from "next/image";
 import Link from "next/link";
@@ -220,7 +220,7 @@ export default function AboutPage() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="p-8 sm:p-10 rounded-3xl bg-[#032a6a] text-white text-center max-w-4xl mx-auto shadow-2xl relative overflow-hidden border border-white/15"
+            className="p-8 sm:p-10 rounded-3xl bg-[#222A59] text-white text-center max-w-4xl mx-auto shadow-2xl relative overflow-hidden border border-white/15"
           >
             {/* Background Image & Hero-matched overlays */}
             <div className="absolute inset-0 z-0 pointer-events-none">
@@ -230,8 +230,8 @@ export default function AboutPage() {
                 fill
                 className="object-cover object-center opacity-40"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#032a6a]/75 via-[#0e3b82]/50 to-white/20" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#032a6a]/60 via-transparent to-white/25" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#222A59]/75 via-[#2e3870]/50 to-white/20" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#222A59]/60 via-transparent to-white/25" />
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.25)_0%,_transparent_65%)]" />
             </div>
 
@@ -324,7 +324,7 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="p-8 sm:p-10 rounded-3xl bg-[#032a6a] text-white shadow-2xl flex flex-col justify-between relative overflow-hidden border border-white/15 group"
+              className="p-8 sm:p-10 rounded-3xl bg-[#222A59] text-white shadow-2xl flex flex-col justify-between relative overflow-hidden border border-white/15 group"
             >
               {/* Background Image & Hero-matched overlays */}
               <div className="absolute inset-0 z-0 pointer-events-none">
@@ -334,8 +334,8 @@ export default function AboutPage() {
                   fill
                   className="object-cover object-center opacity-40 group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#032a6a]/75 via-[#0e3b82]/50 to-white/20" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#032a6a]/60 via-transparent to-white/25" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#222A59]/75 via-[#2e3870]/50 to-white/20" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#222A59]/60 via-transparent to-white/25" />
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.25)_0%,_transparent_65%)]" />
               </div>
 
@@ -368,7 +368,7 @@ export default function AboutPage() {
                     fill
                     className="object-cover opacity-85 group-hover:scale-105 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#032a6a] via-[#032a6a]/30 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#222A59] via-[#222A59]/30 to-transparent" />
                   <div className="absolute bottom-3 left-4 right-4">
                     <p className="text-xs font-bold text-white uppercase tracking-wider">
                       Shared Responsibility · Lasting Impact
@@ -566,7 +566,7 @@ export default function AboutPage() {
       {/* ─────────────────────────────────────────────────────────────
           6. OUR APPROACH: Listen. Support. Empower.
       ───────────────────────────────────────────────────────────── */}
-      <section className="py-20 bg-[#032a6a] text-white relative overflow-hidden">
+      <section className="py-20 bg-[#222A59] text-white relative overflow-hidden">
         {/* Background Image & Hero-matched overlays */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <Image
@@ -576,8 +576,8 @@ export default function AboutPage() {
             className="object-cover object-center opacity-40"
           />
           {/* Blue mixed with white gradient overlays identical to hero */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#032a6a]/75 via-[#0e3b82]/50 to-white/20" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#032a6a]/60 via-transparent to-white/25" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#222A59]/75 via-[#2e3870]/50 to-white/20" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#222A59]/60 via-transparent to-white/25" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.25)_0%,_transparent_65%)]" />
         </div>
 
@@ -788,7 +788,7 @@ export default function AboutPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto rounded-3xl p-8 sm:p-12 lg:p-14 bg-[#032a6a] text-white shadow-2xl relative overflow-hidden text-center border border-white/15"
+            className="max-w-4xl mx-auto rounded-3xl p-8 sm:p-12 lg:p-14 bg-[#222A59] text-white shadow-2xl relative overflow-hidden text-center border border-white/15"
           >
             {/* Background Image & Hero-matched overlays */}
             <div className="absolute inset-0 z-0 pointer-events-none">
@@ -798,8 +798,8 @@ export default function AboutPage() {
                 fill
                 className="object-cover object-center opacity-40"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#032a6a]/75 via-[#0e3b82]/50 to-white/20" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#032a6a]/60 via-transparent to-white/25" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#222A59]/75 via-[#2e3870]/50 to-white/20" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#222A59]/60 via-transparent to-white/25" />
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.25)_0%,_transparent_65%)]" />
             </div>
 

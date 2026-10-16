@@ -52,9 +52,9 @@ const services = [
     image:
       "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=900&q=85",
     imageAlt: "Smiling children receiving warm community support",
-    iconColor: "text-brand-navy",
-    bgColor: "bg-brand-navy/10",
-    accentColor: "bg-brand-navy",
+    iconColor: "text-brand-orange",
+    bgColor: "bg-orange-50",
+    accentColor: "bg-brand-orange",
     rightHighlight: {
       tag: "Shelter & Child Protection",
       headline: "Safe Havens, Daily Nutrition & Pediatric Care",
@@ -75,9 +75,9 @@ const services = [
     image:
       "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=900&q=85",
     imageAlt: "Caring hands supporting an elderly woman with warmth",
-    iconColor: "text-brand-red",
-    bgColor: "bg-brand-red-light",
-    accentColor: "bg-brand-red",
+    iconColor: "text-brand-orange",
+    bgColor: "bg-orange-50",
+    accentColor: "bg-brand-orange",
     rightHighlight: {
       tag: "Elder Comfort & Medicine",
       headline: "Restoring Dignity, Healthcare & Companionship",
@@ -98,9 +98,9 @@ const services = [
     image:
       "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=900&q=85",
     imageAlt: "Healthcare worker offering checkup at rural camp",
-    iconColor: "text-brand-navy",
-    bgColor: "bg-brand-navy/10",
-    accentColor: "bg-brand-navy",
+    iconColor: "text-brand-orange",
+    bgColor: "bg-orange-50",
+    accentColor: "bg-brand-orange",
     rightHighlight: {
       tag: "Mobile Clinics & Surgery Grants",
       headline: "Lifesaving Diagnostics & Emergency Treatment",
@@ -276,10 +276,7 @@ export default function HowWeHelp() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
 
-                      {/* Emoji */}
-                      <span className="absolute top-3 left-3 w-8 h-8 rounded-full bg-white/95 backdrop-blur-md flex items-center justify-center text-base shadow-sm">
-                        {item.emoji}
-                      </span>
+
 
                       {isActive && (
                         <span className="absolute top-3 right-3 text-[10px] font-black uppercase tracking-wider bg-brand-red text-white px-2.5 py-1 rounded-full shadow">

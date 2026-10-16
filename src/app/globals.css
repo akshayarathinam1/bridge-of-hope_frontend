@@ -2,31 +2,31 @@
 
 /* ================================================
    HOPEBRIDGE FOUNDATION — DESIGN SYSTEM
-   Brand: Navy #032a6a · White #ffffff · Orange #ff7100
+   Brand: Navy #222A59 · White #ffffff · Orange #FF6100
    Font: Inter
 ================================================ */
 
 @theme {
   /* Brand Core Colors */
-  --color-brand-primary:      #032a6a;
-  --color-brand-navy:         #032a6a;
-  --color-brand-navy-dark:    #021e4c;
-  --color-brand-navy-light:   #eef3fa;
+  --color-brand-primary:      #222A59;
+  --color-brand-navy:         #222A59;
+  --color-brand-navy-dark:    #171d3e;
+  --color-brand-navy-light:   #eeeffe;
 
-  --color-brand-orange:       #ff7100;
-  --color-brand-orange-dark:  #e06300;
-  --color-brand-orange-deeper:#b34b00;
-  --color-brand-orange-light: #fff2e6;
+  --color-brand-orange:       #FF6100;
+  --color-brand-orange-dark:  #d95300;
+  --color-brand-orange-deeper:#b34400;
+  --color-brand-orange-light: #fff1e6;
 
   --color-brand-white:        #ffffff;
 
   /* Aliased theme tokens for comprehensive component integration */
-  --color-brand-red:          #ff7100;
-  --color-brand-red-dark:     #e06300;
-  --color-brand-red-deeper:   #b34b00;
-  --color-brand-red-light:    #fff2e6;
-  --color-brand-black:        #032a6a;
-  --color-brand-black-soft:   #0a377d;
+  --color-brand-red:          #FF6100;
+  --color-brand-red-dark:     #d95300;
+  --color-brand-red-deeper:   #b34400;
+  --color-brand-red-light:    #fff1e6;
+  --color-brand-black:        #222A59;
+  --color-brand-black-soft:   #2e3870;
 
   /* Font */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;

@@ -14,6 +14,7 @@ import {
   FiSend,
   FiShield,
 } from "react-icons/fi";
+import { FaWhatsapp } from "react-icons/fa6";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -106,6 +107,28 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-2xl bg-[#25D366]/10 flex items-center justify-center text-[#25D366] flex-shrink-0">
+                    <FaWhatsapp className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold text-gray-900 mb-1">
+                      WhatsApp Chat Support
+                    </h3>
+                    <a
+                      href="https://wa.me/919876543210?text=Hello%20Bridge%20of%20Hope"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm font-semibold text-[#25D366] hover:underline transition-colors block"
+                    >
+                      +91 98765 43210
+                    </a>
+                    <span className="text-xs text-gray-500">
+                      Instant response &amp; donation receipts
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-2xl bg-brand-red-light flex items-center justify-center text-brand-red flex-shrink-0">
                     <FiMail className="w-5 h-5" />
                   </div>
@@ -114,10 +137,10 @@ export default function ContactPage() {
                       Email Address
                     </h3>
                     <a
-                      href="mailto:info@hopebridgefoundation.org"
+                      href="mailto:info@bhfoundations.com"
                       className="text-sm font-semibold text-brand-black hover:text-brand-red transition-colors block"
                     >
-                      info@hopebridgefoundation.org
+                      info@bhfoundations.com
                     </a>
                     <span className="text-xs text-gray-500">
                       Response within 24 business hours

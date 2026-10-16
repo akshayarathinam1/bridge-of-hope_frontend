@@ -4,13 +4,15 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Button from "@/components/ui/Button";
 import { FiArrowUpRight, FiHeart } from "react-icons/fi";
+import { useDonateModal } from "@/context/DonateModalContext";
 
 export default function Hero() {
+  const { openDonateModal } = useDonateModal();
   return (
     <section
       id="hero"
       suppressHydrationWarning
-      className="relative min-h-[100svh] sm:min-h-[92vh] flex items-center justify-center overflow-hidden bg-[#032a6a]"
+      className="relative min-h-[100svh] sm:min-h-[92vh] flex items-center justify-center overflow-hidden bg-[#222A59]"
     >
       {/* High Impact Background Image */}
       <div className="absolute inset-0 z-0" suppressHydrationWarning>
@@ -22,8 +24,8 @@ export default function Hero() {
           priority
         />
         {/* Blue mixed with white gradient overlays with reduced opacity */}
-        <div suppressHydrationWarning className="absolute inset-0 bg-gradient-to-r from-[#032a6a]/75 via-[#0e3b82]/50 to-white/20" />
-        <div suppressHydrationWarning className="absolute inset-0 bg-gradient-to-t from-[#032a6a]/60 via-transparent to-white/25" />
+        <div suppressHydrationWarning className="absolute inset-0 bg-gradient-to-r from-[#222A59]/75 via-[#2e3870]/50 to-white/20" />
+        <div suppressHydrationWarning className="absolute inset-0 bg-gradient-to-t from-[#222A59]/60 via-transparent to-white/25" />
         <div suppressHydrationWarning className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.25)_0%,_transparent_65%)]" />
       </div>
 
@@ -84,7 +86,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-5"
           >
-            <Button href="/donate" size="lg" variant="primary" className="w-full sm:w-auto">
+            <Button onClick={openDonateModal} size="lg" variant="primary" className="w-full sm:w-auto">
               <span>Donate Now</span>
               <FiArrowUpRight className="w-5 h-5" aria-hidden="true" />
             </Button>
