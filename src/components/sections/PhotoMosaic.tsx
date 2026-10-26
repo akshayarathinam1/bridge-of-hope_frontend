@@ -152,9 +152,15 @@ export default function PhotoMosaic() {
                 <span className="text-xs sm:text-sm font-semibold tracking-wide drop-shadow-sm">
                   {photo.caption}
                 </span>
-                <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white shadow-sm">
+                <a
+                  href="https://www.instagram.com/bridge.ofhope.foundation/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Follow us on Instagram"
+                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white shadow-sm hover:bg-white/35 transition-colors"
+                >
                   <FiInstagram className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                </span>
+                </a>
               </div>
             </div>
           </div>

@@ -197,7 +197,7 @@ export default function DonateModal() {
 
                       <p className="text-[11px] text-gray-400 text-center mb-4 leading-relaxed">
                         Share payment screenshot on WhatsApp{' '}
-                        <strong className="text-gray-600">+91 98765 43210</strong>{' '}
+                        <strong className="text-gray-600">+91 98849 35959</strong>{' '}
                         for your 80G receipt.
                       </p>
 

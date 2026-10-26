@@ -130,26 +130,22 @@ export default function AboutSection() {
             <SectionLabel>About Bridge of Hope</SectionLabel>
 
             <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.15] sm:leading-[1.1] tracking-tight text-brand-black mt-2 mb-4 sm:mb-5">
-              We Believe Every Life{" "}
-              <span className="text-brand-orange">Deserves Hope</span>
+              Bridging Lives,{" "}
+              <span className="text-brand-orange">Building Hope.</span>
             </h2>
 
             <p className="text-gray-600 text-xs sm:text-base leading-relaxed mb-4">
-              Our mission is to create meaningful change by supporting people and communities in need. Through education, healthcare, care for children and elderly, and social welfare initiatives, we strive to make a lasting difference.
+              Bridge of Hope Foundation is dedicated to supporting people in need through education, medical assistance, residential care, and community service.
             </p>
 
             {/* Pull Quote Highlight */}
             <div className="p-3.5 sm:p-4 rounded-xl bg-brand-red-light/60 border-l-4 border-brand-red mb-4 sm:mb-5">
               <p className="text-xs sm:text-sm font-semibold text-brand-black italic">
-                &ldquo;We believe that real change begins with compassion—and grows when people come together.&rdquo;
+                &ldquo;We believe that compassion becomes meaningful when it turns into action. Our aim is to make care, dignity, and opportunity accessible to those who need them.&rdquo;
               </p>
             </div>
 
-            <p className="text-gray-500 text-xs sm:text-sm leading-relaxed mb-6 sm:mb-8">
-              From helping a child access education to supporting an elderly person with essential care, every initiative is driven by one simple purpose: to give people the support, dignity, and opportunities they deserve.
-            </p>
-
-            {/* Two feature cards: Our Mission & Our Vision */}
+            {/* Two feature cards: Mission & Vision */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 mb-7 sm:mb-9">
               {/* Mission */}
               <div className="p-4 rounded-2xl bg-white border-2 border-gray-100 hover:border-brand-red/40 shadow-sm hover:shadow-md transition-all duration-300 group">
@@ -162,7 +158,7 @@ export default function AboutSection() {
                   </h3>
                 </div>
                 <p className="text-xs text-gray-500 leading-relaxed">
-                  To serve communities with compassion, integrity, and commitment while creating opportunities for a better and more secure future.
+                  To support vulnerable communities with care, compassion, and meaningful opportunities.
                 </p>
               </div>
 
@@ -177,7 +173,7 @@ export default function AboutSection() {
                   </h3>
                 </div>
                 <p className="text-xs text-gray-500 leading-relaxed">
-                  A society where every child can learn, every senior citizen can live with dignity, and every person in need can find support and hope.
+                  A world where everyone has the opportunity to live with dignity, hope, and a better future.
                 </p>
               </div>
             </div>
@@ -190,7 +186,7 @@ export default function AboutSection() {
               </Button>
 
               <a
-                href="tel:+911234567890"
+                href="tel:+919884935959"
                 className="inline-flex items-center justify-center sm:justify-start gap-3 group p-2.5 sm:p-0 rounded-2xl sm:rounded-none bg-gray-50 sm:bg-transparent"
               >
                 <span className="w-10 h-10 sm:w-11 sm:h-11 rounded-full border-2 border-brand-red/30 group-hover:border-brand-red flex items-center justify-center transition-colors duration-200 bg-white">
@@ -201,7 +197,7 @@ export default function AboutSection() {
                     Call Anytime
                   </p>
                   <p className="text-sm font-bold text-brand-black group-hover:text-brand-red transition-colors duration-200">
-                    +91 12345 67890
+                    +91 98849 35959
                   </p>
                 </div>
               </a>

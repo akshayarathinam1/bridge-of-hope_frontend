@@ -13,8 +13,10 @@ import {
   FiCheckCircle,
   FiSend,
   FiShield,
+  FiInstagram,
+  FiFacebook,
 } from "react-icons/fi";
-import { FaWhatsapp } from "react-icons/fa6";
+import { FaWhatsapp, FaXTwitter } from "react-icons/fa6";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -95,10 +97,10 @@ export default function ContactPage() {
                       Phone &amp; Helpline
                     </h3>
                     <a
-                      href="tel:+911234567890"
+                      href="tel:+919884935959"
                       className="text-sm font-semibold text-brand-black hover:text-brand-red transition-colors block"
                     >
-                      +91 12345 67890
+                      +91 98849 35959
                     </a>
                     <span className="text-xs text-gray-500">
                       Mon – Sat, 9:00 AM – 6:30 PM IST
@@ -115,12 +117,12 @@ export default function ContactPage() {
                       WhatsApp Chat Support
                     </h3>
                     <a
-                      href="https://wa.me/919876543210?text=Hello%20Bridge%20of%20Hope"
+                      href="https://wa.me/919884935959?text=Hello%20Bridge%20of%20Hope"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-sm font-semibold text-[#25D366] hover:underline transition-colors block"
                     >
-                      +91 98765 43210
+                      +91 98849 35959
                     </a>
                     <span className="text-xs text-gray-500">
                       Instant response &amp; donation receipts
@@ -157,9 +159,9 @@ export default function ContactPage() {
                       Registered Office
                     </h3>
                     <p className="text-sm text-gray-700 leading-snug">
-                      123, Hope Street, Anna Nagar,
+                      No 58/113, 1st Floor, East Madha Church Street,
                       <br />
-                      Chennai, Tamil Nadu, India — 600001
+                      Royapuram, Chennai — 600013, Tamil Nadu, India
                     </p>
                   </div>
                 </div>
@@ -178,6 +180,49 @@ export default function ContactPage() {
                       <span className="text-xs text-gray-500">Sunday: Closed</span>
                     </p>
                   </div>
+                </div>
+              </div>
+
+              {/* Social Media Links */}
+              <div>
+                <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">Follow Us</p>
+                <div className="flex items-center gap-2.5">
+                  <a
+                    href="https://www.instagram.com/bridge.ofhope.foundation/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Instagram"
+                    className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 text-white flex items-center justify-center hover:opacity-85 transition-opacity shadow-sm"
+                  >
+                    <FiInstagram className="w-4.5 h-4.5" />
+                  </a>
+                  <a
+                    href="https://x.com/bridgeofhope_"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="X / Twitter"
+                    className="w-10 h-10 rounded-xl bg-black text-white flex items-center justify-center hover:opacity-75 transition-opacity shadow-sm"
+                  >
+                    <FaXTwitter className="w-4.5 h-4.5" />
+                  </a>
+                  <a
+                    href="https://www.facebook.com/profile.php?id=61595950105175"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Facebook"
+                    className="w-10 h-10 rounded-xl bg-[#1877F2] text-white flex items-center justify-center hover:opacity-85 transition-opacity shadow-sm"
+                  >
+                    <FiFacebook className="w-4.5 h-4.5" />
+                  </a>
+                  <a
+                    href="https://wa.me/919884935959?text=Hello%20Bridge%20of%20Hope"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="WhatsApp"
+                    className="w-10 h-10 rounded-xl bg-[#25D366] text-white flex items-center justify-center hover:opacity-85 transition-opacity shadow-sm"
+                  >
+                    <FaWhatsapp className="w-4.5 h-4.5" />
+                  </a>
                 </div>
               </div>
 

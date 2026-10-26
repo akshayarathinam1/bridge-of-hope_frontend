@@ -12,7 +12,7 @@ export default function WhatsAppButton() {
 
   if (isDonateModalOpen) return null;
 
-  const whatsappNumber = "919876543210";
+  const whatsappNumber = "919884935959";
   const defaultMessage = encodeURIComponent(
     "Hello Bridge of Hope! I would like to get more information about your causes and how to support."
   );

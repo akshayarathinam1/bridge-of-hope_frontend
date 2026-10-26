@@ -2,14 +2,13 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   FiFacebook,
-  FiTwitter,
   FiInstagram,
   FiYoutube,
   FiMail,
   FiPhone,
   FiMapPin,
 } from "react-icons/fi";
-import { FaWhatsapp } from "react-icons/fa6";
+import { FaWhatsapp, FaXTwitter } from "react-icons/fa6";
 
 const quickLinks = [
   { label: "About Us", href: "/about" },
@@ -27,10 +26,10 @@ const programs = [
 ];
 
 const socials = [
-  { icon: FaWhatsapp, href: "https://wa.me/919876543210?text=Hello%20Bridge%20of%20Hope", label: "WhatsApp" },
-  { icon: FiFacebook, href: "#", label: "Facebook" },
-  { icon: FiTwitter, href: "#", label: "Twitter" },
-  { icon: FiInstagram, href: "#", label: "Instagram" },
+  { icon: FaWhatsapp, href: "https://wa.me/919884935959?text=Hello%20Bridge%20of%20Hope", label: "WhatsApp" },
+  { icon: FiFacebook, href: "https://www.facebook.com/profile.php?id=61595950105175", label: "Facebook" },
+  { icon: FaXTwitter, href: "https://x.com/bridgeofhope_", label: "X" },
+  { icon: FiInstagram, href: "https://www.instagram.com/bridge.ofhope.foundation/", label: "Instagram" },
   { icon: FiYoutube, href: "#", label: "YouTube" },
 ];
 
@@ -150,7 +149,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://wa.me/919876543210?text=Hello%20Bridge%20of%20Hope"
+                  href="https://wa.me/919884935959?text=Hello%20Bridge%20of%20Hope"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 text-sm text-white/90 hover:text-white transition-colors group p-2.5 rounded-xl bg-[#25D366]/20 hover:bg-[#25D366]/30 border border-[#25D366]/40 shadow-sm"
@@ -160,26 +159,26 @@ export default function Footer() {
                   </span>
                   <div className="flex flex-col">
                     <span className="text-[10px] text-emerald-300 font-bold uppercase tracking-wider">Chat on WhatsApp</span>
-                    <span className="font-semibold text-white">+91 98765 43210</span>
+                    <span className="font-semibold text-white">+91 98849 35959</span>
                   </div>
                 </a>
               </li>
               <li>
                 <a
-                  href="tel:+911234567890"
+                  href="tel:+919884935959"
                   className="flex items-center gap-3 text-sm text-white/85 hover:text-white transition-colors group p-2.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 shadow-sm"
                 >
                   <span className="w-7 h-7 rounded-lg bg-white text-brand-black flex items-center justify-center flex-shrink-0 shadow-sm">
                     <FiPhone className="w-3.5 h-3.5 text-brand-red" aria-hidden="true" />
                   </span>
-                  <span>+91 12345 67890</span>
+                  <span>+91 98849 35959</span>
                 </a>
               </li>
               <li className="flex items-start gap-3 text-sm text-white/85 p-2.5 rounded-xl bg-white/10 border border-white/15 shadow-sm">
                 <span className="w-7 h-7 rounded-lg bg-white text-brand-black flex items-center justify-center flex-shrink-0 shadow-sm mt-0.5">
                   <FiMapPin className="w-3.5 h-3.5 text-brand-red" aria-hidden="true" />
                 </span>
-                <span>123, Hope Street, Chennai, Tamil Nadu, India — 600001</span>
+                <span>No 58/113, 1st Floor, East Madha Church Street, Royapuram, Chennai — 600013, Tamil Nadu, India</span>
               </li>
             </ul>
           </div>

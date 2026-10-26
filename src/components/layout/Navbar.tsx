@@ -64,8 +64,9 @@ const programs = [
 ];
 
 const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about' },
+  { label: 'Gallery', href: '/gallery' },
 ];
 
 export default function Navbar() {
@@ -123,11 +124,11 @@ export default function Navbar() {
               aria-label="Bridge of Hope Home"
             >
               <Image
-                src="/assets/bh-logo.png"
+                src="/assets/bridge-of-hope-logo-wide.png"
                 alt="Bridge of Hope"
-                width={400}
-                height={400}
-                className="h-[100px] sm:h-[112px] md:h-[128px] w-auto object-contain transition-transform duration-300 group-hover:scale-[1.04] drop-shadow-sm"
+                width={600}
+                height={200}
+                className="h-[44px] sm:h-[50px] md:h-[56px] w-auto object-contain transition-transform duration-300 group-hover:scale-[1.04] drop-shadow-sm"
                 priority
                 unoptimized
               />
@@ -341,6 +342,20 @@ export default function Navbar() {
                   )}
                 >
                   <span>About Us</span>
+                  <FiArrowRight className="w-4 h-4 text-gray-400" />
+                </Link>
+
+                <Link
+                  href="/gallery"
+                  onClick={() => setOpen(false)}
+                  className={clsx(
+                    "px-4 py-2.5 rounded-2xl text-sm font-bold transition-colors flex items-center justify-between",
+                    pathname === "/gallery"
+                      ? "bg-gray-100 text-brand-black"
+                      : "text-gray-700 hover:bg-gray-50"
+                  )}
+                >
+                  <span>Gallery</span>
                   <FiArrowRight className="w-4 h-4 text-gray-400" />
                 </Link>
 

@@ -176,14 +176,7 @@ export default function FeaturedCauses() {
                     </span>
                   </div>
 
-                  {/* Card CTA button matching user request */}
-                  <Link
-                    href={`/donate?cause=${cause.id}`}
-                    className="group/btn relative overflow-hidden w-full inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full border-2 border-brand-black text-brand-black text-xs sm:text-sm font-bold hover:bg-brand-red hover:text-white hover:border-brand-red transition-all duration-300 shadow-sm hover:shadow-[0_6px_20px_rgba(255,113,0,0.35)] hover:-translate-y-0.5 active:translate-y-0 before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/35 before:to-transparent before:-translate-x-full hover:before:translate-x-full before:transition-transform before:duration-700 before:ease-in-out before:pointer-events-none"
-                  >
-                    <span>{cause.ctaText}</span>
-                    <FiArrowUpRight className="w-4 h-4 transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
-                  </Link>
+
                 </div>
               </div>
             </motion.div>

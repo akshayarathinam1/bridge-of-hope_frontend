@@ -32,16 +32,6 @@ export default function Hero() {
       {/* Hero Content */}
       <div className="relative z-10 container-site pt-28 pb-20 sm:pt-36 sm:pb-28 md:pt-40 md:pb-36" suppressHydrationWarning>
         <div className="max-w-3xl">
-          {/* Eyebrow */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex max-w-full items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-white text-[10px] sm:text-xs font-bold uppercase tracking-wider sm:tracking-widest mb-5 sm:mb-6"
-          >
-            <span className="w-2 h-2 rounded-full bg-brand-red animate-pulse flex-shrink-0" />
-            <span className="truncate sm:overflow-visible">Non-Profit Charity · Bridge of Hope</span>
-          </motion.div>
 
           {/* Main Display Headline */}
           <motion.h1

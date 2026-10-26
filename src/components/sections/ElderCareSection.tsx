@@ -98,13 +98,13 @@ export default function ElderCareSection() {
                 Explore Care Homes
               </Button>
               <a
-                href="tel:+911234567890"
+                href="tel:+919884935959"
                 className="inline-flex items-center gap-3 text-sm font-bold text-brand-black hover:text-brand-red transition-colors"
               >
                 <span className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-brand-red">
                   <FiPhoneCall className="w-4 h-4" />
                 </span>
-                <span>+91 12345 67890</span>
+                <span>+91 98849 35959</span>
               </a>
             </div>
           </motion.div>
