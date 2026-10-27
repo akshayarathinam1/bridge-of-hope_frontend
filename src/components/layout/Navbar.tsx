@@ -7,7 +7,6 @@ import { usePathname } from "next/navigation";
 import { clsx } from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
 import { HiOutlineMenuAlt3, HiOutlineX } from "react-icons/hi";
-import { useDonateModal } from "@/context/DonateModalContext";
 import {
   FiArrowUpRight,
   FiChevronDown,
@@ -76,7 +75,6 @@ export default function Navbar() {
   const [mobileProgramsOpen, setMobileProgramsOpen] = useState(false);
   const dropdownRef = useRef<HTMLLIElement>(null);
   const pathname = usePathname();
-  const { openDonateModal } = useDonateModal();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 25);
@@ -227,16 +225,13 @@ export default function Navbar() {
 
                       <div className="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between">
                         <span className="text-[11px] text-gray-400">80G Tax Deductible · Est. 2016</span>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setProgramsOpen(false);
-                            openDonateModal();
-                          }}
+                        <Link
+                          href="/donate"
+                          onClick={() => setProgramsOpen(false)}
                           className="text-[11px] font-semibold text-brand-orange hover:underline underline-offset-2"
                         >
                           Donate →
-                        </button>
+                        </Link>
                       </div>
                     </motion.div>
                   )}
@@ -260,13 +255,13 @@ export default function Navbar() {
 
             {/* Right — CTA + Hamburger */}
             <div className="flex items-center gap-2.5">
-              <button
-                onClick={openDonateModal}
+              <Link
+                href="/donate"
                 className="hidden sm:flex items-center gap-1.5 px-4 py-2 rounded-lg bg-brand-orange text-white text-[13px] font-bold tracking-wide hover:bg-brand-orange-dark active:scale-[0.97] transition-all duration-200 shadow-[0_2px_10px_rgba(255,97,0,0.28)]"
               >
                 <FiHeart className="w-3.5 h-3.5" />
                 Donate Now
-              </button>
+              </Link>
 
               {/* Mobile Hamburger */}
               <button
@@ -447,13 +442,14 @@ export default function Navbar() {
 
               {/* Mobile Sheet Actions & Quick Support */}
               <div className="pt-4 space-y-3">
-                <button
-                  onClick={() => { setOpen(false); openDonateModal(); }}
+                <Link
+                  href="/donate"
+                  onClick={() => setOpen(false)}
                   className="w-full flex items-center justify-center gap-2 py-3 rounded-2xl bg-gradient-to-r from-brand-red to-brand-orange text-white font-bold text-sm shadow-[0_4px_16px_rgba(217,38,38,0.28)] hover:shadow-lg transition-all"
                 >
                   <FiHeart className="w-4 h-4 fill-white/20" />
                   <span>Donate & Support A Life</span>
-                </button>
+                </Link>
 
                 <div className="flex items-center justify-between px-2 pt-1 text-[11px] text-gray-500 font-medium">
                   <span className="flex items-center gap-1.5">
