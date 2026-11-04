@@ -1,70 +1,59 @@
-'use client';
+import { apiFetch } from "@/lib/api";
+import type { ImpactStat } from "@/types/api";
+import ImpactCounterGrid from "./ImpactCounterGrid";
 
-import { motion } from "framer-motion";
-import { FiUsers, FiHeart, FiSmile, FiAward } from "react-icons/fi";
-
-const stats = [
+/* ─── Fallback data shown when backend is unreachable ─────────────────────── */
+const FALLBACK: ImpactStat[] = [
   {
+    id: 1,
     number: "5,000+",
     label: "Total Lives Touched",
-    subtext: "Across education & healthcare",
-    icon: FiHeart,
+    icon: "FiHeart",
+    display_order: 1,
   },
   {
+    id: 2,
     number: "₹50L+",
     label: "Total Funds Raised",
-    subtext: "Directly deployed for causes",
-    icon: FiAward,
+    icon: "FiAward",
+    display_order: 2,
   },
   {
+    id: 3,
     number: "250+",
     label: "Dedicated Volunteers",
-    subtext: "Selfless hearts on the ground",
-    icon: FiUsers,
+    icon: "FiUsers",
+    display_order: 3,
   },
   {
+    id: 4,
     number: "8+",
     label: "Years of Service",
-    subtext: "Serving communities since 2016",
-    icon: FiSmile,
+    icon: "FiSmile",
+    display_order: 4,
   },
 ];
 
-export default function ImpactCounter() {
+export default async function ImpactCounter() {
+  /* Fetch impact stats; fall back to static data if the backend is down */
+  let stats: ImpactStat[] = FALLBACK;
+  try {
+    const data = await apiFetch<ImpactStat[]>("/content/impact-stats/", {}, 300);
+    if (Array.isArray(data) && data.length > 0) {
+      stats = data;
+    }
+  } catch {
+    /* Use fallback silently */
+  }
+
   return (
     <section className="py-16 bg-brand-navy relative overflow-hidden">
       {/* Subtle geometric accent */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,113,0,0.18)_0%,_transparent_60%)] pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(255,255,255,0.06)_0%,_transparent_55%)] pointer-events-none" />
       <div className="container-site relative z-10">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-          {stats.map((stat, i) => {
-            const Icon = stat.icon;
-            return (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="flex flex-col items-center text-center group"
-              >
-                <div className="w-12 h-12 rounded-2xl bg-brand-orange/20 border border-brand-orange/30 flex items-center justify-center text-brand-orange mb-4 group-hover:scale-110 group-hover:bg-brand-orange group-hover:text-white transition-all duration-300">
-                  <Icon className="w-6 h-6" aria-hidden="true" />
-                </div>
-                <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-1 group-hover:text-brand-orange transition-colors">
-                  {stat.number}
-                </h3>
-                <p className="text-sm font-bold text-brand-orange mb-0.5">
-                  {stat.label}
-                </p>
-                <p className="text-xs text-white/60 font-medium max-w-[180px]">
-                  {stat.subtext}
-                </p>
-              </motion.div>
-            );
-          })}
-        </div>
+        {/* Client component handles framer-motion + icon resolution */}
+        <ImpactCounterGrid stats={stats} />
       </div>
     </section>
   );

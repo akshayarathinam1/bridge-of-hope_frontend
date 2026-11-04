@@ -1,37 +1,49 @@
-'use client';
-
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { apiFetch } from "@/lib/api";
+import type { FAQ } from "@/types/api";
 import SectionLabel from "@/components/ui/SectionLabel";
 import SectionHeading from "@/components/ui/SectionHeading";
-import { FiChevronDown } from "react-icons/fi";
+import FaqAccordion from "./FaqAccordion";
 
-const faqs = [
+/* ─── Fallback data shown when backend is unreachable ─────────────────────── */
+const FALLBACK: FAQ[] = [
   {
-    q: "Is my donation eligible for 80G tax exemption in India?",
-    a: "Yes! Bridge of Hope is registered under Section 80G of the Income Tax Act. You will immediately receive an official 80G tax exemption receipt via email for all eligible donations.",
+    question: "Is my donation eligible for 80G tax exemption in India?",
+    answer:
+      "Yes! Bridge of Hope is registered under Section 80G of the Income Tax Act. You will immediately receive an official 80G tax exemption receipt via email for all eligible donations.",
+    display_order: 1,
   },
   {
-    q: "How are my donated funds utilized and audited?",
-    a: "Over 88% of all funds directly support grassroots field programs — providing tuition fees, school meals, medical aid, and elderly hospice care. We undergo annual independent audits and publish our verified statements.",
+    question: "How are my donated funds utilized and audited?",
+    answer:
+      "Over 88% of all funds directly support grassroots field programs – providing tuition fees, school meals, medical aid, and elderly hospice care. We undergo annual independent audits and publish our verified statements.",
+    display_order: 2,
   },
   {
-    q: "Can I visit the orphanage or elder care home in person?",
-    a: "Absolutely! We welcome donors, mentors, and families to visit our care centers in Chennai. Please contact our volunteer desk 48 hours ahead so our coordinators can give you a guided tour.",
+    question: "Can I visit the orphanage or elder care home in person?",
+    answer:
+      "Absolutely! We welcome donors, mentors, and families to visit our care centers in Chennai. Please contact our volunteer desk 48 hours ahead so our coordinators can give you a guided tour.",
+    display_order: 3,
   },
   {
-    q: "How can our company partner with Bridge of Hope for CSR?",
-    a: "We collaborate with corporate partners on custom CSR initiatives aligned with Schedule VII — including rural school STEM transformations, free healthcare drives, and employee volunteering days.",
+    question: "How can our company partner with Bridge of Hope for CSR?",
+    answer:
+      "We collaborate with corporate partners on custom CSR initiatives aligned with Schedule VII – including rural school STEM transformations, free healthcare drives, and employee volunteering days.",
+    display_order: 4,
   },
 ];
 
-export default function FaqSection() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
-
-  const toggle = (i: number) => {
-    setOpenIndex(openIndex === i ? null : i);
-  };
+export default async function FaqSection() {
+  /* Fetch FAQs from backend; fall back to static data if unavailable */
+  let faqs: FAQ[] = FALLBACK;
+  try {
+    const data = await apiFetch<FAQ[]>("/content/faqs/", {}, 300);
+    if (Array.isArray(data) && data.length > 0) {
+      faqs = data;
+    }
+  } catch {
+    /* Use fallback silently */
+  }
 
   return (
     <section className="py-14 sm:py-20 md:py-24 bg-gray-50/70 border-t border-gray-100">
@@ -58,7 +70,7 @@ export default function FaqSection() {
             </div>
           </div>
 
-          {/* Right: Accordion */}
+          {/* Right: Accordion (client component) */}
           <div className="lg:col-span-7">
             <SectionLabel>Common Inquiries</SectionLabel>
             <SectionHeading
@@ -66,52 +78,7 @@ export default function FaqSection() {
               subtitle="Everything you need to know about our work, compliance, and how your contribution transforms lives."
               align="left"
             />
-
-            <div className="space-y-3 sm:space-y-4 mt-6 sm:mt-8">
-              {faqs.map((faq, i) => {
-                const isOpen = openIndex === i;
-                return (
-                  <div
-                    key={faq.q}
-                    className={`rounded-2xl border transition-all duration-200 overflow-hidden bg-white ${
-                      isOpen
-                        ? "border-brand-red shadow-md"
-                        : "border-gray-200/80 hover:border-gray-300"
-                    }`}
-                  >
-                    <button
-                      type="button"
-                      onClick={() => toggle(i)}
-                      className="w-full text-left p-4 sm:p-6 flex items-center justify-between gap-3 sm:gap-4 font-bold text-sm sm:text-lg text-brand-black"
-                    >
-                      <span className={isOpen ? "text-brand-red" : ""}>
-                        {faq.q}
-                      </span>
-                      <FiChevronDown
-                        className={`w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 text-gray-400 transition-transform duration-300 ${
-                          isOpen ? "rotate-180 text-brand-red" : ""
-                        }`}
-                      />
-                    </button>
-
-                    <AnimatePresence initial={false}>
-                      {isOpen && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3 }}
-                        >
-                          <div className="px-4 pb-4 sm:px-6 sm:pb-6 text-xs sm:text-sm text-gray-600 leading-relaxed border-t border-gray-100 pt-3">
-                            {faq.a}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                );
-              })}
-            </div>
+            <FaqAccordion faqs={faqs} />
           </div>
         </div>
       </div>

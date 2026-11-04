@@ -15,12 +15,16 @@ import {
   FiShield,
   FiInstagram,
   FiFacebook,
+  FiAlertCircle,
 } from "react-icons/fi";
 import { FaWhatsapp, FaXTwitter } from "react-icons/fa6";
+import { apiMutate } from "@/lib/api";
+import type { InquiryResponse } from "@/types/api";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const [formData, setFormData] = useState({
     name: "",
@@ -30,17 +34,38 @@ export default function ContactPage() {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
+    setError("");
+
+    try {
+      const { data, status } = await apiMutate<InquiryResponse>("/inquiries/", {
+        full_name: formData.name,
+        email: formData.email,
+        phone: formData.phone || undefined,
+        subject: formData.subject,
+        message: formData.message,
+        inquiry_type: "general",
+      });
+
+      if (status === 201 && data.success) {
+        setSubmitted(true);
+      } else if (status === 429) {
+        setError("Too many requests. Please wait a moment and try again.");
+      } else {
+        setError("Something went wrong. Please try again or email us directly.");
+      }
+    } catch {
+      setError("Failed to send your message. Please try again or email us directly.");
+    } finally {
       setLoading(false);
-      setSubmitted(true);
-    }, 800);
+    }
   };
 
   const handleReset = () => {
     setSubmitted(false);
+    setError("");
     setFormData({
       name: "",
       email: "",
@@ -52,18 +77,18 @@ export default function ContactPage() {
 
   return (
     <main className="min-h-screen bg-white text-brand-black">
-      {/* ─────────────────────────────────────────────────────────────
+      {/* ─────────────────────────────────────────────────────────────────────
           1. PAGE HEADER
-      ───────────────────────────────────────────────────────────── */}
+      ───────────────────────────────────────────────────────────────────── */}
       <PageHeader
         title="Contact Us"
         subtitle="Have a question, feedback, or want to get in touch? Send us a message and our team will get back to you promptly."
         breadcrumb="Contact"
       />
 
-      {/* ─────────────────────────────────────────────────────────────
+      {/* ─────────────────────────────────────────────────────────────────────
           2. FOCUSED SINGLE CONTACT FORM SECTION
-      ───────────────────────────────────────────────────────────── */}
+      ───────────────────────────────────────────────────────────────────── */}
       <section className="py-20 lg:py-24 bg-white">
         <div className="container-site max-w-6xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
@@ -161,7 +186,7 @@ export default function ContactPage() {
                     <p className="text-sm text-gray-700 leading-snug">
                       No 58/113, 1st Floor, East Madha Church Street,
                       <br />
-                      Royapuram, Chennai — 600013, Tamil Nadu, India
+                      Royapuram, Chennai – 600013, Tamil Nadu, India
                     </p>
                   </div>
                 </div>
@@ -354,6 +379,14 @@ export default function ContactPage() {
                     />
                   </div>
 
+                  {/* Error message */}
+                  {error && (
+                    <div className="flex items-center gap-2 text-sm text-red-600 bg-red-50 border border-red-200 rounded-xl px-4 py-3">
+                      <FiAlertCircle className="w-4 h-4 flex-shrink-0" />
+                      <span>{error}</span>
+                    </div>
+                  )}
+
                   <div className="flex items-center gap-2.5 text-xs text-gray-500 pt-1">
                     <FiShield className="w-4 h-4 text-brand-navy flex-shrink-0" />
                     <span>Your information is protected and will never be shared.</span>
@@ -380,9 +413,9 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* ─────────────────────────────────────────────────────────────
+      {/* ─────────────────────────────────────────────────────────────────────
           3. CTA BANNER
-      ───────────────────────────────────────────────────────────── */}
+      ───────────────────────────────────────────────────────────────────── */}
       <CtaBanner />
     </main>
   );

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -16,10 +16,13 @@ import {
   FiArrowUpRight,
   FiCheckCircle,
   FiLock,
+  FiAlertCircle,
 } from 'react-icons/fi';
 import SectionLabel from '@/components/ui/SectionLabel';
+import { apiMutate } from '@/lib/api';
+import type { CreateOrderResponse, VerifyResponse } from '@/types/api';
 
-/* ─── Program Data ─────────────────────────────────────────────────────── */
+/* ─── Program Data ──────────────────────────────────────────────────────── */
 
 const programs = [
   {
@@ -110,16 +113,24 @@ const trustItems = [
   { icon: FiAward, label: 'Verified Non-Profit' },
 ];
 
-/* ─── Donation Form ────────────────────────────────────────────────────── */
+/* ─── Donation Form ──────────────────────────────────────────────────────── */
 
-function DonationForm({ programName }: { programName: string }) {
+function DonationForm({
+  programKey,
+  programName,
+}: {
+  programKey: ProgramKey;
+  programName: string;
+}) {
+  const router = useRouter();
   const [selected, setSelected] = useState(1000);
   const [custom, setCustom] = useState('');
+  const [frequency, setFrequency] = useState<'one_time' | 'monthly'>('one_time');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const amount = custom ? parseInt(custom) || 0 : selected;
   const displayAmount = amount > 0 ? `₹${amount.toLocaleString('en-IN')}` : '₹—';
@@ -131,133 +142,266 @@ function DonationForm({ programName }: { programName: string }) {
     e.preventDefault();
     if (!amount || !name || !email) return;
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1200));
-    setLoading(false);
-    setSubmitted(true);
+    setError('');
+
+    try {
+      /* ── Step 1: Create order ──────────────────────────────────────── */
+      const idempotencyKey = crypto.randomUUID();
+      const { data: order, status: orderStatus } = await apiMutate<CreateOrderResponse>(
+        '/donations/create-order/',
+        {
+          full_name: name,
+          email,
+          phone: phone || undefined,
+          amount,
+          campaign_slug: programKey,
+          frequency,
+        },
+        'POST',
+        { 'Idempotency-Key': idempotencyKey },
+      );
+
+      if (orderStatus === 429) {
+        setError('Too many attempts. Please wait a moment and try again.');
+        setLoading(false);
+        return;
+      }
+      if (!order.success) {
+        setError(order.message ?? 'Could not initiate payment. Please try again.');
+        setLoading(false);
+        return;
+      }
+
+      /* ── Step 2: Open Razorpay modal ──────────────────────────────── */
+      if (frequency === 'monthly' && order.razorpay_subscription_id) {
+        // Monthly Recurring Donation
+        const rzp = new window.Razorpay({
+          key: order.razorpay_key_id,
+          subscription_id: order.razorpay_subscription_id,
+          name: 'Bridge of Hope Foundation',
+          description: `Monthly Donation – ${programName}`,
+          prefill: {
+            name: order.donor.name,
+            email: order.donor.email,
+            contact: order.donor.phone ?? phone,
+          },
+          theme: { color: '#D92626' },
+          modal: {
+            ondismiss: () => setLoading(false),
+          },
+          handler: async (response) => {
+            /* ── Step 3: Verify subscription ──────────────────────────────── */
+            try {
+              const { data: verify } = await apiMutate<VerifyResponse>(
+                '/donations/verify-subscription/',
+                {
+                  razorpay_subscription_id: response.razorpay_subscription_id,
+                  razorpay_payment_id: response.razorpay_payment_id,
+                  razorpay_signature: response.razorpay_signature,
+                },
+              );
+              if (verify.success) {
+                router.push(`/donate/thank-you?donation_id=${verify.donation_id ?? order.donation_id}`);
+              } else {
+                setError(verify.message ?? 'Subscription verification failed. Please contact support.');
+                setLoading(false);
+              }
+            } catch {
+              setError('Subscription verification error. Please contact support.');
+              setLoading(false);
+            }
+          },
+        });
+        rzp.open();
+      } else {
+        // One-Time Donation
+        const rzp = new window.Razorpay({
+          key: order.razorpay_key_id,
+          order_id: order.razorpay_order_id!,
+          amount: order.amount_paise,
+          currency: 'INR',
+          name: 'Bridge of Hope Foundation',
+          description: `Donation – ${programName}`,
+          prefill: {
+            name: order.donor.name,
+            email: order.donor.email,
+            contact: order.donor.phone ?? phone,
+          },
+          theme: { color: '#D92626' },
+          modal: {
+            ondismiss: () => setLoading(false),
+          },
+          handler: async (response) => {
+            /* ── Step 3: Verify payment ──────────────────────────────── */
+            try {
+              const { data: verify } = await apiMutate<VerifyResponse>(
+                '/donations/verify/',
+                {
+                  razorpay_order_id: response.razorpay_order_id,
+                  razorpay_payment_id: response.razorpay_payment_id,
+                  razorpay_signature: response.razorpay_signature,
+                },
+              );
+              if (verify.success) {
+                router.push(`/donate/thank-you?donation_id=${verify.donation_id ?? order.donation_id}`);
+              } else {
+                setError(verify.message ?? 'Payment verification failed. Please contact support.');
+                setLoading(false);
+              }
+            } catch {
+              setError('Payment verification error. Please contact support.');
+              setLoading(false);
+            }
+          },
+        });
+        rzp.open();
+      }
+    } catch {
+      setError('Payment initiation failed. Please try again.');
+      setLoading(false);
+    }
   };
 
   return (
     <div className="bg-white rounded-3xl border border-gray-100 shadow-[0_4px_40px_-8px_rgba(0,0,0,0.10)] p-7 sm:p-8">
-      <AnimatePresence mode="wait">
-        {submitted ? (
-          <motion.div
-            key="success"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4 }}
-            className="flex flex-col items-center text-center py-6"
-          >
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 20, delay: 0.1 }}
-              className="w-16 h-16 rounded-full bg-green-50 border-2 border-green-200 flex items-center justify-center mb-5"
-            >
-              <FiCheckCircle className="w-8 h-8 text-green-500" />
-            </motion.div>
-            <h3 className="text-xl font-black text-brand-black mb-2">Thank you, {name.split(' ')[0]}!</h3>
-            <p className="text-sm text-gray-500 leading-relaxed mb-1">
-              Your donation of <span className="font-bold text-brand-black">{displayAmount}</span> for{' '}
-              <span className="font-bold text-brand-black">{programName}</span> has been received.
-            </p>
-            <p className="text-xs text-gray-400 mb-8">
-              A confirmation will be sent to <span className="text-gray-600">{email}</span>.
-            </p>
-            <Link href="/programs" className="inline-flex items-center gap-2 text-sm font-bold text-brand-red hover:underline underline-offset-4">
-              View Other Programs <FiArrowUpRight className="w-4 h-4" />
-            </Link>
-          </motion.div>
-        ) : (
-          <motion.form key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <p className="text-xs font-extrabold uppercase tracking-widest text-gray-400 mb-3">Choose an amount</p>
-              <div className="grid grid-cols-2 gap-2.5 mb-3">
-                {PRESETS.map((val) => (
-                  <button
-                    key={val} type="button" onClick={() => handlePreset(val)}
-                    className={
-                      'py-3 rounded-2xl text-sm font-bold border-2 transition-all duration-200 ' +
-                      (selected === val && !custom
-                        ? 'bg-[#222A59] border-[#222A59] text-white shadow-md scale-[1.03]'
-                        : 'bg-white border-gray-200 text-gray-700 hover:border-gray-400')
-                    }
-                  >
-                    ₹{val.toLocaleString('en-IN')}
-                  </button>
-                ))}
-              </div>
-              <div className="relative">
-                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-bold select-none">₹</span>
-                <input
-                  type="text" inputMode="numeric" placeholder="Custom amount"
-                  value={custom} onChange={(e) => handleCustom(e.target.value)}
-                  className="w-full pl-8 pr-4 py-3 rounded-2xl border border-gray-200 bg-gray-50 text-sm text-gray-800 placeholder:text-gray-400 focus:border-[#222A59] focus:bg-white focus:ring-2 focus:ring-[#222A59]/10 outline-none transition-all duration-200"
-                />
-              </div>
-            </div>
-
-            <div className="border-t border-gray-100" />
-
-            <div className="space-y-4">
-              {[
-                { label: 'Full Name', required: true, type: 'text', value: name, setter: setName, placeholder: 'Your full name' },
-                { label: 'Email Address', required: true, type: 'email', value: email, setter: setEmail, placeholder: 'you@example.com' },
-                { label: 'Phone', required: false, type: 'tel', value: phone, setter: setPhone, placeholder: '+91 98765 43210' },
-              ].map((field) => (
-                <div key={field.label}>
-                  <label className="block text-xs font-extrabold uppercase tracking-widest text-gray-400 mb-1.5">
-                    {field.label}{field.required ? <span className="text-brand-red"> *</span> : <span className="text-gray-300 font-medium normal-case tracking-normal"> (optional)</span>}
-                  </label>
-                  <input
-                    type={field.type} required={field.required}
-                    value={field.value} onChange={(e) => field.setter(e.target.value)}
-                    placeholder={field.placeholder}
-                    className="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-gray-50 text-sm text-gray-800 placeholder:text-gray-400 focus:border-[#222A59] focus:bg-white focus:ring-2 focus:ring-[#222A59]/10 outline-none transition-all duration-200"
-                  />
-                </div>
-              ))}
-            </div>
-
+      <motion.form
+        key="form"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        onSubmit={handleSubmit}
+        className="space-y-6"
+      >
+        {/* Frequency Toggle */}
+        <div>
+          <p className="text-xs font-extrabold uppercase tracking-widest text-gray-400 mb-2.5">Donation Frequency</p>
+          <div className="grid grid-cols-2 p-1 rounded-full bg-gray-100 border border-gray-200/80">
             <button
-              type="submit"
-              disabled={!amount || !name || !email || loading}
-              className="w-full flex items-center justify-center gap-2 py-3.5 rounded-full bg-brand-red text-white text-sm font-bold shadow-[0_4px_16px_rgba(217,38,38,0.28)] hover:bg-brand-red-dark hover:shadow-[0_8px_26px_rgba(217,38,38,0.38)] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+              type="button"
+              onClick={() => setFrequency('one_time')}
+              className={`py-2 px-4 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
+                frequency === 'one_time'
+                  ? 'bg-brand-black text-white shadow-sm'
+                  : 'text-gray-600 hover:text-brand-black'
+              }`}
             >
-              {loading ? (
-                <span className="flex items-center gap-2">
-                  <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
-                  Processing…
-                </span>
-              ) : (
-                <><span>Donate {displayAmount} Now</span><FiArrowUpRight className="w-4 h-4" /></>
-              )}
+              Give Once
             </button>
+            <button
+              type="button"
+              onClick={() => setFrequency('monthly')}
+              className={`py-2 px-4 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
+                frequency === 'monthly'
+                  ? 'bg-brand-black text-white shadow-sm'
+                  : 'text-gray-600 hover:text-brand-black'
+              }`}
+            >
+              Give Monthly
+            </button>
+          </div>
+        </div>
 
-            <p className="flex items-center justify-center gap-1.5 text-center text-[11px] text-gray-400 font-medium">
-              <FiLock className="w-3 h-3" />
-              <span>Secure</span>
-              <span className="text-gray-300">·</span>
-              <span>80G Tax Deductible</span>
-              <span className="text-gray-300">·</span>
-              <span>100% Direct Relief</span>
-            </p>
-          </motion.form>
+        <div>
+          <p className="text-xs font-extrabold uppercase tracking-widest text-gray-400 mb-3">Choose an amount</p>
+          <div className="grid grid-cols-2 gap-2.5 mb-3">
+            {PRESETS.map((val) => (
+              <button
+                key={val} type="button" onClick={() => handlePreset(val)}
+                className={
+                  'py-3 rounded-2xl text-sm font-bold border-2 transition-all duration-200 cursor-pointer ' +
+                  (selected === val && !custom
+                    ? 'bg-[#222A59] border-[#222A59] text-white shadow-md scale-[1.03]'
+                    : 'bg-white border-gray-200 text-gray-700 hover:border-gray-400')
+                }
+              >
+                ₹{val.toLocaleString('en-IN')}
+              </button>
+            ))}
+          </div>
+          <div className="relative">
+            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-bold select-none">₹</span>
+            <input
+              type="text" inputMode="numeric" placeholder="Custom amount"
+              value={custom} onChange={(e) => handleCustom(e.target.value)}
+              className="w-full pl-8 pr-4 py-3 rounded-2xl border border-gray-200 bg-gray-50 text-sm text-gray-800 placeholder:text-gray-400 focus:border-[#222A59] focus:bg-white focus:ring-2 focus:ring-[#222A59]/10 outline-none transition-all duration-200"
+            />
+          </div>
+        </div>
+
+        <div className="border-t border-gray-100" />
+
+        <div className="space-y-4">
+          {[
+            { label: 'Full Name', required: true, type: 'text', value: name, setter: setName, placeholder: 'Your full name' },
+            { label: 'Email Address', required: true, type: 'email', value: email, setter: setEmail, placeholder: 'you@example.com' },
+            { label: 'Phone', required: false, type: 'tel', value: phone, setter: setPhone, placeholder: '+91 98765 43210' },
+          ].map((field) => (
+            <div key={field.label}>
+              <label className="block text-xs font-extrabold uppercase tracking-widest text-gray-400 mb-1.5">
+                {field.label}
+                {field.required
+                  ? <span className="text-brand-red"> *</span>
+                  : <span className="text-gray-300 font-medium normal-case tracking-normal"> (optional)</span>
+                }
+              </label>
+              <input
+                type={field.type} required={field.required}
+                value={field.value} onChange={(e) => field.setter(e.target.value)}
+                placeholder={field.placeholder}
+                className="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-gray-50 text-sm text-gray-800 placeholder:text-gray-400 focus:border-[#222A59] focus:bg-white focus:ring-2 focus:ring-[#222A59]/10 outline-none transition-all duration-200"
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Error */}
+        {error && (
+          <div className="flex items-center gap-2 text-sm text-red-600 bg-red-50 border border-red-200 rounded-xl px-4 py-3">
+            <FiAlertCircle className="w-4 h-4 flex-shrink-0" />
+            <span>{error}</span>
+          </div>
         )}
-      </AnimatePresence>
+
+        <button
+          type="submit"
+          disabled={!amount || !name || !email || loading}
+          className="w-full flex items-center justify-center gap-2 py-3.5 rounded-full bg-brand-red text-white text-sm font-bold shadow-[0_4px_16px_rgba(217,38,38,0.28)] hover:bg-brand-red-dark hover:shadow-[0_8px_26px_rgba(217,38,38,0.38)] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 cursor-pointer"
+        >
+          {loading ? (
+            <span className="flex items-center gap-2">
+              <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
+              Processing…
+            </span>
+          ) : (
+            <><span>Donate {displayAmount} Now</span><FiArrowUpRight className="w-4 h-4" /></>
+          )}
+        </button>
+
+        <p className="flex items-center justify-center gap-1.5 text-center text-[11px] text-gray-400 font-medium">
+          <FiLock className="w-3 h-3" />
+          <span>Secure</span>
+          <span className="text-gray-300">·</span>
+          <span>80G Tax Deductible</span>
+          <span className="text-gray-300">·</span>
+          <span>100% Direct Relief</span>
+        </p>
+      </motion.form>
     </div>
   );
 }
 
-/* ─── Main Page Client Component ───────────────────────────────────────── */
+/* ─── Main Page Client Component ──────────────────────────────────────────── */
 
 export default function DonatePageClient() {
   const searchParams = useSearchParams();
   const causeParam = searchParams.get('cause') as ProgramKey | null;
-  const validKey = causeParam && programs.some((p) => p.key === causeParam) ? causeParam : 'education';
+  const validKey =
+    causeParam && programs.some((p) => p.key === causeParam)
+      ? causeParam
+      : 'education';
 
   const [activeKey, setActiveKey] = useState<ProgramKey>(validKey);
 
-  // Sync if URL param changes (e.g. back/forward navigation)
+  /* Sync if URL param changes (e.g. back/forward navigation) */
   useEffect(() => {
     if (causeParam && programs.some((p) => p.key === causeParam)) {
       setActiveKey(causeParam as ProgramKey);
@@ -269,7 +413,7 @@ export default function DonatePageClient() {
 
   return (
     <>
-      {/* ── PROGRAM SELECTOR TABS ─────────────────────────────────── */}
+      {/* ── PROGRAM SELECTOR TABS ─────────────────────────────────────── */}
       <section className="py-10 bg-gray-50 border-b border-gray-100">
         <div className="container-site">
           <p className="text-xs font-extrabold uppercase tracking-widest text-gray-400 mb-4 text-center">
@@ -299,7 +443,7 @@ export default function DonatePageClient() {
         </div>
       </section>
 
-      {/* ── HERO SPLIT ────────────────────────────────────────────── */}
+      {/* ── HERO SPLIT ────────────────────────────────────────────────── */}
       <section className="py-16 sm:py-24 bg-white">
         <div className="container-site">
           <AnimatePresence mode="wait">
@@ -311,7 +455,7 @@ export default function DonatePageClient() {
               transition={{ duration: 0.3, ease: 'easeOut' }}
               className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start"
             >
-              {/* LEFT — Program Context */}
+              {/* LEFT – Program Context */}
               <div className="lg:col-span-5">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-11 h-11 rounded-2xl bg-[#222A59] flex items-center justify-center flex-shrink-0">
@@ -354,16 +498,16 @@ export default function DonatePageClient() {
                 </Link>
               </div>
 
-              {/* RIGHT — Form (sticky) */}
+              {/* RIGHT – Form (sticky) */}
               <div className="lg:col-span-7 lg:sticky lg:top-28">
-                <DonationForm programName={active.label} />
+                <DonationForm programKey={activeKey} programName={active.label} />
               </div>
             </motion.div>
           </AnimatePresence>
         </div>
       </section>
 
-      {/* ── TRUST BAR ─────────────────────────────────────────────── */}
+      {/* ── TRUST BAR ─────────────────────────────────────────────────── */}
       <section className="py-10 bg-gray-50 border-y border-gray-100">
         <div className="container-site">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">

@@ -1,8 +1,8 @@
-﻿'use client';
+'use client';
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { FiShare2, FiLinkedin, FiMail } from "react-icons/fi";
+import { FiShare2 } from "react-icons/fi";
 import SectionLabel from "@/components/ui/SectionLabel";
 
 const teamMembers = [
