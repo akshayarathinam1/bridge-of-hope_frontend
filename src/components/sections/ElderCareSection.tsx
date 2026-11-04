@@ -94,7 +94,7 @@ export default function ElderCareSection() {
 
             {/* CTAs with phone link */}
             <div className="flex flex-wrap items-center gap-5">
-              <Button href="/programs/old-age" size="lg" variant="primary">
+              <Button href="/programs/elderly-care" size="lg" variant="primary">
                 Explore Care Homes
               </Button>
               <a

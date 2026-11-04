@@ -3,11 +3,28 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Button from "@/components/ui/Button";
-import { FiArrowUpRight, FiHeart } from "react-icons/fi";
-import { useDonateModal } from "@/context/DonateModalContext";
+import { FiArrowUpRight } from "react-icons/fi";
+import { splitHighlight } from "@/lib/content";
+import type { HeroSection } from "@/types/api";
 
-export default function Hero() {
-  const { openDonateModal } = useDonateModal();
+/* Shown until the dashboard's Site text → Banner is filled in (or if the API is down). */
+const DEFAULT_HERO = {
+  title: "Give Hope. Create Change. Transform Lives.",
+  subtitle:
+    "Every act of kindness has the power to change a life. We work to support children, senior citizens, families, and communities through education, healthcare, care, and social service.",
+  cta_text: "Donate Now",
+  cta_link: "/donate",
+  background_image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1920&q=85",
+};
+
+/** Home page banner. Headline, line, button and photo come from Site text → Banner. */
+export default function Hero({ hero }: { hero?: HeroSection | null }) {
+  const title = hero?.title?.trim() || DEFAULT_HERO.title;
+  const subtitle = hero ? hero.subtitle : DEFAULT_HERO.subtitle;
+  const ctaText = hero?.cta_text?.trim() || DEFAULT_HERO.cta_text;
+  const ctaLink = hero?.cta_link?.trim() || DEFAULT_HERO.cta_link;
+  const background = hero?.background_image || DEFAULT_HERO.background_image;
+  const [lead, highlight] = splitHighlight(title);
   return (
     <section
       id="hero"
@@ -17,8 +34,8 @@ export default function Hero() {
       {/* High Impact Background Image */}
       <div className="absolute inset-0 z-0" suppressHydrationWarning>
         <Image
-          src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1920&q=85"
-          alt="Happy children smiling and reaching out together"
+          src={background}
+          alt=""
           fill
           className="object-cover object-center opacity-85"
           priority
@@ -40,9 +57,9 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-3xl sm:text-5xl lg:text-7xl font-extrabold text-white leading-[1.12] sm:leading-[1.08] tracking-tight mb-4 sm:mb-6 break-words"
           >
-            Give Hope. Create Change.{" "}
+            {lead && <>{lead}{" "}</>}
             <span className="relative inline-block text-white">
-              Transform Lives.
+              {highlight}
               <svg
                 className="absolute -bottom-2 left-0 w-full h-3 text-brand-red"
                 viewBox="0 0 300 12"
@@ -60,14 +77,16 @@ export default function Hero() {
           </motion.h1>
 
           {/* Subtitle */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-sm sm:text-lg lg:text-xl text-gray-200 leading-relaxed max-w-2xl mb-8 sm:mb-10 font-normal"
-          >
-            Every act of kindness has the power to change a life. We work to support children, senior citizens, families, and communities through education, healthcare, care, and social service.
-          </motion.p>
+          {subtitle && (
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-sm sm:text-lg lg:text-xl text-gray-200 leading-relaxed max-w-2xl mb-8 sm:mb-10 font-normal"
+            >
+              {subtitle}
+            </motion.p>
+          )}
 
           {/* Action Buttons */}
           <motion.div
@@ -76,8 +95,8 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-5"
           >
-            <Button onClick={openDonateModal} size="lg" variant="primary" className="w-full sm:w-auto">
-              <span>Donate Now</span>
+            <Button href={ctaLink} size="lg" variant="primary" className="w-full sm:w-auto">
+              <span>{ctaText}</span>
               <FiArrowUpRight className="w-5 h-5" aria-hidden="true" />
             </Button>
 

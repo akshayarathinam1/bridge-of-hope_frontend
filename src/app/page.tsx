@@ -8,15 +8,20 @@ import PhotoMosaic from "@/components/sections/PhotoMosaic";
 import UpcomingEvents from "@/components/sections/UpcomingEvents";
 import FaqSection from "@/components/sections/FaqSection";
 import CtaBanner from "@/components/sections/CtaBanner";
+import { fetchAbout, fetchHero } from "@/lib/content";
 
-export default function Home() {
+/* Banner and About text come from the dashboard's Site text page. */
+export const revalidate = 60;
+
+export default async function Home() {
+  const [hero, about] = await Promise.all([fetchHero(), fetchAbout()]);
   return (
     <main className="min-h-screen bg-white overflow-x-hidden w-full max-w-full" suppressHydrationWarning>
       {/* 1. Hero Section: Display typography, CTA buttons, avatar stack */}
-      <Hero />
+      <Hero hero={hero} />
 
       {/* 2. About Us: Layered photo collage, feature cards, bullet points, CTA */}
-      <AboutSection />
+      <AboutSection about={about} />
 
       {/* 3. How We Help: Rounded-top card, 3 feature cards with images, relief portrait */}
       <HowWeHelp />

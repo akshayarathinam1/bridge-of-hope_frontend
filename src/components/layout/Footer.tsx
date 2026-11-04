@@ -10,6 +10,7 @@ import {
 } from "react-icons/fi";
 import { FaWhatsapp, FaXTwitter } from "react-icons/fa6";
 import { apiFetch } from "@/lib/api";
+import { fetchProgramList, programHref } from "@/lib/programs";
 import type { SiteInfo } from "@/types/api";
 
 const quickLinks = [
@@ -17,14 +18,6 @@ const quickLinks = [
   { label: "Our Programs", href: "/programs" },
   { label: "Contact Us", href: "/contact" },
   { label: "Donate Now", href: "/donate" },
-];
-
-const programs = [
-  { label: "Education", href: "/programs/education" },
-  { label: "Old Age Care", href: "/programs/old-age" },
-  { label: "Orphanage Support", href: "/programs/orphanage" },
-  { label: "Medical Help", href: "/programs/medical" },
-  { label: "Social Services", href: "/programs/social-service" },
 ];
 
 const socials = [
@@ -47,6 +40,8 @@ const DEFAULT_SITE_INFO: SiteInfo = {
 };
 
 export default async function Footer() {
+  // Programs come from the dashboard, so new, renamed or hidden ones show up here too.
+  const programs = (await fetchProgramList()).map((p) => ({ label: p.name, href: programHref(p.slug) }));
   let siteInfo = DEFAULT_SITE_INFO;
   try {
     const data = await apiFetch<SiteInfo>('/content/site-info/', {}, 300);

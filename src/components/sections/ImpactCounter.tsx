@@ -1,4 +1,4 @@
-import { apiFetch } from "@/lib/api";
+import { fetchImpactStats } from "@/lib/content";
 import type { ImpactStat } from "@/types/api";
 import ImpactCounterGrid from "./ImpactCounterGrid";
 
@@ -6,28 +6,28 @@ import ImpactCounterGrid from "./ImpactCounterGrid";
 const FALLBACK: ImpactStat[] = [
   {
     id: 1,
-    number: "5,000+",
+    value: "5,000+",
     label: "Total Lives Touched",
     icon: "FiHeart",
     display_order: 1,
   },
   {
     id: 2,
-    number: "₹50L+",
+    value: "₹50L+",
     label: "Total Funds Raised",
     icon: "FiAward",
     display_order: 2,
   },
   {
     id: 3,
-    number: "250+",
+    value: "250+",
     label: "Dedicated Volunteers",
     icon: "FiUsers",
     display_order: 3,
   },
   {
     id: 4,
-    number: "8+",
+    value: "8+",
     label: "Years of Service",
     icon: "FiSmile",
     display_order: 4,
@@ -36,15 +36,9 @@ const FALLBACK: ImpactStat[] = [
 
 export default async function ImpactCounter() {
   /* Fetch impact stats; fall back to static data if the backend is down */
-  let stats: ImpactStat[] = FALLBACK;
-  try {
-    const data = await apiFetch<ImpactStat[]>("/content/impact-stats/", {}, 300);
-    if (Array.isArray(data) && data.length > 0) {
-      stats = data;
-    }
-  } catch {
-    /* Use fallback silently */
-  }
+  // The dashboard's "Impact numbers"; the fallback only shows if the API can't be reached.
+  const fetched = await fetchImpactStats();
+  const stats: ImpactStat[] = fetched.length ? fetched : FALLBACK;
 
   return (
     <section className="py-16 bg-brand-navy relative overflow-hidden">

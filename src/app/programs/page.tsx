@@ -5,25 +5,14 @@ import PageHeader from '@/components/ui/PageHeader';
 import SectionLabel from '@/components/ui/SectionLabel';
 import CtaBanner from '@/components/sections/CtaBanner';
 import { apiFetch } from '@/lib/api';
+import { PROGRAM_REVALIDATE } from '@/lib/programs';
 import type { ProgramListItem, ImpactStat } from '@/types/api';
-import {
-  FiArrowUpRight,
-  FiBookOpen,
-  FiHeart,
-  FiActivity,
-  FiUsers,
-  FiHome,
-  FiAward,
-  FiSmile,
-  FiStar,
-} from 'react-icons/fi';
+import { FiArrowUpRight } from 'react-icons/fi';
 import ProgramCards from './_components/ProgramCards';
+import ProgramIcon from '@/components/ui/ProgramIcon';
 
-/* ─── Icon map (matches backend icon names) ──────────────────────────────── */
-type IconCmp = React.ComponentType<{ className?: string }>;
-const ICON_MAP: Record<string, IconCmp> = {
-  FiBookOpen, FiHeart, FiActivity, FiUsers, FiHome, FiAward, FiSmile, FiStar,
-};
+/* Programs come from the dashboard; refresh about once a minute. */
+export const revalidate = 60;
 
 /* ─── Fallback programs ───────────────────────────────────────────────────── */
 const FALLBACK_PROGRAMS: ProgramListItem[] = [
@@ -37,7 +26,7 @@ const FALLBACK_PROGRAMS: ProgramListItem[] = [
     display_order: 1,
   },
   {
-    slug: 'orphanage',
+    slug: 'child-orphan-care',
     name: 'Child and Orphan Care',
     tagline: "Promoting children's well-being through care, support, and compassion.",
     cover_image: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=85',
@@ -46,7 +35,7 @@ const FALLBACK_PROGRAMS: ProgramListItem[] = [
     display_order: 2,
   },
   {
-    slug: 'old-age',
+    slug: 'elderly-care',
     name: 'Elderly Care',
     tagline: 'Helping older adults live with dignity, comfort, and care.',
     cover_image: 'https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=800&q=85',
@@ -55,7 +44,7 @@ const FALLBACK_PROGRAMS: ProgramListItem[] = [
     display_order: 3,
   },
   {
-    slug: 'medical',
+    slug: 'medical-support',
     name: 'Medical Support',
     tagline: 'Helping people access essential healthcare and medical assistance.',
     cover_image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=85',
@@ -64,7 +53,7 @@ const FALLBACK_PROGRAMS: ProgramListItem[] = [
     display_order: 4,
   },
   {
-    slug: 'social-service',
+    slug: 'social-services',
     name: 'Social Service',
     tagline: 'Extending a helping hand to individuals and communities in need.',
     cover_image: 'https://images.unsplash.com/photo-1541544741938-0af808871cc0?w=800&q=85',
@@ -76,26 +65,22 @@ const FALLBACK_PROGRAMS: ProgramListItem[] = [
 
 /* ─── Fallback impact stats ──────────────────────────────────────────────── */
 const FALLBACK_IMPACT: ImpactStat[] = [
-  { id: 1, number: '12,500+', label: 'Lives Supported', icon: 'FiSmile', display_order: 1 },
-  { id: 2, number: '4,800+', label: 'Children Reached', icon: 'FiBookOpen', display_order: 2 },
-  { id: 3, number: '3,200+', label: 'Families Assisted', icon: 'FiHeart', display_order: 3 },
-  { id: 4, number: '150+', label: 'Community Drives', icon: 'FiAward', display_order: 4 },
+  { id: 1, value: '12,500+', label: 'Lives Supported', icon: 'FiSmile', display_order: 1 },
+  { id: 2, value: '4,800+', label: 'Children Reached', icon: 'FiBookOpen', display_order: 2 },
+  { id: 3, value: '3,200+', label: 'Families Assisted', icon: 'FiHeart', display_order: 3 },
+  { id: 4, value: '150+', label: 'Community Drives', icon: 'FiAward', display_order: 4 },
 ];
 
 export default async function ProgramsPage() {
   /* Fetch programs list */
   let programs: ProgramListItem[] = FALLBACK_PROGRAMS;
   try {
-    const data = await apiFetch<ProgramListItem[]>('/content/programs/', {}, 300);
+    const data = await apiFetch<ProgramListItem[]>('/content/programs/', {}, PROGRAM_REVALIDATE);
     if (Array.isArray(data) && data.length > 0) programs = data;
   } catch { /* use fallback */ }
 
-  /* Fetch impact stats */
-  let impactStats: ImpactStat[] = FALLBACK_IMPACT;
-  try {
-    const data = await apiFetch<ImpactStat[]>('/content/impact-stats/', {}, 300);
-    if (Array.isArray(data) && data.length > 0) impactStats = data.slice(0, 4);
-  } catch { /* use fallback */ }
+  /* Impact figures are built in (not edited in the dashboard). */
+  const impactStats = FALLBACK_IMPACT;
 
   return (
     <main className="min-h-screen bg-white text-brand-black">
@@ -165,17 +150,16 @@ export default async function ProgramsPage() {
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
             {impactStats.map((stat, idx) => {
-              const Icon: IconCmp = ICON_MAP[stat.icon] ?? FiHeart;
               return (
                 <div
                   key={stat.id ?? idx}
                   className="p-6 sm:p-8 rounded-3xl bg-white/10 border border-white/15 backdrop-blur-md hover:border-brand-red/50 hover:bg-white/15 transition-all duration-300 group shadow-lg"
                 >
                   <div className="w-10 h-10 rounded-xl bg-white/15 border border-white/20 flex items-center justify-center text-brand-red mb-4 group-hover:scale-110 group-hover:bg-brand-red group-hover:text-white transition-all duration-300">
-                    <Icon className="w-5 h-5" />
+                    <ProgramIcon icon={stat.icon} className="w-5 h-5" />
                   </div>
                   <p className="text-3xl sm:text-4xl font-black text-brand-red mb-1.5 tracking-tight group-hover:text-white transition-colors">
-                    {stat.number}
+                    {stat.value}
                   </p>
                   <h3 className="text-sm sm:text-base font-bold text-white">{stat.label}</h3>
                 </div>

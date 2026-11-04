@@ -5,10 +5,12 @@ import Image from "next/image";
 import Button from "@/components/ui/Button";
 import SectionLabel from "@/components/ui/SectionLabel";
 import { FiTarget, FiEye, FiPhone, FiArrowUpRight } from "react-icons/fi";
-import { useDonateModal } from "@/context/DonateModalContext";
+import type { AboutContent } from "@/lib/content";
 
-export default function AboutSection() {
-  const { openDonateModal } = useDonateModal();
+/** Home page "About Us". The Mission and Vision cards use Site text → About page → Mission / Vision. */
+export default function AboutSection({ about = {} }: { about?: AboutContent }) {
+  const mission = about.mission?.content?.trim() || "To support vulnerable communities with care, compassion, and meaningful opportunities.";
+  const vision = about.vision?.content?.trim() || "A world where everyone has the opportunity to live with dignity, hope, and a better future.";
   return (
     <section id="about" className="py-16 sm:py-20 bg-white overflow-hidden">
       <div className="container-site">
@@ -157,9 +159,7 @@ export default function AboutSection() {
                     Our Mission
                   </h3>
                 </div>
-                <p className="text-xs text-gray-500 leading-relaxed">
-                  To support vulnerable communities with care, compassion, and meaningful opportunities.
-                </p>
+                <p className="text-xs text-gray-500 leading-relaxed line-clamp-4">{mission}</p>
               </div>
 
               {/* Vision */}
@@ -172,15 +172,13 @@ export default function AboutSection() {
                     Our Vision
                   </h3>
                 </div>
-                <p className="text-xs text-gray-500 leading-relaxed">
-                  A world where everyone has the opportunity to live with dignity, hope, and a better future.
-                </p>
+                <p className="text-xs text-gray-500 leading-relaxed line-clamp-4">{vision}</p>
               </div>
             </div>
 
             {/* CTA row */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6">
-              <Button onClick={openDonateModal} size="lg" className="w-full sm:w-auto">
+              <Button href="/donate" size="lg" className="w-full sm:w-auto">
                 <span>Donate Now</span>
                 <FiArrowUpRight className="w-5 h-5" />
               </Button>

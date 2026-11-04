@@ -53,7 +53,7 @@ const programs = [
       { value: '14', label: 'Care Centres' },
       { value: '120K+', label: 'Meals Served' },
     ],
-    programHref: '/programs/orphanage',
+    programHref: '/programs/child-orphan-care',
   },
   {
     key: 'old-age',
@@ -68,7 +68,7 @@ const programs = [
       { value: '9', label: 'Care Homes' },
       { value: '600+', label: 'Kits / Month' },
     ],
-    programHref: '/programs/old-age',
+    programHref: '/programs/elderly-care',
   },
   {
     key: 'medical',
@@ -83,7 +83,7 @@ const programs = [
       { value: '150+', label: 'Health Camps' },
       { value: '180+', label: 'Surgeries' },
     ],
-    programHref: '/programs/medical',
+    programHref: '/programs/medical-support',
   },
   {
     key: 'social-service',
@@ -98,7 +98,7 @@ const programs = [
       { value: '75+', label: 'Relief Drives' },
       { value: '8,200+', label: 'Ration Kits' },
     ],
-    programHref: '/programs/social-service',
+    programHref: '/programs/social-services',
   },
 ] as const;
 

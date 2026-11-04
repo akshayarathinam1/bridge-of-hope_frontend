@@ -145,15 +145,12 @@ export interface Program extends ProgramListItem {
 
 export interface ImpactStat {
   id?: number;
-  /** Display value, e.g. "5,000+" */
-  number: string;
+  /** Display value, e.g. "5,000+" (the API's field is `value`). */
+  value: string;
   label: string;
   /** Optional sub-label below the main label */
   subtext?: string;
-  /**
-   * React icon name. One of:
-   * FiSmile | FiBookOpen | FiHeart | FiAward | FiUsers | FiActivity | FiHome | FiStar
-   */
+  /** An emoji from the dashboard, or a react-icons name like FiSmile (see ProgramIcon). */
   icon: string;
   display_order?: number;
 }

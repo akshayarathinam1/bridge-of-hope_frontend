@@ -61,7 +61,7 @@ const services = [
       description:
         "Providing balanced meals, clean shelter infrastructure, regular pediatric checkups, and emotional counseling to vulnerable and orphaned children.",
       stat: "1,200+ Children Sheltered",
-      programLink: "/programs/orphanage",
+      programLink: "/programs/child-orphan-care",
     },
   },
   {
@@ -84,7 +84,7 @@ const services = [
       description:
         "Doorstep chronic medicine packages, free wheelchairs and walkers, old age home infrastructure upgrades, and regular companion visits.",
       stat: "850+ Elders Supported",
-      programLink: "/programs/old-age",
+      programLink: "/programs/elderly-care",
     },
   },
   {
@@ -107,7 +107,7 @@ const services = [
       description:
         "Reaching remote settlements with doctor-equipped mobile vans, free prescription distribution, and emergency surgery sponsorships for underprivileged families.",
       stat: "3,200+ Families Assisted",
-      programLink: "/programs/medical",
+      programLink: "/programs/medical-support",
     },
   },
   {
@@ -130,7 +130,7 @@ const services = [
       description:
         "Emergency food and clean water during localized disasters, seasonal winter fleece blanket drives, and certified tailoring courses empowering women.",
       stat: "12,500+ Lives Reached",
-      programLink: "/programs/social-service",
+      programLink: "/programs/social-services",
     },
   },
 ];

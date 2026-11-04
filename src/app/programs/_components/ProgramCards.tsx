@@ -3,29 +3,13 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import {
-  FiArrowUpRight,
-  FiBookOpen,
-  FiHeart,
-  FiActivity,
-  FiUsers,
-  FiHome,
-  FiAward,
-  FiSmile,
-  FiStar,
-} from 'react-icons/fi';
+import { FiArrowUpRight } from 'react-icons/fi';
+import ProgramIcon from '@/components/ui/ProgramIcon';
+import { DEFAULT_PROGRAM_EXTRAS, PROGRAM_EXTRAS } from '@/lib/programs';
 import type { ProgramListItem } from '@/types/api';
-
-type IconCmp = React.ComponentType<{ className?: string }>;
-
-const ICON_MAP: Record<string, IconCmp> = {
-  FiBookOpen, FiHeart, FiActivity, FiUsers, FiHome, FiAward, FiSmile, FiStar,
-};
 
 /* Shared card UI ─────────────────────────────────────────────────────────── */
 function ProgramCard({ prog, index }: { prog: ProgramListItem; index: number }) {
-  const Icon: IconCmp = ICON_MAP[prog.icon ?? ''] ?? FiHeart;
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}
@@ -41,10 +25,8 @@ function ProgramCard({ prog, index }: { prog: ProgramListItem; index: number }) 
         {/* Image */}
         <div className="relative h-56 sm:h-60 overflow-hidden flex-shrink-0">
           <Image
-            src={
-              prog.cover_image ||
-              'https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=800&q=85'
-            }
+            // The dashboard's cover photo; without one, the program's own stock photo.
+            src={prog.cover_image || (PROGRAM_EXTRAS[prog.slug] ?? DEFAULT_PROGRAM_EXTRAS).image}
             alt={prog.name}
             fill
             className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
@@ -55,7 +37,7 @@ function ProgramCard({ prog, index }: { prog: ProgramListItem; index: number }) 
           {/* Badge */}
           <div className="absolute top-4 left-4">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#222A59] text-white text-[11px] font-extrabold uppercase tracking-wider">
-              <Icon className="w-3 h-3" />
+              <ProgramIcon icon={prog.icon} className="w-3 h-3" />
               {prog.name}
             </span>
           </div>

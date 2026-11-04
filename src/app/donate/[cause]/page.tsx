@@ -51,7 +51,7 @@ const causes = {
       { value: '14', label: 'Care Centres' },
       { value: '120K+', label: 'Meals Served' },
     ],
-    programHref: '/programs/orphanage',
+    programHref: '/programs/child-orphan-care',
   },
   'old-age': {
     seoTitle: 'Donate for Elderly Care | Bridge of Hope Foundation',
@@ -68,7 +68,7 @@ const causes = {
       { value: '9', label: 'Care Homes' },
       { value: '600+', label: 'Medical Kits / Month' },
     ],
-    programHref: '/programs/old-age',
+    programHref: '/programs/elderly-care',
   },
   medical: {
     seoTitle: 'Donate for Medical Support | Bridge of Hope Foundation',
@@ -85,7 +85,7 @@ const causes = {
       { value: '150+', label: 'Free Health Camps' },
       { value: '180+', label: 'Surgeries Funded' },
     ],
-    programHref: '/programs/medical',
+    programHref: '/programs/medical-support',
   },
   'social-service': {
     seoTitle: 'Donate for Social Service | Bridge of Hope Foundation',
@@ -102,7 +102,7 @@ const causes = {
       { value: '75+', label: 'Relief Drives' },
       { value: '8,200+', label: 'Ration Kits Given' },
     ],
-    programHref: '/programs/social-service',
+    programHref: '/programs/social-services',
   },
 } as const;
 

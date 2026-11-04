@@ -10,57 +10,24 @@ import { HiOutlineMenuAlt3, HiOutlineX } from "react-icons/hi";
 import {
   FiArrowUpRight,
   FiChevronDown,
-  FiBookOpen,
-  FiHome,
   FiHeart,
-  FiActivity,
-  FiUsers,
   FiArrowRight,
   FiPhoneCall,
 } from "react-icons/fi";
+import ProgramIcon from "@/components/ui/ProgramIcon";
+import { FALLBACK_PROGRAM_LINKS, programHref } from "@/lib/programs";
+import type { ProgramListItem } from "@/types/api";
 
-const programs = [
-  {
-    label: "Education",
-    href: "/programs/education",
-    icon: FiBookOpen,
-    desc: "School supplies, study hubs & scholarships",
-    badge: "Youth",
-    accent: "text-brand-orange bg-orange-50 group-hover:bg-brand-orange group-hover:text-white",
-  },
-  {
-    label: "Child & Orphan Care",
-    href: "/programs/orphanage",
-    icon: FiHome,
-    desc: "Safe shelters, daily nutrition & protection",
-    badge: "Care",
-    accent: "text-brand-orange bg-orange-50 group-hover:bg-brand-orange group-hover:text-white",
-  },
-  {
-    label: "Elderly Care",
-    href: "/programs/old-age",
-    icon: FiHeart,
-    desc: "Restoring comfort, medical aid & dignity",
-    badge: "Dignity",
-    accent: "text-brand-orange bg-orange-50 group-hover:bg-brand-orange group-hover:text-white",
-  },
-  {
-    label: "Medical Support",
-    href: "/programs/medical",
-    icon: FiActivity,
-    desc: "Mobile health clinics & emergency surgery grants",
-    badge: "Health",
-    accent: "text-brand-orange bg-orange-50 group-hover:bg-brand-orange group-hover:text-white",
-  },
-  {
-    label: "Social Service",
-    href: "/programs/social-service",
-    icon: FiUsers,
-    desc: "Disaster relief, clean water & empowerment",
-    badge: "Relief",
-    accent: "text-brand-orange bg-orange-50 group-hover:bg-brand-orange group-hover:text-white",
-  },
-];
+/** Menu text for the original programs; others use their tagline from the dashboard. */
+const NAV_DETAILS: Record<string, { icon: string; desc: string }> = {
+  education: { icon: "FiBookOpen", desc: "School supplies, study hubs & scholarships" },
+  "child-orphan-care": { icon: "FiHome", desc: "Safe shelters, daily nutrition & protection" },
+  "elderly-care": { icon: "FiHeart", desc: "Restoring comfort, medical aid & dignity" },
+  "medical-support": { icon: "FiActivity", desc: "Mobile health clinics & emergency surgery grants" },
+  "social-services": { icon: "FiUsers", desc: "Disaster relief, clean water & empowerment" },
+};
+
+const PROGRAM_ACCENT = "text-brand-orange bg-orange-50 group-hover:bg-brand-orange group-hover:text-white";
 
 const navLinks = [
   { label: 'Home', href: '/' },
@@ -68,7 +35,15 @@ const navLinks = [
   { label: 'Gallery', href: '/gallery' },
 ];
 
-export default function Navbar() {
+/** `programList` is the dashboard's visible programs, loaded by the root layout. */
+export default function Navbar({ programList = FALLBACK_PROGRAM_LINKS }: { programList?: ProgramListItem[] }) {
+  const programs = programList.map((p) => ({
+    label: p.name,
+    href: programHref(p.slug),
+    icon: NAV_DETAILS[p.slug]?.icon ?? p.icon,
+    desc: NAV_DETAILS[p.slug]?.desc ?? p.tagline ?? "",
+    accent: PROGRAM_ACCENT,
+  }));
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [programsOpen, setProgramsOpen] = useState(false);
@@ -198,7 +173,6 @@ export default function Navbar() {
 
                       <div className="space-y-px">
                         {programs.map((prog) => {
-                          const Icon = prog.icon;
                           const isCurrent = pathname === prog.href;
                           return (
                             <Link
@@ -207,11 +181,11 @@ export default function Navbar() {
                               onClick={() => setProgramsOpen(false)}
                               className={clsx(
                                 "flex items-center gap-3 px-3 py-2.5 rounded-xl group/item transition-colors duration-150",
-                                isCurrent ? "bg-orange-50" : "hover:bg-gray-50/80"
+                                isCurrent ? "bg-orange-50" : "hover:bg-brand-orange-light"
                               )}
                             >
                               <div className={clsx("w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-transform duration-150 group-hover/item:scale-110", prog.accent)}>
-                                <Icon className="w-3.5 h-3.5" />
+                                <ProgramIcon icon={prog.icon} className="w-3.5 h-3.5" />
                               </div>
                               <div className="flex-1 min-w-0">
                                 <p className="text-[13px] font-semibold text-gray-800 group-hover/item:text-brand-orange transition-colors">{prog.label}</p>
@@ -382,7 +356,6 @@ export default function Navbar() {
                   >
                     <div className="space-y-0.5 pl-2 pt-1">
                       {programs.map((prog) => {
-                        const Icon = prog.icon;
                         const isCurrent = pathname === prog.href;
                         return (
                           <Link
@@ -391,7 +364,7 @@ export default function Navbar() {
                             onClick={() => setOpen(false)}
                             className={clsx(
                               "flex items-center gap-3 p-2.5 rounded-2xl transition-colors group",
-                              isCurrent ? "bg-orange-50" : "hover:bg-gray-50"
+                              isCurrent ? "bg-orange-50" : "hover:bg-brand-orange-light"
                             )}
                           >
                             <div
@@ -400,7 +373,7 @@ export default function Navbar() {
                                 prog.accent
                               )}
                             >
-                              <Icon className="w-4 h-4" />
+                              <ProgramIcon icon={prog.icon} className="w-4 h-4" />
                             </div>
                             <div className="flex-1 min-w-0">
                               <p className="text-sm font-bold text-brand-black group-hover:text-brand-orange transition-colors">

@@ -4,9 +4,11 @@ import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { fetchProgramList } from "@/lib/programs";
 import { DonateModalProvider } from "@/context/DonateModalContext";
 import DonateModal from "@/components/ui/DonateModal";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
+import LiveContentRefresh from "@/components/LiveContentRefresh";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -19,7 +21,7 @@ export const metadata: Metadata = {
     "Bridge of Hope empowers vulnerable communities through education, old age care, orphanage support, medical assistance, and social service.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -62,13 +64,14 @@ export default function RootLayout({
         className={`${inter.className} min-h-screen flex flex-col bg-white text-brand-black antialiased selection:bg-brand-red selection:text-white`}
       >
         <DonateModalProvider>
-          <Navbar />
+          <Navbar programList={await fetchProgramList()} />
           <div className="flex-1 flex flex-col" suppressHydrationWarning>
             {children}
           </div>
           <Footer />
           <DonateModal />
           <WhatsAppButton />
+          <LiveContentRefresh />
         </DonateModalProvider>
 
         {/* Razorpay Checkout SDK — loaded lazily, only when a payment page is visited */}
