@@ -6,6 +6,7 @@ import Link from "next/link";
 import SectionLabel from "@/components/ui/SectionLabel";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { FiCalendar, FiArrowRight } from "react-icons/fi";
+import { SITE_IMAGES } from '@/lib/images';
 
 const articles = [
   {
@@ -16,7 +17,7 @@ const articles = [
     date: "Sep 28, 2026",
     category: "Community Care",
     image:
-      "https://images.unsplash.com/photo-1541544741938-0af808871cc0?w=600&q=80",
+      SITE_IMAGES.communityWater,
   },
   {
     slug: "digital-classrooms",
@@ -26,7 +27,7 @@ const articles = [
     date: "Aug 15, 2026",
     category: "Education",
     image:
-      "https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=600&q=80",
+      SITE_IMAGES.educationClassroom,
   },
   {
     slug: "orphan-dreams",
@@ -36,7 +37,7 @@ const articles = [
     date: "Jul 10, 2026",
     category: "Stories of Hope",
     image:
-      "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&q=80",
+      SITE_IMAGES.childrenSmiling,
   },
 ];
 

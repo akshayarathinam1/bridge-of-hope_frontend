@@ -3,55 +3,56 @@
 import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 import { FiChevronLeft, FiChevronRight, FiInstagram } from "react-icons/fi";
+import { SITE_IMAGES } from '@/lib/images';
 
 const galleryPhotos = [
   {
-    src: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&q=80",
+    src: SITE_IMAGES.childrenSmiling,
     alt: "Smiling children receiving education kits",
     caption: "Education Support",
   },
   {
-    src: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=600&q=80",
+    src: SITE_IMAGES.primaryClass,
     alt: "Children in primary school classroom",
     caption: "Rural Classroom",
   },
   {
-    src: "https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=600&q=80",
+    src: SITE_IMAGES.educationClassroom,
     alt: "Volunteers community hands together",
     caption: "Community Relief",
   },
   {
-    src: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80",
+    src: SITE_IMAGES.medicalCamp,
     alt: "Elderly medical checkup camp",
     caption: "Senior Health Camp",
   },
   {
-    src: "https://images.unsplash.com/photo-1541544741938-0af808871cc0?w=600&q=80",
+    src: SITE_IMAGES.communityWater,
     alt: "Clean water drinking facility",
     caption: "Clean Water Station",
   },
   {
-    src: "https://images.unsplash.com/photo-1471897488648-5eae4ac6686b?w=600&q=80",
+    src: SITE_IMAGES.elderVolunteer,
     alt: "Joyful community gathering",
     caption: "Joy & Togetherness",
   },
   {
-    src: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&q=80",
+    src: SITE_IMAGES.childrenSmiling,
     alt: "Emergency nutrition and food package distribution",
     caption: "Hot Meals Drive",
   },
   {
-    src: "https://images.unsplash.com/photo-1524069290683-0457abfe42c3?w=600&q=80",
+    src: SITE_IMAGES.childrenGroup,
     alt: "Young girl learning in community library",
     caption: "Girls' Education",
   },
   {
-    src: "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=600&q=80",
+    src: SITE_IMAGES.volunteersAid,
     alt: "Humanitarian volunteer support",
     caption: "Hope in Action",
   },
   {
-    src: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=600&q=80",
+    src: SITE_IMAGES.volunteerTeam,
     alt: "Volunteers team holding hands",
     caption: "Partner With Us",
   },

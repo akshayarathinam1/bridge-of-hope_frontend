@@ -4,6 +4,7 @@ import type { FAQ } from "@/types/api";
 import SectionLabel from "@/components/ui/SectionLabel";
 import SectionHeading from "@/components/ui/SectionHeading";
 import FaqAccordion from "./FaqAccordion";
+import { SITE_IMAGES } from '@/lib/images';
 
 /* ─── Fallback data shown when backend is unreachable ─────────────────────── */
 const FALLBACK: FAQ[] = [
@@ -53,7 +54,7 @@ export default async function FaqSection() {
           <div className="lg:col-span-5">
             <div className="relative rounded-3xl overflow-hidden shadow-xl sm:shadow-2xl border-4 border-white aspect-[16/10] sm:aspect-[4/5] max-w-sm mx-auto lg:max-w-none">
               <Image
-                src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=700&q=85"
+                src={SITE_IMAGES.childrenSmiling}
                 alt="Bridge of Hope children and community supported by volunteers"
                 fill
                 className="object-cover"

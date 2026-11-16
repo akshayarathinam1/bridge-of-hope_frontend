@@ -126,3 +126,27 @@ body {
     font-weight: 600;
   }
 }
+
+/*
+ * Focal points for the site photos in public/assets (see src/lib/images.ts).
+ * Photos are cropped with object-cover into boxes of many shapes (wide banners, tall cards,
+ * squares). These keep each photo's faces in frame instead of the default centre crop.
+ * Kept outside @layer so they win over Tailwind's object-* utilities. CMS-uploaded photos are not affected.
+ */
+img[src*="hero-children."]       { object-position: 50% 45%; }
+img[src*="children-smiling."]    { object-position: 50% 15%; }
+img[src*="education-classroom."] { object-position: 50% 40%; }
+img[src*="medical-camp."]        { object-position: 55% 25%; }
+img[src*="volunteers-aid."]      { object-position: 50% 25%; }
+img[src*="elderly-care."]        { object-position: 40% 25%; }
+img[src*="community-water."]     { object-position: 50% 55%; }
+img[src*="elder-volunteer."]     { object-position: 50% 50%; }
+img[src*="volunteer-group."]     { object-position: 50% 40%; }
+img[src*="primary-class."]       { object-position: 50% 50%; }
+img[src*="child-studying."]      { object-position: 50% 35%; }
+img[src*="health-worker."]       { object-position: 75% 20%; }
+img[src*="volunteer-team."]      { object-position: 50% 30%; }
+img[src*="community-meeting."]   { object-position: 50% 65%; }
+img[src*="about-hero."]          { object-position: 50% 70%; }
+img[src*="children-group."]      { object-position: 50% 40%; }
+img[src*="portrait-"]            { object-position: 50% 30%; }

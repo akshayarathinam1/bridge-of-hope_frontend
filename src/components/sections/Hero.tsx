@@ -6,6 +6,7 @@ import Button from "@/components/ui/Button";
 import { FiArrowUpRight } from "react-icons/fi";
 import { splitHighlight } from "@/lib/content";
 import type { HeroSection } from "@/types/api";
+import { SITE_IMAGES } from '@/lib/images';
 
 /* Shown until the dashboard's Site text → Banner is filled in (or if the API is down). */
 const DEFAULT_HERO = {
@@ -14,7 +15,7 @@ const DEFAULT_HERO = {
     "Every act of kindness has the power to change a life. We work to support children, senior citizens, families, and communities through education, healthcare, care, and social service.",
   cta_text: "Donate Now",
   cta_link: "/donate",
-  background_image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1920&q=85",
+  background_image: SITE_IMAGES.hero,
 };
 
 /** Home page banner. Headline, line, button and photo come from Site text → Banner. */
@@ -37,8 +38,12 @@ export default function Hero({ hero }: { hero?: HeroSection | null }) {
           src={background}
           alt=""
           fill
+          sizes="100vw"
           className="object-cover object-center opacity-85"
           priority
+          // Our own hero photo in public/assets is already resized and compressed, so serve it
+          // directly; going through the image optimizer delayed it and left the banner empty.
+          unoptimized={background.startsWith("/assets/")}
         />
         {/* Blue mixed with white gradient overlays with reduced opacity */}
         <div suppressHydrationWarning className="absolute inset-0 bg-gradient-to-r from-[#222A59]/75 via-[#2e3870]/50 to-white/20" />

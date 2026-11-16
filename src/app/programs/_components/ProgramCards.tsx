@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FiArrowUpRight } from 'react-icons/fi';
 import ProgramIcon from '@/components/ui/ProgramIcon';
-import { DEFAULT_PROGRAM_EXTRAS, PROGRAM_EXTRAS } from '@/lib/programs';
+import { programImage } from '@/lib/programs';
 import type { ProgramListItem } from '@/types/api';
 
 /* Shared card UI ─────────────────────────────────────────────────────────── */
@@ -25,9 +25,8 @@ function ProgramCard({ prog, index }: { prog: ProgramListItem; index: number }) 
         {/* Image */}
         <div className="relative h-56 sm:h-60 overflow-hidden flex-shrink-0">
           <Image
-            // The dashboard's cover photo; without one, the program's own stock photo.
-            src={prog.cover_image || (PROGRAM_EXTRAS[prog.slug] ?? DEFAULT_PROGRAM_EXTRAS).image}
-            alt={prog.name}
+            src={programImage(prog.slug, prog.cover_image).src}
+            alt={programImage(prog.slug, prog.cover_image).alt || prog.name}
             fill
             className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"

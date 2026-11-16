@@ -4,6 +4,7 @@
  */
 import { apiFetch } from '@/lib/api';
 import type { ProgramListItem } from '@/types/api';
+import { SITE_IMAGES } from '@/lib/images';
 
 /** Seconds the site caches program content, so dashboard edits show within about a minute. */
 export const PROGRAM_REVALIDATE = 60;
@@ -67,7 +68,7 @@ export const PROGRAM_EXTRAS: Record<string, ProgramExtras> = {
       'Educational resources and essential supplies',
       "Encouraging children's growth and development",
     ],
-    image: 'https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=900&q=85',
+    image: SITE_IMAGES.educationClassroom,
     imageAlt: 'Children learning together in a bright classroom',
     donateLabel: 'Support Education',
     cta: {
@@ -82,7 +83,7 @@ export const PROGRAM_EXTRAS: Record<string, ProgramExtras> = {
       "Children's well-being and development",
       'A caring and supportive environment',
     ],
-    image: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=900&q=85',
+    image: SITE_IMAGES.childrenSmiling,
     imageAlt: 'Happy children smiling at a community care centre',
     donateLabel: 'Support Child and Orphan Care',
     cta: {
@@ -97,8 +98,8 @@ export const PROGRAM_EXTRAS: Record<string, ProgramExtras> = {
       'Care, comfort, and companionship',
       'Promoting dignity and well-being',
     ],
-    image: 'https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=900&q=85',
-    imageAlt: 'Caregiver gently holding the hand of an elderly person',
+    image: SITE_IMAGES.elderlyCare,
+    imageAlt: 'Smiling elderly woman in a red headscarf',
     donateLabel: 'Support Elderly Care',
     cta: {
       lead: 'Let Care',
@@ -112,8 +113,8 @@ export const PROGRAM_EXTRAS: Record<string, ProgramExtras> = {
       'Health awareness and community initiatives',
       'Support for essential healthcare needs',
     ],
-    image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=900&q=85',
-    imageAlt: 'Healthcare worker providing medical assistance to a patient',
+    image: SITE_IMAGES.medicalCamp,
+    imageAlt: 'Community health worker recording details on a tablet',
     donateLabel: 'Support Medical Care',
     cta: {
       lead: 'Help Make Healthcare',
@@ -127,8 +128,8 @@ export const PROGRAM_EXTRAS: Record<string, ProgramExtras> = {
       'Essential community assistance',
       'Promoting kindness and social responsibility',
     ],
-    image: 'https://images.unsplash.com/photo-1541544741938-0af808871cc0?w=900&q=85',
-    imageAlt: 'Volunteers distributing food and relief packages to community members',
+    image: SITE_IMAGES.communityWater,
+    imageAlt: 'Woman carrying water past village homes with children',
     donateLabel: 'Support Our Mission',
     cta: {
       lead: 'Be the Reason',
@@ -138,10 +139,22 @@ export const PROGRAM_EXTRAS: Record<string, ProgramExtras> = {
   },
 };
 
+/**
+ * Photo for a program card or page. The five built-in programs always use their placeholder
+ * photo from public/assets (see PROGRAM_EXTRAS); a program added later in the dashboard uses
+ * its uploaded cover photo, or the default placeholder if it has none.
+ */
+export function programImage(slug: string, coverImage?: string | null): { src: string; alt: string } {
+  const extras = PROGRAM_EXTRAS[slug];
+  if (extras) return { src: extras.image, alt: extras.imageAlt };
+  if (coverImage) return { src: coverImage, alt: '' };
+  return { src: DEFAULT_PROGRAM_EXTRAS.image, alt: DEFAULT_PROGRAM_EXTRAS.imageAlt };
+}
+
 /** For programs added in the dashboard, which have no design text of their own. */
 export const DEFAULT_PROGRAM_EXTRAS: ProgramExtras = {
   focusAreas: [],
-  image: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=900&q=85',
+  image: SITE_IMAGES.childrenSmiling,
   imageAlt: '',
   donateLabel: 'Donate Now',
   cta: {

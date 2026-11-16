@@ -20,6 +20,7 @@ import {
   FiCheckCircle,
 } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa6";
+import { SITE_IMAGES } from '@/lib/images';
 
 const CAUSES = [
   { id: "child-education", label: "Child Education" },
@@ -99,7 +100,7 @@ export default function DonationImpactCard({ embedded = false }: DonationImpactC
       {/* ── Absolute Hero-matched blue + white background — covers top ~45% ── */}
       <div className="absolute inset-x-0 top-0 h-[45%] min-h-[260px] bg-[#032a6a] z-0 overflow-hidden">
         <Image
-          src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1600&q=85"
+          src={SITE_IMAGES.childrenSmiling}
           alt="Community background"
           fill
           className="object-cover object-center opacity-85"
@@ -739,7 +740,7 @@ export default function DonationImpactCard({ embedded = false }: DonationImpactC
           {/* ── Right Column: Hero image with torn brush edge (col-span-5) ── */}
           <div className="lg:col-span-5 relative min-h-[340px] lg:min-h-0 overflow-hidden bg-gray-100 hidden sm:block">
             <Image
-              src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=900&q=85"
+              src={SITE_IMAGES.volunteersAid}
               alt="Smiling child receiving support — Bridge of Hope"
               fill
               className="object-cover object-center"

@@ -4,24 +4,25 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { FiShare2 } from "react-icons/fi";
 import SectionLabel from "@/components/ui/SectionLabel";
+import { SITE_IMAGES } from '@/lib/images';
 
 const teamMembers = [
   {
     name: "Dr. Andrew Smith",
     role: "Founder & Managing Trustee",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80",
+    image: SITE_IMAGES.portraitMan1,
     bio: "Passionate about grassroots equity, Dr. Smith leads Bridge of Hope with over 15 years of social service leadership.",
   },
   {
     name: "Ethan Matthew",
     role: "Director of Field Operations",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80",
+    image: SITE_IMAGES.portraitMan2,
     bio: "Supervising humanitarian logistics, community outreach drives, and rural relief distribution.",
   },
   {
     name: "Samuel Lucas",
     role: "Healthcare & Welfare Lead",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80",
+    image: SITE_IMAGES.portraitWoman2,
     bio: "Coordinating free medical camps, vision screenings, and elderly hospice healthcare programs.",
   },
 ];

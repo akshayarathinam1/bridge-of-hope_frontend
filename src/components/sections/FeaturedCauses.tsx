@@ -2,6 +2,7 @@ import { apiFetch } from "@/lib/api";
 import type { Paginated, Campaign } from "@/types/api";
 import SectionLabel from "@/components/ui/SectionLabel";
 import FeaturedCausesCarousel from "./FeaturedCausesCarousel";
+import { SITE_IMAGES } from '@/lib/images';
 
 /* ─── Fallback data shown when backend is unreachable ─────────────────────── */
 const FALLBACK: Campaign[] = [
@@ -12,7 +13,7 @@ const FALLBACK: Campaign[] = [
     description:
       "Help provide children with the resources and opportunities they need to continue their education and build their future.",
     cover_image:
-      "https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=600&q=80",
+      SITE_IMAGES.educationClassroom,
     raised_inr: 3800000,
     goal_inr: 5000000,
     progress_percent: 76,
@@ -27,7 +28,7 @@ const FALLBACK: Campaign[] = [
     description:
       "Help provide essential care, comfort, and support to elderly people who may be living without adequate assistance.",
     cover_image:
-      "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=600&q=80",
+      SITE_IMAGES.elderlyCare,
     raised_inr: 6400000,
     goal_inr: 8000000,
     progress_percent: 80,
@@ -42,7 +43,7 @@ const FALLBACK: Campaign[] = [
     description:
       "Your support can help individuals and families facing medical needs access essential healthcare assistance.",
     cover_image:
-      "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80",
+      SITE_IMAGES.medicalCamp,
     raised_inr: 4200000,
     goal_inr: 5000000,
     progress_percent: 84,
@@ -57,7 +58,7 @@ const FALLBACK: Campaign[] = [
     description:
       "Help create safer, more supportive environments where children can grow, learn, and look forward to a brighter future.",
     cover_image:
-      "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&q=80",
+      SITE_IMAGES.childrenSmiling,
     raised_inr: 7800000,
     goal_inr: 9000000,
     progress_percent: 87,

@@ -15,6 +15,7 @@ import {
   PROGRAM_REVALIDATE,
   donateHrefFor,
   fetchProgramList,
+  programImage,
 } from '@/lib/programs';
 import type { Program } from '@/types/api';
 
@@ -70,6 +71,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
   if (!program) return notFound();
 
   const extras = PROGRAM_EXTRAS[program.slug] ?? DEFAULT_PROGRAM_EXTRAS;
+  const photo = programImage(program.slug, program.cover_image);
   const donateHref = donateHrefFor(program.slug);
   const [lead, highlight] = splitHeadline(program.tagline || program.name);
   const stats = program.stats ?? [];
@@ -154,8 +156,8 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
             <div className="relative">
               <div className="relative h-[400px] sm:h-[500px] w-full rounded-3xl overflow-hidden shadow-2xl">
                 <Image
-                  src={program.cover_image || extras.image}
-                  alt={program.cover_image ? program.name : extras.imageAlt || program.name}
+                  src={photo.src}
+                  alt={photo.alt || program.name}
                   fill
                   priority
                   className="object-cover"

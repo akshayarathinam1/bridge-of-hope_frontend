@@ -5,6 +5,7 @@ import Image from "next/image";
 import SectionLabel from "@/components/ui/SectionLabel";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { FaQuoteLeft } from "react-icons/fa";
+import { SITE_IMAGES } from '@/lib/images';
 
 const testimonials = [
   {
@@ -13,7 +14,7 @@ const testimonials = [
     name: "Dr. Elizabeth Joe",
     role: "Medical Volunteer & Donor",
     avatar:
-      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&q=80",
+      SITE_IMAGES.portraitWoman1,
   },
   {
     quote:
@@ -21,7 +22,7 @@ const testimonials = [
     name: "Esther Howard",
     role: "Headmistress, Govt School",
     avatar:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&q=80",
+      SITE_IMAGES.portraitMan1,
   },
   {
     quote:
@@ -29,7 +30,7 @@ const testimonials = [
     name: "Albert Flores",
     role: "CSR Partner, Tech Solutions",
     avatar:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&q=80",
+      SITE_IMAGES.portraitMan2,
   },
 ];
 

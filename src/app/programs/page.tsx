@@ -10,6 +10,7 @@ import type { ProgramListItem, ImpactStat } from '@/types/api';
 import { FiArrowUpRight } from 'react-icons/fi';
 import ProgramCards from './_components/ProgramCards';
 import ProgramIcon from '@/components/ui/ProgramIcon';
+import { SITE_IMAGES } from '@/lib/images';
 
 /* Programs come from the dashboard; refresh about once a minute. */
 export const revalidate = 60;
@@ -20,7 +21,7 @@ const FALLBACK_PROGRAMS: ProgramListItem[] = [
     slug: 'education',
     name: 'Education',
     tagline: 'Supporting learning and creating opportunities for a brighter future.',
-    cover_image: 'https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=800&q=85',
+    cover_image: SITE_IMAGES.educationClassroom,
     icon: 'FiBookOpen',
     is_active: true,
     display_order: 1,
@@ -29,7 +30,7 @@ const FALLBACK_PROGRAMS: ProgramListItem[] = [
     slug: 'child-orphan-care',
     name: 'Child and Orphan Care',
     tagline: "Promoting children's well-being through care, support, and compassion.",
-    cover_image: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=85',
+    cover_image: SITE_IMAGES.childrenSmiling,
     icon: 'FiHome',
     is_active: true,
     display_order: 2,
@@ -38,7 +39,7 @@ const FALLBACK_PROGRAMS: ProgramListItem[] = [
     slug: 'elderly-care',
     name: 'Elderly Care',
     tagline: 'Helping older adults live with dignity, comfort, and care.',
-    cover_image: 'https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=800&q=85',
+    cover_image: SITE_IMAGES.elderlyCare,
     icon: 'FiHeart',
     is_active: true,
     display_order: 3,
@@ -47,7 +48,7 @@ const FALLBACK_PROGRAMS: ProgramListItem[] = [
     slug: 'medical-support',
     name: 'Medical Support',
     tagline: 'Helping people access essential healthcare and medical assistance.',
-    cover_image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=85',
+    cover_image: SITE_IMAGES.medicalCamp,
     icon: 'FiActivity',
     is_active: true,
     display_order: 4,
@@ -56,7 +57,7 @@ const FALLBACK_PROGRAMS: ProgramListItem[] = [
     slug: 'social-services',
     name: 'Social Service',
     tagline: 'Extending a helping hand to individuals and communities in need.',
-    cover_image: 'https://images.unsplash.com/photo-1541544741938-0af808871cc0?w=800&q=85',
+    cover_image: SITE_IMAGES.communityWater,
     icon: 'FiUsers',
     is_active: true,
     display_order: 5,
@@ -128,7 +129,7 @@ export default async function ProgramsPage() {
       <section className="py-20 sm:py-24 bg-[#222A59] text-white relative overflow-hidden" suppressHydrationWarning>
         <div className="absolute inset-0 z-0 pointer-events-none" suppressHydrationWarning>
           <Image
-            src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1920&q=85"
+            src={SITE_IMAGES.childrenSmiling}
             alt="Bridge of Hope community impact"
             fill
             className="object-cover opacity-25"

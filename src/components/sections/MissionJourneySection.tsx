@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { FiCheckCircle, FiArrowUpRight } from "react-icons/fi";
 import Link from "next/link";
 import SectionLabel from "@/components/ui/SectionLabel";
+import { SITE_IMAGES } from '@/lib/images';
 
 const missionPoints = [
   "Empowering young minds through quality education, modern kits, and tuition support.",
@@ -29,7 +30,7 @@ export default function MissionJourneySection() {
             {/* Main curved image container */}
             <div className="relative h-[360px] sm:h-[420px] rounded-[36px] sm:rounded-[48px] overflow-hidden shadow-2xl border-4 border-gray-100 group">
               <Image
-                src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=800&q=80"
+                src={SITE_IMAGES.volunteersAid}
                 alt="Volunteers and community members"
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"

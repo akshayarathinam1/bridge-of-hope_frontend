@@ -28,6 +28,7 @@ import {
   FiTool,
   FiVolume2,
 } from "react-icons/fi";
+import { SITE_IMAGES } from '@/lib/images';
 
 /* Shown until the dashboard's Site text → About page → Values is filled in. */
 const DEFAULT_VALUES = [
@@ -141,7 +142,7 @@ export default function AboutContent({ about, team }: { about: AboutText; team: 
                 {/* Main large photo */}
                 <div className="absolute left-0 top-0 w-[78%] h-[340px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white group">
                   <Image
-                    src={story?.image || "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=85"}
+                    src={story?.image || SITE_IMAGES.childrenSmiling}
                     alt={story?.image ? "" : "Smiling children receiving community aid"}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
@@ -152,7 +153,7 @@ export default function AboutContent({ about, team }: { about: AboutText; team: 
                 {/* Overlapping secondary photo */}
                 <div className="absolute right-0 bottom-4 w-[65%] h-[240px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white group z-10">
                   <Image
-                    src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=700&q=85"
+                    src={SITE_IMAGES.volunteersAid}
                     alt="Elderly care and companionship"
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
@@ -205,25 +206,25 @@ export default function AboutContent({ about, team }: { about: AboutText; team: 
                 icon: FiBookOpen,
                 title: "Child Education",
                 desc: "A child may need support to continue their education.",
-                image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=500&q=80",
+                image: SITE_IMAGES.childStudying,
               },
               {
                 icon: FiHeart,
                 title: "Elderly Care",
                 desc: "An elderly person may need care and companionship.",
-                image: "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=500&q=80",
+                image: SITE_IMAGES.elderlyCare,
               },
               {
                 icon: FiActivity,
                 title: "Medical Relief",
                 desc: "A family may struggle to meet an unexpected medical need.",
-                image: "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=500&q=80",
+                image: SITE_IMAGES.healthWorker,
               },
               {
                 icon: FiUsers,
                 title: "Community Aid",
                 desc: "A community may need support during a difficult time.",
-                image: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=500&q=80",
+                image: SITE_IMAGES.volunteerGroup,
               },
             ].map((item, idx) => (
               <motion.div
@@ -269,7 +270,7 @@ export default function AboutContent({ about, team }: { about: AboutText; team: 
             {/* Background Image & Hero-matched overlays */}
             <div className="absolute inset-0 z-0 pointer-events-none">
               <Image
-                src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=1200&q=80"
+                src={SITE_IMAGES.volunteerTeam}
                 alt="Community standing together in solidarity"
                 fill
                 className="object-cover object-center opacity-40"
@@ -375,7 +376,7 @@ export default function AboutContent({ about, team }: { about: AboutText; team: 
               {/* Background Image & Hero-matched overlays */}
               <div className="absolute inset-0 z-0 pointer-events-none">
                 <Image
-                  src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=1200&q=80"
+                  src={SITE_IMAGES.educationClassroom}
                   alt="Bridge of Hope Vision for a better future"
                   fill
                   className="object-cover object-center opacity-40 group-hover:scale-105 transition-transform duration-700"
@@ -411,7 +412,7 @@ export default function AboutContent({ about, team }: { about: AboutText; team: 
                 {/* Supporting photo thumbnail row */}
                 <div className="relative h-44 rounded-2xl overflow-hidden border border-white/20 shadow-md">
                   <Image
-                    src={vision?.image || "https://images.unsplash.com/photo-1542810634-71277d95dcbb?w=700&q=80"}
+                    src={vision?.image || SITE_IMAGES.communityMeeting}
                     alt={vision?.image ? "" : "Community learning together with hope"}
                     fill
                     className="object-cover opacity-85 group-hover:scale-105 transition-transform duration-700"
@@ -461,35 +462,35 @@ export default function AboutContent({ about, team }: { about: AboutText; team: 
                 title: "Education",
                 icon: FiBookOpen,
                 desc: "We believe education can open doors to opportunities and transform lives. We support children and young people with educational resources and assistance wherever possible.",
-                image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&q=80",
+                image: SITE_IMAGES.childStudying,
                 tag: "Learning & Future",
               },
               {
                 title: "Child Care",
                 icon: FiSmile,
                 desc: "Every child deserves safety, care, education, and the opportunity to grow in a supportive environment. We work to provide support to children who need it most.",
-                image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&q=80",
+                image: SITE_IMAGES.childrenSmiling,
                 tag: "Safety & Dignity",
               },
               {
                 title: "Elderly Care",
                 icon: FiHeart,
                 desc: "We believe growing older should come with dignity, care, and respect. Our initiatives aim to support elderly people with essential needs and compassionate care.",
-                image: "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=600&q=80",
+                image: SITE_IMAGES.elderlyCare,
                 tag: "Comfort & Respect",
               },
               {
                 title: "Medical Support",
                 icon: FiActivity,
                 desc: "Medical needs can place a significant burden on individuals and families. We work to provide assistance for essential healthcare needs wherever our resources allow.",
-                image: "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=600&q=80",
+                image: SITE_IMAGES.healthWorker,
                 tag: "Essential Health",
               },
               {
                 title: "Social Service",
                 icon: FiUsers,
                 desc: "We respond to community needs through various social welfare initiatives, bringing people and resources together to support those facing difficult circumstances.",
-                image: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=600&q=80",
+                image: SITE_IMAGES.volunteerGroup,
                 tag: "Welfare & Unity",
               },
             ].map((item, idx) => (
@@ -638,7 +639,7 @@ export default function AboutContent({ about, team }: { about: AboutText; team: 
         {/* Background Image & Hero-matched overlays */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <Image
-            src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1920&q=85"
+            src={SITE_IMAGES.aboutHero}
             alt="Bridge of Hope approach in community"
             fill
             className="object-cover object-center opacity-40"
@@ -856,7 +857,7 @@ export default function AboutContent({ about, team }: { about: AboutText; team: 
             {/* Background Image & Hero-matched overlays */}
             <div className="absolute inset-0 z-0 pointer-events-none">
               <Image
-                src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=1600&q=80"
+                src={SITE_IMAGES.volunteerGroup}
                 alt="Bridge of Hope community unity and compassion"
                 fill
                 className="object-cover object-center opacity-40"

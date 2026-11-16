@@ -5,6 +5,7 @@ import Image from "next/image";
 import Button from "@/components/ui/Button";
 import SectionLabel from "@/components/ui/SectionLabel";
 import { FiArrowUpRight, FiHeart } from "react-icons/fi";
+import { SITE_IMAGES } from '@/lib/images';
 
 const impactTiers = [
   { amount: "₹500", label: "School Kits & Nutrition" },
@@ -29,7 +30,7 @@ export default function EqualOpportunity() {
               {/* Back tilted image */}
               <div className="relative w-full h-[280px] sm:h-[380px] md:h-[440px] rounded-3xl overflow-hidden shadow-2xl rotate-0 sm:rotate-[-2deg] hover:rotate-0 transition-transform duration-500 border-4 border-white bg-gray-100 group">
                 <Image
-                  src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=85"
+                  src={SITE_IMAGES.childrenSmiling}
                   alt="Child with a bright hopeful smile"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"

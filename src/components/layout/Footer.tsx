@@ -28,11 +28,12 @@ const socials = [
   { icon: FiYoutube, href: "#", label: "YouTube" },
 ];
 
+/* Contact details are the same as on the Contact page (src/app/contact/page.tsx). */
 const DEFAULT_SITE_INFO: SiteInfo = {
   name: "Bridge of Hope",
   email: "info@bhfoundations.com",
   phone: "+91 98849 35959",
-  address: "No 58/113, 1st Floor, East Madha Church Street, Royapuram, Chennai — 600013, Tamil Nadu, India",
+  address: "No 58/113, 1st Floor, East Madha Church Street, Royapuram, Chennai – 600013, Tamil Nadu, India",
   pan: "AABTB1234F",
   registration_80g: "CIT(E)/CHN/80G/2020-21/1234",
   registration_12a: "CIT(E)/CHN/12A/2020-21/5678",
@@ -46,7 +47,14 @@ export default async function Footer() {
   try {
     const data = await apiFetch<SiteInfo>('/content/site-info/', {}, 300);
     if (data && data.name) {
-      siteInfo = data;
+      // Phone, email and address always match the Contact page; the backend's ORG_* settings
+      // can still hold example placeholders (e.g. "+91-XXXXXXXXXX").
+      siteInfo = {
+        ...data,
+        email: DEFAULT_SITE_INFO.email,
+        phone: DEFAULT_SITE_INFO.phone,
+        address: DEFAULT_SITE_INFO.address,
+      };
     }
   } catch {
     // Graceful fallback to default site info
@@ -208,16 +216,9 @@ export default async function Footer() {
 
       {/* Bottom Bar with white tint */}
       <div className="border-t border-white/20 bg-white/5 backdrop-blur-sm">
-        <div className="container-site py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+        <div className="container-site py-5 flex items-center justify-center text-center">
           <p className="text-xs text-white/75">
             &copy; {new Date().getFullYear()} {siteInfo.name}. All rights reserved.
-          </p>
-          <p className="text-xs text-white/75 flex flex-wrap items-center justify-center sm:justify-end gap-2">
-            <span>NITI Aayog Reg. No: <strong className="text-white">{siteInfo.darpan_id}</strong></span>
-            <span className="hidden sm:inline">·</span>
-            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-white/15 text-white text-[11px] font-bold border border-white/20">
-              80G Tax Benefit Applicable
-            </span>
           </p>
         </div>
       </div>

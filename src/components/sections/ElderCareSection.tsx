@@ -5,6 +5,7 @@ import Image from "next/image";
 import SectionLabel from "@/components/ui/SectionLabel";
 import Button from "@/components/ui/Button";
 import { FiHeart, FiEye, FiPhoneCall } from "react-icons/fi";
+import { SITE_IMAGES } from '@/lib/images';
 
 export default function ElderCareSection() {
   return (
@@ -21,7 +22,7 @@ export default function ElderCareSection() {
           >
             <div className="relative mx-auto max-w-md lg:max-w-none rounded-3xl overflow-hidden shadow-2xl border-4 border-white aspect-[4/3] sm:aspect-[16/11]">
               <Image
-                src="https://images.unsplash.com/photo-1471897488648-5eae4ac6686b?w=800&q=85"
+                src={SITE_IMAGES.elderVolunteer}
                 alt="Volunteer smiling with elderly resident"
                 fill
                 className="object-cover"

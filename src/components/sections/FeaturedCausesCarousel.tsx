@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import type { Campaign } from "@/types/api";
+import { SITE_IMAGES } from '@/lib/images';
 
 /* ─── Helper ─────────────────────────────────────────────────────────────── */
 
@@ -78,7 +79,7 @@ export default function FeaturedCausesCarousel({
                 <Image
                   src={
                     campaign.cover_image ||
-                    "https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=600&q=80"
+                    SITE_IMAGES.educationClassroom
                   }
                   alt={campaign.name}
                   fill

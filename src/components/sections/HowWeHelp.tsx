@@ -16,6 +16,7 @@ import {
   FiArrowRight,
   FiArrowUpRight,
 } from "react-icons/fi";
+import { SITE_IMAGES } from '@/lib/images';
 
 const services = [
   {
@@ -27,7 +28,7 @@ const services = [
     description:
       "We help children and young people access educational opportunities, learning resources, and the support they need to build a better future.",
     image:
-      "https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=900&q=85",
+      SITE_IMAGES.educationClassroom,
     imageAlt: "Children actively learning in school",
     iconColor: "text-brand-orange",
     bgColor: "bg-orange-50",
@@ -50,7 +51,7 @@ const services = [
     description:
       "We support children who need care, protection, education, and a safe environment to grow with confidence and dignity.",
     image:
-      "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=900&q=85",
+      SITE_IMAGES.childrenSmiling,
     imageAlt: "Smiling children receiving warm community support",
     iconColor: "text-brand-orange",
     bgColor: "bg-orange-50",
@@ -73,7 +74,7 @@ const services = [
     description:
       "We provide support and care for elderly people, helping them live with dignity, comfort, and companionship.",
     image:
-      "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=900&q=85",
+      SITE_IMAGES.elderlyCare,
     imageAlt: "Caring hands supporting an elderly woman with warmth",
     iconColor: "text-brand-orange",
     bgColor: "bg-orange-50",
@@ -96,7 +97,7 @@ const services = [
     description:
       "We help individuals and families facing medical challenges by supporting essential healthcare and medical needs.",
     image:
-      "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=900&q=85",
+      SITE_IMAGES.medicalCamp,
     imageAlt: "Healthcare worker offering checkup at rural camp",
     iconColor: "text-brand-orange",
     bgColor: "bg-orange-50",
@@ -119,7 +120,7 @@ const services = [
     description:
       "We work with communities to respond to essential needs and support people facing difficult circumstances.",
     image:
-      "https://images.unsplash.com/photo-1541544741938-0af808871cc0?w=900&q=85",
+      SITE_IMAGES.communityWater,
     imageAlt: "Community aid and relief distribution",
     iconColor: "text-brand-orange",
     bgColor: "bg-orange-50",

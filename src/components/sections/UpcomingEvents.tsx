@@ -3,6 +3,7 @@ import type { Paginated, Event } from "@/types/api";
 import SectionLabel from "@/components/ui/SectionLabel";
 import SectionHeading from "@/components/ui/SectionHeading";
 import UpcomingEventsCards from "./UpcomingEventsCards";
+import { SITE_IMAGES } from '@/lib/images';
 
 /* ─── Fallback data shown when backend is unreachable ─────────────────────── */
 const FALLBACK: Event[] = [
@@ -15,7 +16,7 @@ const FALLBACK: Event[] = [
     display_time: "9:00 AM – 2:00 PM",
     location: "Govt School, Tambaram, Chennai",
     cover_image:
-      "https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=600&q=80",
+      SITE_IMAGES.educationClassroom,
     status: "upcoming",
     is_featured: true,
   },
@@ -28,7 +29,7 @@ const FALLBACK: Event[] = [
     display_time: "8:30 AM – 4:00 PM",
     location: "Community Center, Kanchipuram",
     cover_image:
-      "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80",
+      SITE_IMAGES.medicalCamp,
     status: "upcoming",
     is_featured: true,
   },
@@ -41,7 +42,7 @@ const FALLBACK: Event[] = [
     display_time: "11:00 AM – 3:00 PM",
     location: "Anbagam Elders Shelter, Velachery",
     cover_image:
-      "https://images.unsplash.com/photo-1471897488648-5eae4ac6686b?w=600&q=80",
+      SITE_IMAGES.elderVolunteer,
     status: "upcoming",
     is_featured: true,
   },

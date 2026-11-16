@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FiArrowUpRight } from "react-icons/fi";
+import { SITE_IMAGES } from '@/lib/images';
 
 function HandsHeartIcon({ className = "w-14 h-14" }: { className?: string }) {
   return (
@@ -64,7 +65,7 @@ export default function CtaBanner() {
           {/* Background Image with clear exposure */}
           <div className="absolute inset-0 z-0">
             <Image
-              src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=900&q=80"
+              src={SITE_IMAGES.childrenSmiling}
               alt="Children in community"
               fill
               className="object-cover object-center opacity-85 group-hover/left:scale-105 transition-transform duration-700 ease-out"
@@ -125,7 +126,7 @@ export default function CtaBanner() {
         <div className="relative min-h-[170px] sm:min-h-[300px] lg:min-h-0 flex items-center justify-center overflow-hidden bg-neutral-900 group/center">
           {/* Background Image */}
           <Image
-            src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=900&q=80"
+            src={SITE_IMAGES.primaryClass}
             alt="Joyful child running"
             fill
             className="object-cover grayscale brightness-95 contrast-110 group-hover/center:scale-105 transition-transform duration-700 ease-out"
@@ -138,7 +139,7 @@ export default function CtaBanner() {
           {/* Background Image with Rich Brand-Red Gradient Tint */}
           <div className="absolute inset-0 z-0">
             <Image
-              src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=900&q=80"
+              src={SITE_IMAGES.educationClassroom}
               alt="Children in school"
               fill
               className="object-cover grayscale brightness-40 contrast-125 group-hover/right:scale-105 transition-transform duration-700 ease-out"

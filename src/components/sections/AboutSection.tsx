@@ -6,6 +6,7 @@ import Button from "@/components/ui/Button";
 import SectionLabel from "@/components/ui/SectionLabel";
 import { FiTarget, FiEye, FiPhone, FiArrowUpRight } from "react-icons/fi";
 import type { AboutContent } from "@/lib/content";
+import { SITE_IMAGES } from '@/lib/images';
 
 /** Home page "About Us". The Mission and Vision cards use Site text → About page → Mission / Vision. */
 export default function AboutSection({ about = {} }: { about?: AboutContent }) {
@@ -27,7 +28,7 @@ export default function AboutSection({ about = {} }: { about?: AboutContent }) {
             {/* Vertical dark brand banner strip */}
             <div className="absolute left-0 top-0 bottom-0 w-[190px] bg-brand-black rounded-2xl overflow-hidden z-0">
               <Image
-                src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&q=80"
+                src={SITE_IMAGES.childrenSmiling}
                 alt="Children in community"
                 fill
                 className="object-cover opacity-35"
@@ -48,7 +49,7 @@ export default function AboutSection({ about = {} }: { about?: AboutContent }) {
             {/* Top-center photo */}
             <div className="absolute left-[158px] top-0 w-[220px] h-[175px] rounded-2xl overflow-hidden shadow-2xl border-4 border-white z-10">
               <Image
-                src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=500&q=80"
+                src={SITE_IMAGES.educationClassroom}
                 alt="Children smiling and learning"
                 fill
                 className="object-cover"
@@ -58,7 +59,7 @@ export default function AboutSection({ about = {} }: { about?: AboutContent }) {
             {/* Center photo */}
             <div className="absolute left-[158px] top-[144px] w-[220px] h-[235px] rounded-2xl overflow-hidden shadow-2xl border-4 border-white z-10 group">
               <Image
-                src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=600&q=80"
+                src={SITE_IMAGES.volunteersAid}
                 alt="Volunteers helping children"
                 fill
                 className="object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
@@ -68,7 +69,7 @@ export default function AboutSection({ about = {} }: { about?: AboutContent }) {
             {/* Bottom-right photo */}
             <div className="absolute right-0 bottom-0 w-[205px] h-[215px] rounded-2xl overflow-hidden shadow-2xl border-4 border-white z-10">
               <Image
-                src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=500&q=80"
+                src={SITE_IMAGES.medicalCamp}
                 alt="Elder care and medical assistance"
                 fill
                 className="object-cover"
@@ -100,7 +101,7 @@ export default function AboutSection({ about = {} }: { about?: AboutContent }) {
             <div className="grid grid-cols-2 gap-3 relative">
               <div className="relative h-44 rounded-2xl overflow-hidden shadow-lg border-2 border-white">
                 <Image
-                  src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=500&q=80"
+                  src={SITE_IMAGES.educationClassroom}
                   alt="Children learning"
                   fill
                   className="object-cover"
@@ -108,7 +109,7 @@ export default function AboutSection({ about = {} }: { about?: AboutContent }) {
               </div>
               <div className="relative h-44 rounded-2xl overflow-hidden shadow-lg border-2 border-white">
                 <Image
-                  src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=600&q=80"
+                  src={SITE_IMAGES.volunteersAid}
                   alt="Volunteers helping"
                   fill
                   className="object-cover"

@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FiMapPin, FiClock } from "react-icons/fi";
 import type { Event } from "@/types/api";
+import { SITE_IMAGES } from '@/lib/images';
 
 const BADGE_COLORS = ["bg-brand-orange", "bg-brand-navy", "bg-brand-red"];
 
@@ -38,7 +39,7 @@ export default function UpcomingEventsCards({ events }: { events: Event[] }) {
             <Image
               src={
                 evt.cover_image ||
-                "https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=600&q=80"
+                SITE_IMAGES.educationClassroom
               }
               alt={evt.title}
               fill

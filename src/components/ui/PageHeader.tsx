@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { SITE_IMAGES } from '@/lib/images';
 
 interface PageHeaderProps {
   title: string;
@@ -17,7 +18,7 @@ export default function PageHeader({ title, titleHighlight, subtitle, breadcrumb
       {/* Background Image with softer contrast overlay */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1400&q=80"
+          src={SITE_IMAGES.childrenSmiling}
           alt="Bridge of Hope Community"
           fill
           priority

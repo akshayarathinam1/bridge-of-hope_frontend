@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { FiPlay, FiUsers, FiMapPin, FiHeart, FiTrendingUp } from "react-icons/fi";
+import { SITE_IMAGES } from '@/lib/images';
 
 const stats = [
   {
@@ -38,7 +39,7 @@ export default function VolunteerBanner() {
       {/* Background Image with Hero-matched blue + white gradients */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=1600&q=85"
+          src={SITE_IMAGES.educationClassroom}
           alt="Volunteers smiling together"
           fill
           className="object-cover object-center opacity-85"
