@@ -11,6 +11,7 @@ import CtaBanner from '@/components/sections/CtaBanner';
 import { apiFetch } from '@/lib/api';
 import {
   DEFAULT_PROGRAM_EXTRAS,
+  FALLBACK_PROGRAM_LINKS,
   PROGRAM_EXTRAS,
   PROGRAM_REVALIDATE,
   donateHrefFor,
@@ -25,8 +26,11 @@ export const revalidate = 60;
 async function getProgram(slug: string): Promise<Program | null> {
   try {
     return await apiFetch<Program>(`/content/programs/${slug}/`, {}, PROGRAM_REVALIDATE);
-  } catch {
-    return null; // unknown, or hidden in the dashboard
+  } catch (err) {
+    // The dashboard says the program is unknown or hidden.
+    if (err instanceof Error && err.message.startsWith('API error 404')) return null;
+    // The API is down or erroring: show the built-in text for the five core programs.
+    return FALLBACK_PROGRAM_LINKS.find((p) => p.slug === slug) ?? null;
   }
 }
 

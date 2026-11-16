@@ -28,13 +28,51 @@ export const programHref = (slug: string) => `/programs/${slug}`;
 export const donateHrefFor = (slug: string) =>
   DONATE_CAUSE[slug] ? `/donate?cause=${DONATE_CAUSE[slug]}` : '/donate';
 
-/** Shown when the API can't be reached, so the menu and footer still have links. */
+/**
+ * Shown when the API can't be reached, so the menu, footer, program cards and program pages
+ * still work. The text matches what the dashboard was seeded with.
+ */
 export const FALLBACK_PROGRAM_LINKS: ProgramListItem[] = [
-  { slug: 'education', name: 'Education', icon: 'FiBookOpen' },
-  { slug: 'child-orphan-care', name: 'Child & Orphan Care', icon: 'FiHome' },
-  { slug: 'elderly-care', name: 'Elderly Care', icon: 'FiHeart' },
-  { slug: 'medical-support', name: 'Medical Support', icon: 'FiActivity' },
-  { slug: 'social-services', name: 'Social Services', icon: 'FiUsers' },
+  {
+    slug: 'education',
+    name: 'Education',
+    icon: 'FiBookOpen',
+    tagline: 'Every Child Deserves a Chance to Learn.',
+    description:
+      'Education opens doors to opportunity, confidence, and a brighter future. We aim to support children in accessing learning opportunities and building a strong foundation for life.',
+  },
+  {
+    slug: 'child-orphan-care',
+    name: 'Child & Orphan Care',
+    icon: 'FiHome',
+    tagline: 'Every Child Deserves Care and Compassion.',
+    description:
+      'Every child deserves to feel safe, valued, and supported. We aim to support children in need by focusing on their well-being, essential needs, and opportunities for a better future.',
+  },
+  {
+    slug: 'elderly-care',
+    name: 'Elderly Care',
+    icon: 'FiHeart',
+    tagline: 'Every Elder Deserves Dignity and Respect.',
+    description:
+      'Older adults deserve care, comfort, and companionship. We aim to support elderly people in need and promote a life filled with dignity, respect, and compassion.',
+  },
+  {
+    slug: 'medical-support',
+    name: 'Medical Support',
+    icon: 'FiActivity',
+    tagline: 'Healthcare Is a Need, Not a Privilege.',
+    description:
+      "Access to healthcare can make a meaningful difference in people's lives. We aim to support individuals and families facing medical difficulties through essential assistance and community health initiatives.",
+  },
+  {
+    slug: 'social-services',
+    name: 'Social Services',
+    icon: 'FiUsers',
+    tagline: 'A Small Act of Kindness Can Create Lasting Change.',
+    description:
+      'A helping hand can bring hope when it matters most. Through social service, we aim to support individuals and families facing challenges and contribute to stronger, more caring communities.',
+  },
 ];
 
 /** Programs shown on the website (hidden ones are left out by the API), in dashboard order. */
@@ -69,7 +107,7 @@ export const PROGRAM_EXTRAS: Record<string, ProgramExtras> = {
       "Encouraging children's growth and development",
     ],
     image: SITE_IMAGES.educationClassroom,
-    imageAlt: 'Children learning together in a bright classroom',
+    imageAlt: 'Teacher reading with schoolchildren in a classroom',
     donateLabel: 'Support Education',
     cta: {
       lead: 'Be a Part of',
@@ -84,7 +122,7 @@ export const PROGRAM_EXTRAS: Record<string, ProgramExtras> = {
       'A caring and supportive environment',
     ],
     image: SITE_IMAGES.childrenSmiling,
-    imageAlt: 'Happy children smiling at a community care centre',
+    imageAlt: 'Teacher with happy, smiling children at a learning centre',
     donateLabel: 'Support Child and Orphan Care',
     cta: {
       lead: 'Together, We Can',
@@ -99,7 +137,7 @@ export const PROGRAM_EXTRAS: Record<string, ProgramExtras> = {
       'Promoting dignity and well-being',
     ],
     image: SITE_IMAGES.elderlyCare,
-    imageAlt: 'Smiling elderly woman in a red headscarf',
+    imageAlt: 'Bridge of Hope volunteer sharing a smile with an elderly woman',
     donateLabel: 'Support Elderly Care',
     cta: {
       lead: 'Let Care',

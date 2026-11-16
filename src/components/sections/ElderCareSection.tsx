@@ -23,7 +23,7 @@ export default function ElderCareSection() {
             <div className="relative mx-auto max-w-md lg:max-w-none rounded-3xl overflow-hidden shadow-2xl border-4 border-white aspect-[4/3] sm:aspect-[16/11]">
               <Image
                 src={SITE_IMAGES.elderVolunteer}
-                alt="Volunteer smiling with elderly resident"
+                alt="Volunteer with her arm around a smiling elderly woman"
                 fill
                 className="object-cover"
               />

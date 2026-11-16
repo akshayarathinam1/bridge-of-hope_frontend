@@ -52,7 +52,7 @@ const services = [
       "We support children who need care, protection, education, and a safe environment to grow with confidence and dignity.",
     image:
       SITE_IMAGES.childrenSmiling,
-    imageAlt: "Smiling children receiving warm community support",
+    imageAlt: "Teacher with smiling children in a classroom",
     iconColor: "text-brand-orange",
     bgColor: "bg-orange-50",
     accentColor: "bg-brand-orange",

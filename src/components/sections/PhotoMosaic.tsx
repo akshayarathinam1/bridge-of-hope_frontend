@@ -8,7 +8,7 @@ import { SITE_IMAGES } from '@/lib/images';
 const galleryPhotos = [
   {
     src: SITE_IMAGES.childrenSmiling,
-    alt: "Smiling children receiving education kits",
+    alt: "Teacher with smiling children in a classroom",
     caption: "Education Support",
   },
   {
@@ -33,12 +33,12 @@ const galleryPhotos = [
   },
   {
     src: SITE_IMAGES.elderVolunteer,
-    alt: "Joyful community gathering",
+    alt: "Volunteer sharing a smile with an elderly woman on a bench",
     caption: "Joy & Togetherness",
   },
   {
     src: SITE_IMAGES.childrenSmiling,
-    alt: "Emergency nutrition and food package distribution",
+    alt: "Children laughing together with their teacher",
     caption: "Hot Meals Drive",
   },
   {

@@ -143,7 +143,7 @@ export default function AboutContent({ about, team }: { about: AboutText; team: 
                 <div className="absolute left-0 top-0 w-[78%] h-[340px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white group">
                   <Image
                     src={story?.image || SITE_IMAGES.childrenSmiling}
-                    alt={story?.image ? "" : "Smiling children receiving community aid"}
+                    alt={story?.image ? "" : "Teacher sharing a laugh with smiling children"}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   />

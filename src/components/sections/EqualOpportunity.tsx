@@ -31,7 +31,7 @@ export default function EqualOpportunity() {
               <div className="relative w-full h-[280px] sm:h-[380px] md:h-[440px] rounded-3xl overflow-hidden shadow-2xl rotate-0 sm:rotate-[-2deg] hover:rotate-0 transition-transform duration-500 border-4 border-white bg-gray-100 group">
                 <Image
                   src={SITE_IMAGES.childrenSmiling}
-                  alt="Child with a bright hopeful smile"
+                  alt="Children smiling up at their teacher"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
