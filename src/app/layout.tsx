@@ -5,8 +5,6 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { fetchProgramList } from "@/lib/programs";
-import { DonateModalProvider } from "@/context/DonateModalContext";
-import DonateModal from "@/components/ui/DonateModal";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import LiveContentRefresh from "@/components/LiveContentRefresh";
 
@@ -63,16 +61,13 @@ export default async function RootLayout({
         suppressHydrationWarning
         className={`${inter.className} min-h-screen flex flex-col bg-white text-brand-black antialiased selection:bg-brand-red selection:text-white`}
       >
-        <DonateModalProvider>
-          <Navbar programList={await fetchProgramList()} />
-          <div className="flex-1 flex flex-col" suppressHydrationWarning>
-            {children}
-          </div>
-          <Footer />
-          <DonateModal />
-          <WhatsAppButton />
-          <LiveContentRefresh />
-        </DonateModalProvider>
+        <Navbar programList={await fetchProgramList()} />
+        <div className="flex-1 flex flex-col" suppressHydrationWarning>
+          {children}
+        </div>
+        <Footer />
+        <WhatsAppButton />
+        <LiveContentRefresh />
 
         {/* Razorpay Checkout SDK — loaded lazily, only when a payment page is visited */}
         <Script

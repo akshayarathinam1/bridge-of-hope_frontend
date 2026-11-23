@@ -45,16 +45,29 @@ export async function apiMutate<T>(
   extraHeaders?: Record<string, string>,
 ): Promise<{ data: T; status: number }> {
   const url = `${BASE}${path}`;
-  const res = await fetch(url, {
-    method,
-    headers: {
-      'Content-Type': 'application/json',
-      ...extraHeaders,
-    },
-    body: JSON.stringify(body),
-    cache: 'no-store',
-  });
+  const friendly = (message: string, status = 0) =>
+    ({ data: { success: false, message } as T, status });
 
-  const data = (await res.json()) as T;
-  return { data, status: res.status };
+  let res: Response;
+  try {
+    res = await fetch(url, {
+      method,
+      headers: {
+        'Content-Type': 'application/json',
+        ...extraHeaders,
+      },
+      body: JSON.stringify(body),
+      cache: 'no-store',
+    });
+  } catch {
+    return friendly("We couldn't reach our servers. Please check your internet connection and try again.");
+  }
+
+  try {
+    const data = (await res.json()) as T;
+    return { data, status: res.status };
+  } catch {
+    // Non-JSON body (e.g. a proxy or server error page)
+    return friendly('Something went wrong on our side. Please try again shortly.', res.status);
+  }
 }

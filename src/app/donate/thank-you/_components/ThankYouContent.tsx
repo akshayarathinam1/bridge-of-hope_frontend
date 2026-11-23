@@ -1,18 +1,21 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useSyncExternalStore } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import {
   FiCheckCircle,
-  FiDownload,
   FiAlertCircle,
   FiClock,
   FiArrowUpRight,
   FiHeart,
 } from 'react-icons/fi';
 import type { DonationStatusResponse } from '@/types/api';
+import { readReceiptEmail } from '@/lib/emailCheck';
+
+/* sessionStorage never changes while this page is open, so there is nothing to subscribe to. */
+const subscribeNoop = () => () => {};
 
 const API_BASE =
   process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000/api/v1';
@@ -24,11 +27,13 @@ export default function ThankYouContent() {
   const [status, setStatus] = useState<DonationStatusResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  // Read on the client only; the server render (and first hydration pass) sees null.
+  const receiptEmail = useSyncExternalStore(subscribeNoop, readReceiptEmail, () => null);
   const [pollCount, setPollCount] = useState(0);
 
   const fetchStatus = useCallback(async () => {
     if (!donationId) {
-      setError('No donation ID found in the URL.');
+      setError("We couldn't find your donation. Please check your email for a confirmation.");
       setLoading(false);
       return;
     }
@@ -44,7 +49,7 @@ export default function ThankYouContent() {
       setLoading(false);
       return data;
     } catch {
-      setError('Could not load donation details. Please contact support.');
+      setError("We couldn't load your donation details right now. Your payment is safe. Please check your email for confirmation or contact us.");
       setLoading(false);
     }
   }, [donationId]);
@@ -131,7 +136,7 @@ export default function ThankYouContent() {
   /* ── Success ──────────────────────────────────────────────────────────── */
   const amountFormatted = `₹${status.amount_inr.toLocaleString('en-IN')}`;
   const isMonthly = status.frequency === 'monthly';
-  const receiptReady = status.receipt.status === 'generated';
+  const receiptReady = status.receipt.status === 'generated' || status.receipt.status === 'sent';
   const receiptPending = status.receipt.status === 'pending';
 
   return (
@@ -190,21 +195,16 @@ export default function ThankYouContent() {
         )}
       </div>
 
-      {/* Receipt download / pending */}
-      {receiptReady && status.receipt.download_url ? (
-        <a
-          href={status.receipt.download_url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-brand-navy text-white text-sm font-bold hover:bg-brand-navy/90 transition-colors shadow-md mb-5"
-        >
-          <FiDownload className="w-4 h-4" />
-          Download 80G Receipt
-        </a>
+      {/* Receipt emailed / pending */}
+      {receiptReady ? (
+        <div className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-green-50 border border-green-200 text-green-700 text-sm font-semibold mb-5">
+          <FiCheckCircle className="w-4 h-4" />
+          {receiptEmail ? <>Your 80G receipt has been emailed to <span className="font-bold">{receiptEmail}</span></> : 'Your 80G receipt has been emailed to you.'}
+        </div>
       ) : receiptPending ? (
         <div className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-amber-50 border border-amber-200 text-amber-700 text-sm font-semibold mb-5">
           <FiClock className="w-4 h-4 animate-pulse" />
-          Your 80G receipt is being generated…
+          {receiptEmail ? <>Your 80G receipt is on its way to <span className="font-bold">{receiptEmail}</span>…</> : 'Your 80G receipt is on its way to your email…'}
         </div>
       ) : null}
 
@@ -227,7 +227,7 @@ export default function ThankYouContent() {
       </div>
 
       <p className="mt-8 text-xs text-gray-400">
-        A confirmation email has been sent. If you have any questions, please{' '}
+        Please check your inbox (and spam folder) for your receipt. If you have any questions, please{' '}
         <Link href="/contact" className="underline hover:text-brand-red">contact us</Link>.
       </p>
     </motion.div>

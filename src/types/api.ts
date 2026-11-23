@@ -273,7 +273,7 @@ export interface DonationStatusResponse {
   donor_first_name: string;
   paid_at: string | null;
   receipt: {
-    status: 'pending' | 'generated' | 'failed';
+    status: 'pending' | 'generated' | 'sent' | 'cancelled' | 'failed';
     receipt_number: string | null;
     download_url: string | null;
   };

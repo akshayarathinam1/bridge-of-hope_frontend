@@ -4,13 +4,9 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaWhatsapp } from 'react-icons/fa6';
 import { FiX } from 'react-icons/fi';
-import { useDonateModal } from '@/context/DonateModalContext';
 
 export default function WhatsAppButton() {
-  const { isOpen: isDonateModalOpen } = useDonateModal();
   const [showTooltip, setShowTooltip] = useState(true);
-
-  if (isDonateModalOpen) return null;
 
   const whatsappNumber = "919884935959";
   const defaultMessage = encodeURIComponent(

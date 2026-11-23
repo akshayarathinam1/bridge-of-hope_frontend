@@ -20,6 +20,8 @@ import {
 } from 'react-icons/fi';
 import SectionLabel from '@/components/ui/SectionLabel';
 import { apiMutate } from '@/lib/api';
+import { friendlyPaymentError, NETWORK_ERROR_MESSAGE, VERIFY_ERROR_MESSAGE } from '@/lib/paymentErrors';
+import { isValidEmail, rememberReceiptEmail, suggestEmailFix } from '@/lib/emailCheck';
 import type { CreateOrderResponse, VerifyResponse } from '@/types/api';
 
 /* ─── Program Data ──────────────────────────────────────────────────────── */
@@ -129,10 +131,14 @@ function DonationForm({
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [emailTouched, setEmailTouched] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   const amount = custom ? parseInt(custom) || 0 : selected;
+  const emailValid = isValidEmail(email);
+  const emailSuggestion = emailValid ? suggestEmailFix(email) : null;
+  const showEmailError = emailTouched && email.length > 0 && !emailValid;
   const displayAmount = amount > 0 ? `₹${amount.toLocaleString('en-IN')}` : '₹—';
 
   const handlePreset = (val: number) => { setSelected(val); setCustom(''); };
@@ -141,6 +147,10 @@ function DonationForm({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!amount || !name || !email) return;
+    if (!emailValid) {
+      setEmailTouched(true);
+      return;
+    }
     setLoading(true);
     setError('');
 
@@ -151,7 +161,7 @@ function DonationForm({
         '/donations/create-order/',
         {
           full_name: name,
-          email,
+          email: email.trim(),
           phone: phone || undefined,
           amount,
           campaign_slug: programKey,
@@ -167,7 +177,7 @@ function DonationForm({
         return;
       }
       if (!order.success) {
-        setError(order.message ?? 'Could not initiate payment. Please try again.');
+        setError(order.message ?? "We couldn't start your payment. You haven't been charged. Please try again.");
         setLoading(false);
         return;
       }
@@ -201,16 +211,21 @@ function DonationForm({
                 },
               );
               if (verify.success) {
+                rememberReceiptEmail(order.donor.email ?? email);
                 router.push(`/donate/thank-you?donation_id=${verify.donation_id ?? order.donation_id}`);
               } else {
-                setError(verify.message ?? 'Subscription verification failed. Please contact support.');
+                setError(verify.message ?? VERIFY_ERROR_MESSAGE);
                 setLoading(false);
               }
             } catch {
-              setError('Subscription verification error. Please contact support.');
+              setError(VERIFY_ERROR_MESSAGE);
               setLoading(false);
             }
           },
+        });
+        rzp.on('payment.failed', (resp) => {
+          setError(friendlyPaymentError(resp));
+          setLoading(false);
         });
         rzp.open();
       } else {
@@ -243,21 +258,26 @@ function DonationForm({
                 },
               );
               if (verify.success) {
+                rememberReceiptEmail(order.donor.email ?? email);
                 router.push(`/donate/thank-you?donation_id=${verify.donation_id ?? order.donation_id}`);
               } else {
-                setError(verify.message ?? 'Payment verification failed. Please contact support.');
+                setError(verify.message ?? VERIFY_ERROR_MESSAGE);
                 setLoading(false);
               }
             } catch {
-              setError('Payment verification error. Please contact support.');
+              setError(VERIFY_ERROR_MESSAGE);
               setLoading(false);
             }
           },
         });
+        rzp.on('payment.failed', (resp) => {
+          setError(friendlyPaymentError(resp));
+          setLoading(false);
+        });
         rzp.open();
       }
     } catch {
-      setError('Payment initiation failed. Please try again.');
+      setError(NETWORK_ERROR_MESSAGE);
       setLoading(false);
     }
   };
@@ -331,9 +351,9 @@ function DonationForm({
 
         <div className="space-y-4">
           {[
-            { label: 'Full Name', required: true, type: 'text', value: name, setter: setName, placeholder: 'Your full name' },
-            { label: 'Email Address', required: true, type: 'email', value: email, setter: setEmail, placeholder: 'you@example.com' },
-            { label: 'Phone', required: false, type: 'tel', value: phone, setter: setPhone, placeholder: '+91 98765 43210' },
+            { label: 'Full Name', required: true, type: 'text', value: name, setter: setName, placeholder: 'Your full name', autoComplete: 'name' },
+            { label: 'Email Address', required: true, type: 'email', value: email, setter: setEmail, placeholder: 'you@example.com', autoComplete: 'email' },
+            { label: 'Phone', required: false, type: 'tel', value: phone, setter: setPhone, placeholder: '+91 98765 43210', autoComplete: 'tel' },
           ].map((field) => (
             <div key={field.label}>
               <label className="block text-xs font-extrabold uppercase tracking-widest text-gray-400 mb-1.5">
@@ -344,11 +364,42 @@ function DonationForm({
                 }
               </label>
               <input
+                id={field.type === 'email' ? 'donor-email' : undefined}
                 type={field.type} required={field.required}
                 value={field.value} onChange={(e) => field.setter(e.target.value)}
+                onBlur={field.type === 'email' ? () => setEmailTouched(true) : undefined}
                 placeholder={field.placeholder}
-                className="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-gray-50 text-sm text-gray-800 placeholder:text-gray-400 focus:border-[#222A59] focus:bg-white focus:ring-2 focus:ring-[#222A59]/10 outline-none transition-all duration-200"
+                autoComplete={field.autoComplete}
+                aria-invalid={field.type === 'email' && showEmailError ? true : undefined}
+                aria-describedby={field.type === 'email' ? 'donor-email-help' : undefined}
+                className={
+                  'w-full px-4 py-3 rounded-2xl border bg-gray-50 text-sm text-gray-800 placeholder:text-gray-400 focus:bg-white focus:ring-2 outline-none transition-all duration-200 ' +
+                  (field.type === 'email' && showEmailError
+                    ? 'border-red-300 focus:border-red-400 focus:ring-red-100'
+                    : 'border-gray-200 focus:border-[#222A59] focus:ring-[#222A59]/10')
+                }
               />
+              {field.type === 'email' && (
+                <div id="donor-email-help" className="mt-1.5 text-xs" aria-live="polite">
+                  {showEmailError ? (
+                    <p className="text-red-600">Please enter a valid email address, like name@example.com.</p>
+                  ) : emailSuggestion ? (
+                    <p className="text-amber-700">
+                      Did you mean{' '}
+                      <button
+                        type="button"
+                        onClick={() => setEmail(emailSuggestion)}
+                        className="font-semibold underline underline-offset-2 hover:text-amber-900 cursor-pointer"
+                      >
+                        {emailSuggestion}
+                      </button>
+                      ?
+                    </p>
+                  ) : (
+                    <p className="text-gray-500">Your 80G tax receipt will be emailed here right after payment.</p>
+                  )}
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -363,7 +414,7 @@ function DonationForm({
 
         <button
           type="submit"
-          disabled={!amount || !name || !email || loading}
+          disabled={!amount || !name || !emailValid || loading}
           className="w-full flex items-center justify-center gap-2 py-3.5 rounded-full bg-brand-red text-white text-sm font-bold shadow-[0_4px_16px_rgba(217,38,38,0.28)] hover:bg-brand-red-dark hover:shadow-[0_8px_26px_rgba(217,38,38,0.38)] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 cursor-pointer"
         >
           {loading ? (
