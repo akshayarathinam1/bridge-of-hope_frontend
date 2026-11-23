@@ -43,7 +43,7 @@ const FALLBACK: Campaign[] = [
     description:
       "Your support can help individuals and families facing medical needs access essential healthcare assistance.",
     cover_image:
-      SITE_IMAGES.medicalCamp,
+      SITE_IMAGES.medicalCheckup,
     raised_inr: 4200000,
     goal_inr: 5000000,
     progress_percent: 84,
@@ -58,7 +58,7 @@ const FALLBACK: Campaign[] = [
     description:
       "Help create safer, more supportive environments where children can grow, learn, and look forward to a brighter future.",
     cover_image:
-      SITE_IMAGES.childrenSmiling,
+      SITE_IMAGES.orphanageMeal,
     raised_inr: 7800000,
     goal_inr: 9000000,
     progress_percent: 87,

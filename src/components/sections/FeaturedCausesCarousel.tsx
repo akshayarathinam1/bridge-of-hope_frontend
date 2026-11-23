@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import type { Campaign } from "@/types/api";
-import { SITE_IMAGES } from '@/lib/images';
+import { SITE_IMAGES, causeImageOverride } from '@/lib/images';
 
 /* ─── Helper ─────────────────────────────────────────────────────────────── */
 
@@ -78,6 +78,7 @@ export default function FeaturedCausesCarousel({
               <div className="relative h-52 w-full overflow-hidden flex-shrink-0 bg-gray-100">
                 <Image
                   src={
+                    causeImageOverride(campaign.slug, campaign.name) ||
                     campaign.cover_image ||
                     SITE_IMAGES.educationClassroom
                   }

@@ -51,8 +51,8 @@ const services = [
     description:
       "We support children who need care, protection, education, and a safe environment to grow with confidence and dignity.",
     image:
-      SITE_IMAGES.childrenSmiling,
-    imageAlt: "Teacher with smiling children in a classroom",
+      SITE_IMAGES.orphanageMeal,
+    imageAlt: "Volunteer serving a meal to children at a shelter",
     iconColor: "text-brand-orange",
     bgColor: "bg-orange-50",
     accentColor: "bg-brand-orange",
@@ -97,8 +97,8 @@ const services = [
     description:
       "We help individuals and families facing medical challenges by supporting essential healthcare and medical needs.",
     image:
-      SITE_IMAGES.medicalCamp,
-    imageAlt: "Healthcare worker offering checkup at rural camp",
+      SITE_IMAGES.medicalCheckup,
+    imageAlt: "Doctor checking an elderly woman's blood pressure",
     iconColor: "text-brand-orange",
     bgColor: "bg-orange-50",
     accentColor: "bg-brand-orange",
@@ -120,8 +120,8 @@ const services = [
     description:
       "We work with communities to respond to essential needs and support people facing difficult circumstances.",
     image:
-      SITE_IMAGES.communityWater,
-    imageAlt: "Community aid and relief distribution",
+      SITE_IMAGES.socialOutreach,
+    imageAlt: "Volunteer meeting women and children during community outreach",
     iconColor: "text-brand-orange",
     bgColor: "bg-orange-50",
     accentColor: "bg-brand-orange",

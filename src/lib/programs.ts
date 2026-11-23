@@ -121,8 +121,8 @@ export const PROGRAM_EXTRAS: Record<string, ProgramExtras> = {
       "Children's well-being and development",
       'A caring and supportive environment',
     ],
-    image: SITE_IMAGES.childrenSmiling,
-    imageAlt: 'Teacher with happy, smiling children at a learning centre',
+    image: SITE_IMAGES.orphanageMeal,
+    imageAlt: 'Volunteer serving a meal to children sitting together at a shelter',
     donateLabel: 'Support Child and Orphan Care',
     cta: {
       lead: 'Together, We Can',
@@ -151,8 +151,8 @@ export const PROGRAM_EXTRAS: Record<string, ProgramExtras> = {
       'Health awareness and community initiatives',
       'Support for essential healthcare needs',
     ],
-    image: SITE_IMAGES.medicalCamp,
-    imageAlt: 'Community health worker recording details on a tablet',
+    image: SITE_IMAGES.medicalCheckup,
+    imageAlt: 'Doctor checking an elderly woman’s blood pressure',
     donateLabel: 'Support Medical Care',
     cta: {
       lead: 'Help Make Healthcare',
@@ -166,8 +166,8 @@ export const PROGRAM_EXTRAS: Record<string, ProgramExtras> = {
       'Essential community assistance',
       'Promoting kindness and social responsibility',
     ],
-    image: SITE_IMAGES.communityWater,
-    imageAlt: 'Woman carrying water past village homes with children',
+    image: SITE_IMAGES.socialOutreach,
+    imageAlt: 'Volunteer meeting with women and children during a community outreach visit',
     donateLabel: 'Support Our Mission',
     cta: {
       lead: 'Be the Reason',
