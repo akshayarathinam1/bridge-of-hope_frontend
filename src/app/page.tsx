@@ -2,7 +2,7 @@ import Hero from "@/components/sections/Hero";
 import AboutSection from "@/components/sections/AboutSection";
 import HowWeHelp from "@/components/sections/HowWeHelp";
 import EqualOpportunity from "@/components/sections/EqualOpportunity";
-import FeaturedCauses from "@/components/sections/FeaturedCauses";
+// import FeaturedCauses from "@/components/sections/FeaturedCauses";
 import DonationImpactCard from "@/components/sections/DonationImpactCard";
 import PhotoMosaic from "@/components/sections/PhotoMosaic";
 import UpcomingEvents from "@/components/sections/UpcomingEvents";
@@ -30,9 +30,9 @@ export default async function Home() {
       <EqualOpportunity />
 
       {/* 5. Featured Causes: Campaign cards with progress bars and donation CTAs */}
-      <FeaturedCauses />
+      {/* <FeaturedCauses /> */}
 
-      {/* 6. Interactive Donation Impact Calculator: Monthly/One-time giving + beneficiary photos */}
+      {/* 6. Interactive Donation Impact Calculator: One-time giving + beneficiary photos */}
       <DonationImpactCard />
 
       {/* 7. Photo Mosaic: 6-photo community strip */}

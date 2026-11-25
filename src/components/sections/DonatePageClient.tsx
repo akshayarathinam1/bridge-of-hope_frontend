@@ -127,7 +127,6 @@ function DonationForm({
   const router = useRouter();
   const [selected, setSelected] = useState(1000);
   const [custom, setCustom] = useState('');
-  const [frequency, setFrequency] = useState<'one_time' | 'monthly'>('one_time');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -165,7 +164,6 @@ function DonationForm({
           phone: phone || undefined,
           amount,
           campaign_slug: programKey,
-          frequency,
         },
         'POST',
         { 'Idempotency-Key': idempotencyKey },
@@ -183,99 +181,51 @@ function DonationForm({
       }
 
       /* ── Step 2: Open Razorpay modal ──────────────────────────────── */
-      if (frequency === 'monthly' && order.razorpay_subscription_id) {
-        // Monthly Recurring Donation
-        const rzp = new window.Razorpay({
-          key: order.razorpay_key_id,
-          subscription_id: order.razorpay_subscription_id,
-          name: 'Bridge of Hope Foundation',
-          description: `Monthly Donation – ${programName}`,
-          prefill: {
-            name: order.donor.name,
-            email: order.donor.email,
-            contact: order.donor.phone ?? phone,
-          },
-          theme: { color: '#D92626' },
-          modal: {
-            ondismiss: () => setLoading(false),
-          },
-          handler: async (response) => {
-            /* ── Step 3: Verify subscription ──────────────────────────────── */
-            try {
-              const { data: verify } = await apiMutate<VerifyResponse>(
-                '/donations/verify-subscription/',
-                {
-                  razorpay_subscription_id: response.razorpay_subscription_id,
-                  razorpay_payment_id: response.razorpay_payment_id,
-                  razorpay_signature: response.razorpay_signature,
-                },
-              );
-              if (verify.success) {
-                rememberReceiptEmail(order.donor.email ?? email);
-                router.push(`/donate/thank-you?donation_id=${verify.donation_id ?? order.donation_id}`);
-              } else {
-                setError(verify.message ?? VERIFY_ERROR_MESSAGE);
-                setLoading(false);
-              }
-            } catch {
-              setError(VERIFY_ERROR_MESSAGE);
+      const rzp = new window.Razorpay({
+        key: order.razorpay_key_id,
+        order_id: order.razorpay_order_id!,
+        amount: order.amount_paise,
+        currency: 'INR',
+        name: 'Bridge of Hope Foundation',
+        description: `Donation – ${programName}`,
+        prefill: {
+          name: order.donor.name,
+          email: order.donor.email,
+          contact: order.donor.phone ?? phone,
+        },
+        theme: { color: '#D92626' },
+        modal: {
+          ondismiss: () => setLoading(false),
+        },
+        handler: async (response) => {
+          /* ── Step 3: Verify payment ──────────────────────────────── */
+          try {
+            const { data: verify } = await apiMutate<VerifyResponse>(
+              '/donations/verify/',
+              {
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature,
+              },
+            );
+            if (verify.success) {
+              rememberReceiptEmail(order.donor.email ?? email);
+              router.push(`/donate/thank-you?donation_id=${verify.donation_id ?? order.donation_id}`);
+            } else {
+              setError(verify.message ?? VERIFY_ERROR_MESSAGE);
               setLoading(false);
             }
-          },
-        });
-        rzp.on('payment.failed', (resp) => {
-          setError(friendlyPaymentError(resp));
-          setLoading(false);
-        });
-        rzp.open();
-      } else {
-        // One-Time Donation
-        const rzp = new window.Razorpay({
-          key: order.razorpay_key_id,
-          order_id: order.razorpay_order_id!,
-          amount: order.amount_paise,
-          currency: 'INR',
-          name: 'Bridge of Hope Foundation',
-          description: `Donation – ${programName}`,
-          prefill: {
-            name: order.donor.name,
-            email: order.donor.email,
-            contact: order.donor.phone ?? phone,
-          },
-          theme: { color: '#D92626' },
-          modal: {
-            ondismiss: () => setLoading(false),
-          },
-          handler: async (response) => {
-            /* ── Step 3: Verify payment ──────────────────────────────── */
-            try {
-              const { data: verify } = await apiMutate<VerifyResponse>(
-                '/donations/verify/',
-                {
-                  razorpay_order_id: response.razorpay_order_id,
-                  razorpay_payment_id: response.razorpay_payment_id,
-                  razorpay_signature: response.razorpay_signature,
-                },
-              );
-              if (verify.success) {
-                rememberReceiptEmail(order.donor.email ?? email);
-                router.push(`/donate/thank-you?donation_id=${verify.donation_id ?? order.donation_id}`);
-              } else {
-                setError(verify.message ?? VERIFY_ERROR_MESSAGE);
-                setLoading(false);
-              }
-            } catch {
-              setError(VERIFY_ERROR_MESSAGE);
-              setLoading(false);
-            }
-          },
-        });
-        rzp.on('payment.failed', (resp) => {
-          setError(friendlyPaymentError(resp));
-          setLoading(false);
-        });
-        rzp.open();
-      }
+          } catch {
+            setError(VERIFY_ERROR_MESSAGE);
+            setLoading(false);
+          }
+        },
+      });
+      rzp.on('payment.failed', (resp) => {
+        setError(friendlyPaymentError(resp));
+        setLoading(false);
+      });
+      rzp.open();
     } catch {
       setError(NETWORK_ERROR_MESSAGE);
       setLoading(false);
@@ -291,35 +241,6 @@ function DonationForm({
         onSubmit={handleSubmit}
         className="space-y-6"
       >
-        {/* Frequency Toggle */}
-        <div>
-          <p className="text-xs font-extrabold uppercase tracking-widest text-gray-400 mb-2.5">Donation Frequency</p>
-          <div className="grid grid-cols-2 p-1 rounded-full bg-gray-100 border border-gray-200/80">
-            <button
-              type="button"
-              onClick={() => setFrequency('one_time')}
-              className={`py-2 px-4 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
-                frequency === 'one_time'
-                  ? 'bg-brand-black text-white shadow-sm'
-                  : 'text-gray-600 hover:text-brand-black'
-              }`}
-            >
-              Give Once
-            </button>
-            <button
-              type="button"
-              onClick={() => setFrequency('monthly')}
-              className={`py-2 px-4 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
-                frequency === 'monthly'
-                  ? 'bg-brand-black text-white shadow-sm'
-                  : 'text-gray-600 hover:text-brand-black'
-              }`}
-            >
-              Give Monthly
-            </button>
-          </div>
-        </div>
-
         <div>
           <p className="text-xs font-extrabold uppercase tracking-widest text-gray-400 mb-3">Choose an amount</p>
           <div className="grid grid-cols-2 gap-2.5 mb-3">

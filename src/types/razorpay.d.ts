@@ -18,8 +18,6 @@ interface RazorpayTheme {
 interface RazorpayHandlerResponse {
   /** Present for one-time payments */
   razorpay_order_id?: string;
-  /** Present for subscription payments */
-  razorpay_subscription_id?: string;
   razorpay_payment_id: string;
   razorpay_signature: string;
 }
@@ -28,9 +26,7 @@ interface RazorpayOptions {
   key: string;
   /** Required for one-time payments */
   order_id?: string;
-  /** Required for subscription payments */
-  subscription_id?: string;
-  /** Amount in paise (e.g. 50000 = ₹500). Optional for subscriptions. */
+  /** Amount in paise (e.g. 50000 = ₹500).  */
   amount?: number;
   currency?: string;
   name: string;

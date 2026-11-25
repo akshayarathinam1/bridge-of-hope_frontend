@@ -88,7 +88,7 @@ export default function Navbar({ programList = FALLBACK_PROGRAM_LINKS }: { progr
                 ? "bg-white/90 backdrop-blur-2xl border-gray-200/70 shadow-[0_8px_32px_-4px_rgba(0,0,0,0.12),0_2px_8px_-2px_rgba(0,0,0,0.06)]"
                 : "bg-white/75 backdrop-blur-xl border-white/60 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.08),0_1px_4px_-1px_rgba(0,0,0,0.04)]"
             )}
-            style={{ height: "88px" }}
+            style={{ height: "104px" }}
           >
             {/* Logo */}
             <Link
@@ -101,7 +101,7 @@ export default function Navbar({ programList = FALLBACK_PROGRAM_LINKS }: { progr
                 alt="Bridge of Hope"
                 width={600}
                 height={200}
-                className="h-[44px] sm:h-[50px] md:h-[56px] w-auto object-contain transition-transform duration-300 group-hover:scale-[1.04] drop-shadow-sm"
+                className="h-[44px] sm:h-[56px] md:h-[88px] w-auto object-contain transition-transform duration-300 group-hover:scale-[1.04] drop-shadow-sm"
                 priority
                 unoptimized
               />

@@ -228,16 +228,13 @@ export interface CreateOrderPayload {
   is_anonymous?: boolean;
   amount: number;             // INR integer
   campaign_slug: string;
-  frequency: 'one_time' | 'monthly';
 }
 
 export interface CreateOrderResponse {
   success: boolean;
   message?: string;
-  type: 'one_time' | 'subscription';
   donation_id: string;
-  razorpay_order_id?: string;         // one_time
-  razorpay_subscription_id?: string;  // subscription
+  razorpay_order_id?: string;
   razorpay_key_id: string;
   amount_paise: number;
   currency: string;
@@ -251,12 +248,6 @@ export interface VerifyPaymentPayload {
   razorpay_signature: string;
 }
 
-export interface VerifySubscriptionPayload {
-  razorpay_payment_id: string;
-  razorpay_subscription_id: string;
-  razorpay_signature: string;
-}
-
 export interface VerifyResponse {
   success: boolean;
   message: string;
@@ -267,7 +258,6 @@ export interface DonationStatusResponse {
   success: boolean;
   donation_id: string;
   status: 'created' | 'paid' | 'failed' | 'refunded';
-  frequency: 'one_time' | 'monthly';
   amount_inr: number;
   campaign: string;
   donor_first_name: string;

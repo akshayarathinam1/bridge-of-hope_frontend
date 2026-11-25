@@ -26,7 +26,7 @@ const actions = [
     icon: FiGift,
     title: "Start Donating",
     description:
-      "Your donation, however small, changes a life. Donate once or set up a monthly giving plan.",
+      "Your donation, however small, changes a life. Every rupee goes where it is needed most.",
     color: "bg-red-50",
     iconColor: "text-brand-red",
     border: "border-red-100",

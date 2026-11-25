@@ -41,7 +41,6 @@ interface DonationImpactCardProps {
 export default function DonationImpactCard({ embedded = false }: DonationImpactCardProps) {
   // Step 1 State
   const [step, setStep] = useState<Step>("step1");
-  const [frequency, setFrequency] = useState<"once" | "monthly">("monthly");
   const [selectedAmount, setSelectedAmount] = useState<number>(1000);
   const [isCustom, setIsCustom] = useState<boolean>(false);
   const [customAmount, setCustomAmount] = useState<string>("");
@@ -153,37 +152,6 @@ export default function DonationImpactCard({ embedded = false }: DonationImpactC
                         STEP 1 — START YOUR DONATION
                       </span>
                       <span className="text-[11px] text-gray-400 font-medium">100% Tax Deductible</span>
-                    </div>
-
-                    {/* Giving Frequency */}
-                    <div className="mb-5">
-                      <label className="block text-xs font-bold text-brand-black uppercase tracking-wider mb-2">
-                        Giving Frequency
-                      </label>
-                      <div className="grid grid-cols-2 p-1 rounded-full bg-gray-100">
-                        <button
-                          type="button"
-                          onClick={() => setFrequency("once")}
-                          className={`py-2 px-4 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 ${
-                            frequency === "once"
-                              ? "bg-brand-black text-white shadow-sm"
-                              : "text-gray-600 hover:text-brand-black"
-                          }`}
-                        >
-                          Give Once
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setFrequency("monthly")}
-                          className={`py-2 px-4 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 ${
-                            frequency === "monthly"
-                              ? "bg-brand-black text-white shadow-sm"
-                              : "text-gray-600 hover:text-brand-black"
-                          }`}
-                        >
-                          Give Monthly
-                        </button>
-                      </div>
                     </div>
 
                     {/* Donation Amount */}
@@ -444,10 +412,6 @@ export default function DonationImpactCard({ embedded = false }: DonationImpactC
                           <span className="font-extrabold text-brand-black">{formattedAmount}</span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-gray-500">Frequency</span>
-                          <span className="font-semibold text-brand-black capitalize">{frequency}</span>
-                        </div>
-                        <div className="flex justify-between">
                           <span className="text-gray-500">Cause</span>
                           <span className="font-semibold text-brand-black">{selectedCauseLabel}</span>
                         </div>
@@ -659,10 +623,6 @@ export default function DonationImpactCard({ embedded = false }: DonationImpactC
                       <div className="flex justify-between">
                         <span className="text-gray-500">Cause:</span>
                         <span className="font-semibold text-brand-black">{selectedCauseLabel}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-500">Frequency:</span>
-                        <span className="font-semibold text-brand-black capitalize">{frequency}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-500">Transaction ID:</span>

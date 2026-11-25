@@ -135,7 +135,6 @@ export default function ThankYouContent() {
 
   /* ── Success ──────────────────────────────────────────────────────────── */
   const amountFormatted = `₹${status.amount_inr.toLocaleString('en-IN')}`;
-  const isMonthly = status.frequency === 'monthly';
   const receiptReady = status.receipt.status === 'generated' || status.receipt.status === 'sent';
   const receiptPending = status.receipt.status === 'pending';
 
@@ -161,9 +160,7 @@ export default function ThankYouContent() {
         {status.donor_first_name ? `, ${status.donor_first_name}` : ''}!
       </h1>
       <p className="text-brand-orange font-semibold text-sm mb-8">
-        {isMonthly
-          ? 'Your monthly giving subscription is active.'
-          : 'Your one-time donation has been received.'}
+        Your donation has been received.
       </p>
 
       {/* Donation summary card */}
@@ -176,13 +173,6 @@ export default function ThankYouContent() {
         <div className="flex items-center justify-between">
           <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Campaign</span>
           <span className="text-sm font-semibold text-brand-black capitalize">{status.campaign}</span>
-        </div>
-        <div className="border-t border-gray-200" />
-        <div className="flex items-center justify-between">
-          <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Frequency</span>
-          <span className="text-sm font-semibold text-brand-black">
-            {isMonthly ? 'Monthly' : 'One-time'}
-          </span>
         </div>
         {status.receipt.receipt_number && (
           <>
