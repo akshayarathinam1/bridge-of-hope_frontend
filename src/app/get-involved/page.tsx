@@ -352,7 +352,7 @@ export default function GetInvolvedPage() {
                     <div className="relative">
                       <FiMessageSquare className="absolute left-3.5 top-3.5 w-4 h-4 text-gray-400" />
                       <textarea
-                        required rows={4}
+                        required rows={4} maxLength={5000}
                         placeholder="Tell us about yourself and your motivation to volunteer…"
                         value={form.message} onChange={set('message')}
                         className="w-full pl-10 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-red/30 focus:border-brand-red transition-all resize-none"

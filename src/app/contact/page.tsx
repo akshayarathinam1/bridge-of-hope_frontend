@@ -371,6 +371,7 @@ export default function ContactPage() {
                     </label>
                     <textarea
                       required
+                      maxLength={5000}
                       rows={5}
                       placeholder="Write your message here..."
                       value={formData.message}
